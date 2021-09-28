@@ -57,6 +57,10 @@ function Pipeline(documenti) {
     };
 
     this.esegui = function() {   
+        if (this._document.length == 0) {
+            return;
+        }
+
         for (var filtro of this._filtri) {
             filtro.esegui(this._documenti);
         }
