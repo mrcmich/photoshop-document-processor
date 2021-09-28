@@ -1,11 +1,9 @@
 #include "EstrattoreInfoAstratto.jsx"
 
-function EstrattoreCodiceNumericoStandard(lunghezzaCodiceNumerico) {
+function EstrattoreCodiceNumericoStandard() {
     this.__proto__ = EstrattoreInfoAstratto;
 
     this.estraiInfo = function(documento) {
-        var nomeCompletoDocumento;
-
         if (documento == undefined) {
             throw new Error(
                 "Invocazione del metodo estraiInfo(documento) di EstrattoreCodiceNumericoStandard " +
@@ -13,28 +11,7 @@ function EstrattoreCodiceNumericoStandard(lunghezzaCodiceNumerico) {
             );
         }
 
-        nomeCompletoDocumento = documento.name;
-
-        return nomeCompletoDocumento.substring(0, this._lunghezzaCodiceNumerico);
+        return (documento.name.split("_"))[0];
     };
-
-    this.settaLunghezzaCodiceNumerico = function(lunghezzaCodiceNumerico) {
-        lunghezzaCodiceNumerico = Math.round(Number(lunghezzaCodiceNumerico));
-
-        if (lunghezzaCodiceNumerico <= 0) {
-            throw new Error(
-                "Invocazione del metodo settaLunghezzaCodiceNumerico(lunghezzaCodiceNumerico) di " +
-                "EstrattoreCodiceNumericoStandard con argomento lunghezzaCodiceNumerico nullo o negativo."
-            );
-        }
-
-        this._lunghezzaCodiceNumerico = lunghezzaCodiceNumerico;
-    };
-
-    this.leggiLunghezzaCodiceNumerico = function() {
-        return this._lunghezzaCodiceNumerico;
-    };
-
-    this.settaLunghezzaCodiceNumerico(lunghezzaCodiceNumerico);
 
 }
