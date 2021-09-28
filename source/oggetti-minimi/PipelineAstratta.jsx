@@ -27,6 +27,12 @@ var PipelineAstratta = {
         throw new Error(
             "Invocazione del metodo astratto esegui() di PipelineAstratta."
         );
+    },
+
+    concatena: function(pipeline) {
+         throw new Error(
+            "Invocazione del metodo astratto concatena(pipeline) di PipelineAstratta."
+        );
     }
 
 };

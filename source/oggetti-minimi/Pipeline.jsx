@@ -85,4 +85,26 @@ function Pipeline(documenti) {
         return this._filtri;
     };
 
+    this.concatena = function(pipeline) {
+        var filtriAccodati; 
+
+        if (pipeline == undefined) {
+            throw new Error(
+                "Invocazione del metodo concatena(pipeline) di Pipeline con argomento pipeline null o undefined."
+            );
+        }
+
+        filtriAccodati = pipeline.leggiFiltri();
+
+        if (filtriAccodati.length == 0) {
+            return this;
+        }
+
+        for (var i = 0; i < filtriAccodati.length; i++) {
+            this.aggiungiFiltro(filtriAccodati[i]);
+        }
+
+        return this;
+    };
+
 }
