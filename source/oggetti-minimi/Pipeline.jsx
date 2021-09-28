@@ -14,6 +14,13 @@ function Pipeline(documenti) {
     };
 
     this.aggiungiFiltro = function(filtro) {
+        if (filtro == undefined) {
+            throw new TypeError(
+                `Invocazione del metodo aggiungiFiltro(filtro) di Pipeline
+                con argomento filtro null o undefined.`
+            );
+        }
+
         this._filtri.push(filtro);
     };
 
