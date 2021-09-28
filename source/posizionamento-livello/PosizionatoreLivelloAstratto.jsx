@@ -1,13 +1,14 @@
 var PosizionatoreLivelloAstratto = {
-    REGIONE_SINISTRA = 0,
-    REGIONE_CENTRALE = 1,
-    REGIONE_DESTRA = 2,
+    REGIONE_SINISTRA = -1,
+    REGIONE_CENTRALE = -2,
+    REGIONE_DESTRA = -3,
+    MARGINE_DEFAULT = 0,
 
     rilevaRegione: function(livello) {
         throw new SyntaxError("Invocazione del metodo astratto rilevaRegione(livello, documento) di PosizionatoreLivelloAstratto.");
     },
 
-    riposizionaLivello: function(livello, margine) {
+    riposizionaLivello: function() {
         throw new SyntaxError(`
             Invocazione del metodo astratto riposizionaLivello(livello, documento, regione, margine) di PosizionatoreLivelloAstratto.
         `);
@@ -28,6 +29,12 @@ Object.defineProperty(PosizionatoreLivelloAstratto, "REGIONE_CENTRALE", {
 });
 
 Object.defineProperty(PosizionatoreLivelloAstratto, "REGIONE_DESTRA", {
+    "writable": false,
+    "enumerable": false,
+    "configurable": false
+});
+
+Object.defineProperty(PosizionatoreLivelloAstratto, "MARGINE_DEFAULT", {
     "writable": false,
     "enumerable": false,
     "configurable": false
