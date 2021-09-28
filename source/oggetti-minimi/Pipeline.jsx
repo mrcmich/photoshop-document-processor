@@ -27,7 +27,7 @@ function Pipeline(documenti) {
     this.rimuoviFiltro = function(indiceFiltro) {
         var filtriAggiornati = [];
 
-        indiceFiltro = Number(indiceFiltro);
+        indiceFiltro = Math.trunc(Number(indiceFiltro));
 
         if (indiceFiltro < 0 || indiceFiltro >= this._filtri.length) {
             return;
