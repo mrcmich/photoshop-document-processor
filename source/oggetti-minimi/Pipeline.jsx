@@ -1,9 +1,15 @@
 function Pipeline(documenti) {
     this.__proto__ = PipelineAstratta;
-    this._documenti = documenti;
     this._filtri = [];
 
     this.settaDocumenti = function(documenti) {
+        if (documenti == undefined) {
+            throw new TypeError(
+                `Invocazione del metodo settaDocumenti(documenti) di Pipeline
+                con argomento documenti null o undefined.`
+            );
+        }
+
         this._documenti = documenti;
     };
 
@@ -65,5 +71,7 @@ function Pipeline(documenti) {
             filtro.esegui(this._documenti);
         }
     };
+
+    this.settaDocumenti(documenti);
 
 }
