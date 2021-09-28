@@ -1,18 +1,35 @@
+#include "PipelineAstratta.jsx"
+
 function Pipeline(documenti) {
     this.__proto__ = PipelineAstratta;
-    this._documenti = documenti;
     this._filtri = [];
 
     this.settaDocumenti = function(documenti) {
+        if (documenti == undefined) {
+            throw new Error(
+                "Invocazione del metodo settaDocumenti(documenti) di Pipeline con argomento documenti null o undefined."
+            );
+        }
+
         this._documenti = documenti;
     };
 
+    this.settaDocumenti(documenti);
+
     this.aggiungiFiltro = function(filtro) {
+        if (filtro == undefined) {
+            throw new Error(
+                "Invocazione del metodo aggiungiFiltro(filtro) di Pipeline con argomento filtro null o undefined."
+            );
+        }
+
         this._filtri.push(filtro);
     };
 
     this.rimuoviFiltro = function(indiceFiltro) {
         var filtriAggiornati = [];
+
+        indiceFiltro = Math.round(Number(indiceFiltro));
 
         if (indiceFiltro < 0 || indiceFiltro >= this._filtri.length) {
             return;
@@ -55,8 +72,12 @@ function Pipeline(documenti) {
     };
 
     this.esegui = function() {   
-        for (var filtro of this._filtri) {
-            filtro.esegui(this._documenti);
+        if (this._documenti.length == 0) {
+            return;
+        }
+
+        for (var i = 0; i < this._filtri.length; i++) {
+            this._filtri[i].esegui(this._documenti);
         }
     };
 
