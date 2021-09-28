@@ -81,4 +81,8 @@ function Pipeline(documenti) {
         }
     };
 
+    this.leggiFiltri = function() {
+        return this._filtri;
+    };
+
 }
