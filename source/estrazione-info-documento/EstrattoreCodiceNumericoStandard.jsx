@@ -1,3 +1,5 @@
+#include "EstrattoreInfoAstratto.jsx"
+
 function EstrattoreCodiceNumericoStandard(lunghezzaCodiceNumerico) {
     this.__proto__ = EstrattoreInfoAstratto;
 
@@ -5,9 +7,9 @@ function EstrattoreCodiceNumericoStandard(lunghezzaCodiceNumerico) {
         var nomeCompletoDocumento;
 
         if (documento == undefined) {
-            throw new TypeError(
-                `Invocazione del metodo estraiInfo(documento) di EstrattoreCodiceNumericoStandard
-                con argomento documento null o undefined.`
+            throw new Error(
+                "Invocazione del metodo estraiInfo(documento) di EstrattoreCodiceNumericoStandard " +
+                "con argomento documento null o undefined."
             );
         }
 
@@ -16,20 +18,20 @@ function EstrattoreCodiceNumericoStandard(lunghezzaCodiceNumerico) {
         return nomeCompletoDocumento.substring(0, this._lunghezzaCodiceNumerico);
     };
 
-    this.settaLunghezzaCodiceNumerico(lunghezzaCodiceNumerico) {
-        lunghezzaCodiceNumerico = Math.trunc(Number(lunghezzaCodiceNumerico));
+    this.settaLunghezzaCodiceNumerico = function(lunghezzaCodiceNumerico) {
+        lunghezzaCodiceNumerico = Math.round(Number(lunghezzaCodiceNumerico));
 
         if (lunghezzaCodiceNumerico <= 0) {
-            throw new SyntaxError(
-                `Invocazione del metodo settaLunghezzaCodiceNumerico(lunghezzaCodiceNumerico) di EstrattoreCodiceNumericoStandard
-                con argomento lunghezzaCodiceNumerico nullo o negativo.`
+            throw new Error(
+                "Invocazione del metodo settaLunghezzaCodiceNumerico(lunghezzaCodiceNumerico) di " +
+                "EstrattoreCodiceNumericoStandard con argomento lunghezzaCodiceNumerico nullo o negativo."
             );
         }
 
         this._lunghezzaCodiceNumerico = lunghezzaCodiceNumerico;
     };
 
-    this.leggiLunghezzaCodiceNumerico() {
+    this.leggiLunghezzaCodiceNumerico = function() {
         return this._lunghezzaCodiceNumerico;
     };
 

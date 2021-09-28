@@ -1,4 +1,9 @@
-function FiltroSovrimpressione(oggettoConfigurazione, estrattoreInfo, posizionatoreLivello) {
+#include "../oggetti-minimi/FiltroAstratto.jsx"
+#include "../estrazione-info-documento/EstrattoreNomeStandard.jsx"
+#include "../estrazione-info-documento/EstrattoreCodiceNumericoStandard.jsx"
+#include "../posizionamento-livello/PosizionatoreLivello.jsx"
+
+function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizionatoreLivello) {
     this.__proto__ = FiltroAstratto;
     this._nome = "FiltroSovrimpressione";
 
@@ -6,16 +11,12 @@ function FiltroSovrimpressione(oggettoConfigurazione, estrattoreInfo, posizionat
         return this._nome;
     };
 
-    this.settaAzioneConfigurazione = function(oggettoConfigurazione) {
-        // Inserisci controllo su azione
-
-        this._azioneConfigurazione = oggettoConfigurazione.azione;
+    this.settaAzioneConfigurazione = function(parametriConfigurazione) {
+        this._azioneConfigurazione = parametriConfigurazione.azioneConfigurazione;
     };
 
-    this.settaSetAzioneConfigurazione = function(oggettoConfigurazione) {
-        // Inserisci controllo su set azione
-
-        this._setAzioneConfigurazione = oggettoConfigurazione.set;
+    this.settaSetAzioneConfigurazione = function(parametriConfigurazione) {
+        this._setAzioneConfigurazione = parametriConfigurazione.setAzioneConfigurazione;
     };
 
     this.settaEstrattoreInfo = function(estrattoreInfo) {
@@ -32,39 +33,54 @@ function FiltroSovrimpressione(oggettoConfigurazione, estrattoreInfo, posizionat
         var regioneLivelloConfigurazione;
 
         if (documenti == undefined) {
-            throw new TypeError(
-                `Invocazione del metodo esegui(documenti) di FiltroSovrimpressione
-                con argomento documenti null o undefined.`
+            throw new Error(
+                "Invocazione del metodo esegui(documenti) di FiltroSovrimpressione con argomento documenti null o undefined."
             );
         }
 
-        for (var documento of documenti) {
-            app.activeDocument = documento;
-            app.doAction(this._azioneConfigurazione, this._setAzioneConfigurazione);
-            livelloConfigurazione = documento.artLayers[0];
+        for (var i = 0; i < documenti.length; i++) {
+            app.activeDocument = documenti[i];
+
+            try {
+                app.doAction(this._azioneConfigurazione, this._setAzioneConfigurazione);
+            } catch (errore) {
+                alert(
+                    "Impossibile proseguire con la sovrimpressione:\n" +
+                    "non è stato possibile eseguire l'azione " + this._azioneConfigurazione +
+                    " dal set " + this._setAzioneConfigurazione + ". Verifica di aver definito l'azione.",
+                    "Errore",
+                    true
+                );
+
+                return;
+            }
+            
+            livelloConfigurazione = documenti[i].artLayers[0];
 
             if (livelloConfigurazione.kind != LayerKind.TEXT) {
                 alert(
-                    `Impossibile proseguire con la sovrimpressione:
-                    nessun livello con campo di testo nel documento ${documento.name}. Verifica di aver impostato correttamente
-                    l'azione di configurazione ${this._azioneConfigurazione}.`
+                    "Impossibile proseguire con la sovrimpressione:\n" +
+                    "nessun livello con campo di testo nel documento " + documenti[i].name + ". Verifica di aver impostato " +
+                    "correttamente l'azione di configurazione " + this._azioneConfigurazione + ".",
+                    "Errore",
+                    true
                 );
 
                 return;
             }
 
-            documento.activeLayer = livelloConfigurazione;
+            documenti[i].activeLayer = livelloConfigurazione;
             regioneLivelloConfigurazione = this._posizionatoreLivello.rilevaRegione(livelloConfigurazione);
-            infoDocumento = this._estrattoreInfo.estraiInfo(documento);
+            infoDocumento = this._estrattoreInfo.estraiInfo(documenti[i]);
             livelloConfigurazione.textItem.contents = infoDocumento;
             this._posizionatoreLivello.riposizionaLivello();
-            documento.mergeVisibileLayers();
-            documento.save();
+            documenti[i].mergeVisibleLayers();
+            documenti[i].save();
         }
     };
 
-    this.settaAzioneConfigurazione(oggettoConfigurazione);
-    this.settaSetAzioneConfigurazione(oggettoConfigurazione);
+    this.settaAzioneConfigurazione(parametriConfigurazione);
+    this.settaSetAzioneConfigurazione(parametriConfigurazione);
     this.settaEstrattoreInfo(estrattoreInfo);
     this.settaPosizionatoreLivello(posizionatoreLivello);
 

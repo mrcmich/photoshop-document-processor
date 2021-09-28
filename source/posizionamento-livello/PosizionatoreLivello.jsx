@@ -1,11 +1,13 @@
+#include "PosizionatoreLivelloAstratto.jsx"
+
 function PosizionatoreLivello(margine) {
     this.__proto__ = PosizionatoreLivelloAstratto;
 
     this.settaLivello = function(livello) {
         if (livello == undefined) {
-            throw new TypeError(
-                `Invocazione del metodo settaLivello(livello) di PosizionatoreLivello
-                con argomento livello null o undefined.`
+            throw new Error(
+                "Invocazione del metodo settaLivello(livello) di PosizionatoreLivello " +
+                "con argomento livello null o undefined."
             );
         }
 
@@ -20,13 +22,13 @@ function PosizionatoreLivello(margine) {
         return this._regioneLivello;
     };
 
-    this.settaMargine = function(margine = this.MARGINE_DEFAULT) {
-        margine = Number(margine);
+    this.settaMargine = function(margine) {
+        margine = (margine == undefined) ? this._MARGINE_DEFAULT : Number(margine);
 
         if (margine < 0) {
-             throw new SyntaxError(
-                `Invocazione del metodo settaMargine(margine) di PosizionatoreLivello
-                con argomento margine negativo.`
+             throw new Error(
+                "Invocazione del metodo settaMargine(margine) di PosizionatoreLivello " +
+                "con argomento margine negativo."
             );
         }
 
@@ -35,6 +37,10 @@ function PosizionatoreLivello(margine) {
 
     this.leggiMargine = function() {
         return this._margine;
+    };
+
+    this.leggiMargineDefault = function() {
+        return this._MARGINE_DEFAULT;
     };
 
     this.rilevaRegione = function(livello) {
@@ -48,11 +54,11 @@ function PosizionatoreLivello(margine) {
         ascissaMediaLivello = (bordiLivello[0] + bordiLivello[2]) / 2;
 
         if (ascissaMediaLivello < larghezzaDocumento / 3) {
-		    this._regioneLivello = this.REGIONE_SINISTRA;
+		    this._regioneLivello = this._REGIONE_SINISTRA;
 	    } else if (ascissaMediaLivello > (2/3) * larghezzaDocumento) {
-		    this._regioneLivello = this.REGIONE_DESTRA;
+		    this._regioneLivello = this._REGIONE_DESTRA;
 	    } else {
-            this._regioneLivello = this.REGIONE_CENTRALE;
+            this._regioneLivello = this._REGIONE_CENTRALE;
         }
 
     };
@@ -65,7 +71,7 @@ function PosizionatoreLivello(margine) {
         }
 
         if (this._margine > (1/2) * Math.min(this._livello.parent.width, this._livello.parent.height)) {
-             margine = this.MARGINE_DEFAULT;
+             margine = this._MARGINE_DEFAULT;
         }
 
         this._allineaVerticalmenteLivello(margine);
@@ -92,11 +98,11 @@ function PosizionatoreLivello(margine) {
         ascissaMinimaLivello = bordiLivello[0].value;
         ascissaMassimaLivello = bordiLivello[2].value;
 
-        if (this._regioneLivello == this.REGIONE_SINISTRA) {
+        if (this._regioneLivello == this._REGIONE_SINISTRA) {
 		    this._livello.translate(margine - ascissaMinimaLivello, 0);
-	    } else if (this._regioneLivello == this.REGIONE_DESTRA) {
+	    } else if (this._regioneLivello == this._REGIONE_DESTRA) {
             this._livello.translate(larghezzaDocumento - margine - ascissaMassimaLivello, 0);
-	    } else if (this._regioneLivello == this.REGIONE_CENTRALE) {
+	    } else if (this._regioneLivello == this._REGIONE_CENTRALE) {
             this._livello.translate((larghezzaDocumento - ascissaMinimaLivello - ascissaMassimaLivello) / 2, 0);
 	    }
 

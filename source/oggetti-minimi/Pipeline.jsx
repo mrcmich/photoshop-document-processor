@@ -1,23 +1,25 @@
+#include "PipelineAstratta.jsx"
+
 function Pipeline(documenti) {
     this.__proto__ = PipelineAstratta;
     this._filtri = [];
 
     this.settaDocumenti = function(documenti) {
         if (documenti == undefined) {
-            throw new TypeError(
-                `Invocazione del metodo settaDocumenti(documenti) di Pipeline
-                con argomento documenti null o undefined.`
+            throw new Error(
+                "Invocazione del metodo settaDocumenti(documenti) di Pipeline con argomento documenti null o undefined."
             );
         }
 
         this._documenti = documenti;
     };
 
+    this.settaDocumenti(documenti);
+
     this.aggiungiFiltro = function(filtro) {
         if (filtro == undefined) {
-            throw new TypeError(
-                `Invocazione del metodo aggiungiFiltro(filtro) di Pipeline
-                con argomento filtro null o undefined.`
+            throw new Error(
+                "Invocazione del metodo aggiungiFiltro(filtro) di Pipeline con argomento filtro null o undefined."
             );
         }
 
@@ -27,7 +29,7 @@ function Pipeline(documenti) {
     this.rimuoviFiltro = function(indiceFiltro) {
         var filtriAggiornati = [];
 
-        indiceFiltro = Math.trunc(Number(indiceFiltro));
+        indiceFiltro = Math.round(Number(indiceFiltro));
 
         if (indiceFiltro < 0 || indiceFiltro >= this._filtri.length) {
             return;
@@ -70,15 +72,13 @@ function Pipeline(documenti) {
     };
 
     this.esegui = function() {   
-        if (this._document.length == 0) {
+        if (this._documenti.length == 0) {
             return;
         }
 
-        for (var filtro of this._filtri) {
-            filtro.esegui(this._documenti);
+        for (var i = 0; i < this._filtri.length; i++) {
+            this._filtri[i].esegui(this._documenti);
         }
     };
-
-    this.settaDocumenti(documenti);
 
 }

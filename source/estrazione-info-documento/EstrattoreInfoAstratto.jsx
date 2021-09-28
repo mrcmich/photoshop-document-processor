@@ -1,6 +1,8 @@
 var EstrattoreInfoAstratto = {
     estraiInfo: function(documento) {
-        throw new SyntaxError("Invocazione del metodo astratto estraiInfo(documento) di EstrattoreInfoAstratto.");
+        throw new Error(
+            "Invocazione del metodo astratto estraiInfo(documento) di EstrattoreInfoAstratto."
+        );
     }
     
 };
