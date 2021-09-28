@@ -3,11 +3,11 @@ var PosizionatoreLivelloAstratto = {
     REGIONE_CENTRALE = 1,
     REGIONE_DESTRA = 2,
 
-    rilevaRegione: function(livello, documento) {
+    rilevaRegione: function(livello) {
         throw new SyntaxError("Invocazione del metodo astratto rilevaRegione(livello, documento) di PosizionatoreLivelloAstratto.");
     },
 
-    riposizionaLivello: function(livello, documento, regione, margine) {
+    riposizionaLivello: function(livello, margine) {
         throw new SyntaxError(`
             Invocazione del metodo astratto riposizionaLivello(livello, documento, regione, margine) di PosizionatoreLivelloAstratto.
         `);
