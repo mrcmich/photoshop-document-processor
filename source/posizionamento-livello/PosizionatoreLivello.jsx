@@ -1,21 +1,18 @@
 #include "PosizionatoreLivelloAstratto.jsx"
+#include "../oggetti-minimi/Asserzione.jsx"
 
 function PosizionatoreLivello(margine) {
     this.__proto__ = PosizionatoreLivelloAstratto;
 
     this.settaLivello = function(livello) {
-        if (livello == undefined) {
-            throw new Error(
-                "Invocazione del metodo settaLivello(livello) di PosizionatoreLivello " +
-                "con argomento livello null o undefined."
-            );
-        }
+        asserzione(
+            livello != undefined, 
+            "settaLivello(livello)", 
+            "PosizionatoreLivello", 
+            "livello null o undefined."
+        );
 
         this._livello = livello;
-    };
-
-    this.leggiLivello = function() {
-        return this._livello;
     };
 
     this.leggiRegioneLivello = function() {
@@ -25,12 +22,12 @@ function PosizionatoreLivello(margine) {
     this.settaMargine = function(margine) {
         margine = (margine == undefined) ? this._MARGINE_DEFAULT : Number(margine);
 
-        if (margine < 0) {
-             throw new Error(
-                "Invocazione del metodo settaMargine(margine) di PosizionatoreLivello " +
-                "con argomento margine negativo."
-            );
-        }
+        asserzione(
+            margine >= 0, 
+            "settaMargine(margine)", 
+            "PosizionatoreLivello", 
+            "margine negativo."
+        );
 
         this._margine = margine;
     };

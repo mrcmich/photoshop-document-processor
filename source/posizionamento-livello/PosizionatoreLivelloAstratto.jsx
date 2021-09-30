@@ -14,6 +14,6 @@ var PosizionatoreLivelloAstratto = {
         throw new Error(
             "Invocazione del metodo astratto riposizionaLivello(livello, documento, regione, margine) di PosizionatoreLivelloAstratto."
         );
-    }
+    },
 
 };

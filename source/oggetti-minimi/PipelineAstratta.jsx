@@ -33,6 +33,6 @@ var PipelineAstratta = {
          throw new Error(
             "Invocazione del metodo astratto concatena(pipeline) di PipelineAstratta."
         );
-    }
+    },
 
 };
