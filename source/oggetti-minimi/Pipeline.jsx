@@ -79,6 +79,9 @@ function Pipeline(documenti) {
         for (var i = 0; i < this._filtri.length; i++) {
             this._filtri[i].esegui(this._documenti);
         }
+
+        alert("Elaborazioni terminate. Controlla i documenti processati.", "Elaborazioni terminate");
+        beep();
     };
 
     this.leggiFiltri = function() {
