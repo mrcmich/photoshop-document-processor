@@ -3,6 +3,6 @@ var EstrattoreInfoAstratto = {
         throw new Error(
             "Invocazione del metodo astratto estraiInfo(documento) di EstrattoreInfoAstratto."
         );
-    }
+    },
     
 };

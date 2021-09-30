@@ -1,33 +1,40 @@
 #include "PipelineAstratta.jsx"
+#include "Asserzione.jsx"
 
 function Pipeline(documenti) {
     this.__proto__ = PipelineAstratta;
     this._filtri = [];
 
     this.settaDocumenti = function(documenti) {
-        if (documenti == undefined) {
-            throw new Error(
-                "Invocazione del metodo settaDocumenti(documenti) di Pipeline con argomento documenti null o undefined."
-            );
-        }
+        asserzione(
+            documenti != undefined, 
+            "settaDocumenti(documenti)", 
+            "Pipeline", 
+            "documenti null o undefined."
+        );
 
         this._documenti = documenti;
     };
 
-    this.settaDocumenti(documenti);
-
     this.aggiungiFiltro = function(filtro) {
-        if (filtro == undefined) {
-            throw new Error(
-                "Invocazione del metodo aggiungiFiltro(filtro) di Pipeline con argomento filtro null o undefined."
-            );
-        }
+         asserzione(
+            filtro != undefined, 
+            "aggiungiFiltro(filtro)", 
+            "Pipeline", 
+            "filtro null o undefined."
+        );
 
         this._filtri.push(filtro);
     };
 
+    // indiceFiltro è assunto numerico (number o stringa convertibile in numero)
     this.rimuoviFiltro = function(indiceFiltro) {
-        var filtriAggiornati = [];
+        asserzione(
+            indiceFiltro != undefined, 
+            "aggiungiFiltro(filtro)", 
+            "Pipeline", 
+            "filtro null o undefined."
+        );
 
         indiceFiltro = Math.round(Number(indiceFiltro));
 
@@ -35,15 +42,12 @@ function Pipeline(documenti) {
             return;
         }
 
-        for (var i = 0; i < this._filtri.length; i++) {
-            if (i != indiceFiltro) {
-                filtriAggiornati.push(this._filtri[i]);
-            }
-        }
-
-        this._filtri = filtriAggiornati;
+        this._filtri.splice(indiceFiltro, 1);
     };
 
+    this.leggiFiltri = function() {
+        return this._filtri;
+    }
 
     this.elencoFiltri = function() {
         var elencoFiltri = "";
@@ -72,30 +76,26 @@ function Pipeline(documenti) {
     };
 
     this.esegui = function() {   
-        if (this._documenti.length == 0) {
-            return;
+        if (this._documenti.length != 0) {
+            for (var i = 0; i < this._filtri.length; i++) {
+                this._filtri[i].esegui(this._documenti);
+            }
         }
 
-        for (var i = 0; i < this._filtri.length; i++) {
-            this._filtri[i].esegui(this._documenti);
-        }
-
-        alert("Elaborazioni terminate. Controlla i documenti processati.", "Elaborazioni terminate");
         beep();
-    };
-
-    this.leggiFiltri = function() {
-        return this._filtri;
+        alert("Elaborazioni terminate. Controlla i documenti processati.", "Elaborazioni terminate");
+        
     };
 
     this.concatena = function(pipeline) {
         var filtriAccodati; 
 
-        if (pipeline == undefined) {
-            throw new Error(
-                "Invocazione del metodo concatena(pipeline) di Pipeline con argomento pipeline null o undefined."
-            );
-        }
+        asserzione(
+            pipeline != undefined, 
+            "concatena(pipeline)", 
+            "Pipeline", 
+            "pipeline null o undefined."
+        );
 
         filtriAccodati = pipeline.leggiFiltri();
 
@@ -109,5 +109,7 @@ function Pipeline(documenti) {
 
         return this;
     };
+
+    this.settaDocumenti(documenti);
 
 }

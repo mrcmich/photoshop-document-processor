@@ -3,6 +3,6 @@ var FiltroAstratto = {
         throw new Error(
             "Invocazione del metodo astratto esegui() di FiltroAstratto."
         );
-    }
+    },
 
 };

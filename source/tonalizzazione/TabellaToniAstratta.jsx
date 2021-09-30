@@ -15,6 +15,6 @@ var TabellaToniAstratta = {
          throw new Error(
             "Invocazione del metodo astratto toString() di TabellaToniAstratta."
         );
-    }
+    },
 
 };

@@ -1,4 +1,5 @@
 #include "../oggetti-minimi/FiltroAstratto.jsx"
+#include "../oggetti-minimi/Asserzione.jsx"
 #include "../estrazione-info-documento/EstrattoreNomeStandard.jsx"
 #include "../estrazione-info-documento/EstrattoreCodiceNumericoStandard.jsx"
 #include "../posizionamento-livello/PosizionatoreLivello.jsx"
@@ -12,18 +13,46 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
     };
 
     this.settaAzioneConfigurazione = function(parametriConfigurazione) {
+        asserzione(
+            "azioneConfigurazione" in parametriConfigurazione, 
+            "settaAzioneConfigurazione(parametriConfigurazione)", 
+            "FiltroSovrimpressione", 
+            "parametriConfigurazione non ha una proprietà azioneConfigurazione."
+        );
+
         this._azioneConfigurazione = parametriConfigurazione.azioneConfigurazione;
     };
 
     this.settaSetAzioneConfigurazione = function(parametriConfigurazione) {
+        asserzione(
+            "setAzioneConfigurazione" in parametriConfigurazione, 
+            "settaSetAzioneConfigurazione(parametriConfigurazione)", 
+            "FiltroSovrimpressione", 
+            "parametriConfigurazione non ha una proprietà setAzioneConfigurazione."
+        );
+
         this._setAzioneConfigurazione = parametriConfigurazione.setAzioneConfigurazione;
     };
 
     this.settaEstrattoreInfo = function(estrattoreInfo) {
+        asserzione(
+            estrattoreInfo != undefined, 
+            "settaEstrattoreInfo(estrattoreInfo)", 
+            "FiltroSovrimpressione", 
+            "estrattoreInfo null o undefined."
+        );
+
         this._estrattoreInfo = estrattoreInfo;
     };
 
     this.settaPosizionatoreLivello = function(posizionatoreLivello) {
+        asserzione(
+            posizionatoreLivello != undefined, 
+            "settaPosizionatoreLivello(posizionatoreLivello)", 
+            "FiltroSovrimpressione", 
+            "posizionatoreLivello null o undefined."
+        );
+
         this._posizionatoreLivello = posizionatoreLivello;
     };
 
@@ -32,11 +61,12 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
         var livelloConfigurazione;
         var regioneLivelloConfigurazione;
 
-        if (documenti == undefined) {
-            throw new Error(
-                "Invocazione del metodo esegui(documenti) di FiltroSovrimpressione con argomento documenti null o undefined."
-            );
-        }
+        asserzione(
+            documenti != undefined, 
+            "esegui(documenti)", 
+            "FiltroSovrimpressione", 
+            "documenti null o undefined."
+        );
 
         for (var i = 0; i < documenti.length; i++) {
             app.activeDocument = documenti[i];

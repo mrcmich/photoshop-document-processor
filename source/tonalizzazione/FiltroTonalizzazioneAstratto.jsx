@@ -10,27 +10,33 @@ var FiltroTonalizzazioneAstratto = {
     },
 
     _determinaTonoRiferimento: function() {
-         throw new Error(
+        throw new Error(
             "Invocazione del metodo astratto _determinaTonoRiferimento() di FiltroTonalizzazioneAstratto."
         );
     },
 
-    _calcolaFattoriTonalizzazione: function(documento, tono) {
-         throw new Error(
+    _calcolaFattoriTonalizzazione: function(documento, tonoRiferimento) {
+        throw new Error(
             "Invocazione del metodo astratto _calcolaFattoriTonalizzazione(documento, tono) di FiltroTonalizzazioneAstratto."
         );
     },
 
-    _bilanciaTonoDocumento: function(documento, tono) {
-         throw new Error(
+    _bilanciaTonoDocumento: function(documento, tonoRiferimento) {
+        throw new Error(
             "Invocazione del metodo astratto _bilanciaTonoDocumento(documento, tono) di FiltroTonalizzazioneAstratto."
         );
     },
 
     esegui: function(documenti) {
-         throw new Error(
+        throw new Error(
             "Invocazione del metodo astratto esegui(documenti) di FiltroTonalizzazioneAstratto."
         );
-    } 
+    },
+
+    _verificaMetodoColore: function(documento, metodoColore) {
+        throw new Error(
+            "Invocazione del metodo astratto _verificaMetodoColore(documento, metodoColore) di FiltroTonalizzazioneAstratto."
+        );
+    },
 
 };
