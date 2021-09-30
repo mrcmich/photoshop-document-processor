@@ -1,15 +1,19 @@
-function TabellaToni(estrattoreInfo) {
+#include "../estrazione-info-documento/EstrattoreCodiceNumericoStandard.jsx"
+
+function TabellaToni(estrattoreCodiceNumerico) {
     this.__proto__ = TabellaToniAstratta;
     this._toni = {};
     this._tonoMedio = null;
 
-    this.settaEstrattoreInfo = function(estrattoreInfo) {
-        if (estrattoreInfo == undefined) {
+    this.settaEstrattoreCodiceNumerico = function(estrattoreCodiceNumerico) {
+        if (estrattoreCodiceNumerico == undefined) {
             throw new Error(
-                "Invocazione del metodo settaEstrattoreInfo(estrattoreInfo) " +
-                "di TabellaToni con argomento estrattoreInfo null o undefined."
+                "Invocazione del metodo settaEstrattoreCodiceNumerico(estrattoreCodiceNumerico) " +
+                "di TabellaToni con argomento estrattoreCodiceNumerico null o undefined."
             );
         }
+
+        this._estrattoreCodiceNumerico = estrattoreCodiceNumerico;
     };
 
     this.aggiungiTono = function(documento, tono) {
@@ -29,7 +33,7 @@ function TabellaToni(estrattoreInfo) {
             );
         }
 
-        idDocumento = Number(estrattoreInfo.estraiInfo(documento));
+        idDocumento = Number(this._estrattoreCodiceNumerico.estraiInfo(documento));
         this._toni[idDocumento] = tono;
     };
 
@@ -104,6 +108,6 @@ function TabellaToni(estrattoreInfo) {
 
     };
 
-    this.settaEstrattoreInfo(estrattoreInfo);
+    this.settaEstrattoreCodiceNumerico(estrattoreCodiceNumerico);
 
 }
