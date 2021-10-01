@@ -95,7 +95,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
                 concat(this._toni[idDocumento].magenta).concat(", ").
                 concat(this._toni[idDocumento].yellow).concat(", ").
                 concat(this._toni[idDocumento].black).concat("]\n")
-            );
+            ;
         }
 
         if (numeroDocumentiTabella == 0) {
