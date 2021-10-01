@@ -1,7 +1,9 @@
 #include "FiltroLetturaTonoAstratto.jsx"
 #include "../oggetti-minimi/Asserzione.jsx"
+#include "TabellaToniCMYK.jsx"
+#include "../gestione-io/ScrittoreTabellaToni.jsx"
 
-function FiltroLetturaTonoCMYK(tabellaToni, scrittoreFileTestuale) {
+function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
     this.__proto__ = FiltroLetturaTonoAstratto;
     this._documentiConTonoNonValido = [];
 
@@ -48,8 +50,6 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreFileTestuale) {
     };
 
     this.esegui = function(documenti) {
-        var righeTabellaToni;
-
         try {
             this.settaDocumenti(documenti);
         } catch (errore) {
@@ -68,15 +68,13 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreFileTestuale) {
 
         this._compilaTabellaToni();
         this._tabellaToni.calcolaTonoMedio();
-        righeTabellaToni = this._tabellaToni.toString();
-
         beep();
+        this._scrittoreTabellaToni.scriviSuFile(this._tabellaToni.toFile());
+
         alert(
-            righeTabellaToni,
+            this._tabellaToni.toString(),
             "Tabella dei toni"
         );
-
-        this._scrittoreFileTestuale.scriviSuFile(righeTabellaToni);
 
     };
 
@@ -97,7 +95,7 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreFileTestuale) {
         return tono;
     };
 
-    this.validaTono(tono) {
+    this.validaTono = function(tono) {
          if (
             tono == undefined ||
             tono.cyan == 0 ||
@@ -147,18 +145,18 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreFileTestuale) {
         this._tabellaToni = tabellaToni;
     };
 
-    this.settaScrittoreFileTestuale = function(scrittoreFileTestuale) {
+    this.settaScrittoreTabellaToni = function(scrittoreTabellaToni) {
         asserzione(
-            scrittoreFileTestuale != undefined, 
-            "settaScrittoreFileTestuale(scrittoreFileTestuale)", 
+            scrittoreTabellaToni != undefined, 
+            "settaScrittoreTabellaToni(scrittoreTabellaToni)", 
             "FiltroLetturaTonoCMYK", 
-            "scrittoreFileTestuale null o undefined."
+            "scrittoreTabellaToni null o undefined."
         );
 
-        this._scrittoreFileTestuale = scrittoreFileTestuale;
+        this._scrittoreTabellaToni = scrittoreTabellaToni;
     };
 
     this.settaTabellaToni(tabellaToni);
-    this.settaScrittoreFileTestuale(scrittoreFileTestuale);
+    this.settaScrittoreTabellaToni(scrittoreTabellaToni);
 
 }
