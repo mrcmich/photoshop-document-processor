@@ -71,6 +71,14 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         return tonoMedio;
     };
 
+    this.leggiTonoMedio = function() {
+        if (this._tonoMedio == null) {
+            this.calcolaTonoMedio();
+        }
+
+        return this._tonoMedio;
+    };
+
     // Ritorna array vuoto se la tabella è vuota
     this.toString = function() {
         var righeTabella = [];

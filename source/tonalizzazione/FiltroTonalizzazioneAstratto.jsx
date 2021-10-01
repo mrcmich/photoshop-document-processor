@@ -3,39 +3,30 @@
 var FiltroTonalizzazioneAstratto = {
     __proto__: FiltroAstratto,
 
-    _rilevaTono: function(documento) {
+    _calcolaFattoriTonalizzazione: function(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore) {
         throw new Error(
-            "Invocazione del metodo astratto _rilevaTono(documento) di FiltroTonalizzazioneAstratto."
+            "Invocazione del metodo astratto " +
+            "_calcolaFattoriTonalizzazione(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore) " +
+            "di FiltroTonalizzazioneAstratto."
         );
     },
 
-    _determinaTonoRiferimento: function() {
+    _tonalizza: function(livelloRiferimento, campionatoreColore, riferimentiUtente) {
         throw new Error(
-            "Invocazione del metodo astratto _determinaTonoRiferimento() di FiltroTonalizzazioneAstratto."
+            "Invocazione del metodo astratto _tonalizza(livelloRiferimento, campionatoreColore, riferimentiUtente) " +
+            "di FiltroTonalizzazioneAstratto."
         );
     },
 
-    _calcolaFattoriTonalizzazione: function(documento, tonoRiferimento) {
+    _determinaTonoRiferimento: function(tonoDefault) {
         throw new Error(
-            "Invocazione del metodo astratto _calcolaFattoriTonalizzazione(documento, tono) di FiltroTonalizzazioneAstratto."
-        );
-    },
-
-    _bilanciaTonoDocumento: function(documento, tonoRiferimento) {
-        throw new Error(
-            "Invocazione del metodo astratto _bilanciaTonoDocumento(documento, tono) di FiltroTonalizzazioneAstratto."
+            "Invocazione del metodo astratto _determinaTonoRiferimento(tonoDefault) di FiltroTonalizzazioneAstratto."
         );
     },
 
     esegui: function(documenti) {
         throw new Error(
             "Invocazione del metodo astratto esegui(documenti) di FiltroTonalizzazioneAstratto."
-        );
-    },
-
-    _verificaMetodoColore: function(documento, metodoColore) {
-        throw new Error(
-            "Invocazione del metodo astratto _verificaMetodoColore(documento, metodoColore) di FiltroTonalizzazioneAstratto."
         );
     },
 
