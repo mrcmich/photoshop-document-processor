@@ -83,14 +83,14 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         var tabella = "";
         var numeroDocumentiTabella = 0;
 
-        tabella.concat(
+        tabella = tabella.concat(
             "Per ogni documento, si riporta la quaterna di valori [C, M, Y, K] corrispondente:\n"
         );
 
         for (var idDocumento in this._toni) {
             numeroDocumentiTabella++;
 
-            tabella.concat(idDocumento).concat(": [").
+            tabella = tabella.concat(idDocumento).concat(": [").
                 concat(this._toni[idDocumento].cyan).concat(", ").
                 concat(this._toni[idDocumento].magenta).concat(", ").
                 concat(this._toni[idDocumento].yellow).concat(", ").
@@ -106,7 +106,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
             this.calcolaTonoMedio();
         }
 
-        tabella.concat("\nIl tono medio, valutato su tutti i documenti, è il seguente: \n[").
+        tabella = tabella.concat("\nIl tono medio, valutato su tutti i documenti, è il seguente: \n[").
             concat(this._tonoMedio.cyan).concat(", ").
             concat(this._tonoMedio.magenta).concat(", ").
             concat(this._tonoMedio.yellow).concat(", ").
