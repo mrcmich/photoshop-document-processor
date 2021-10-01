@@ -1,4 +1,5 @@
 #include "ScrittoreFileAstratto.jsx"
+#include "../oggetti-minimi/Asserzione.jsx"
 
 function ScrittoreFileTestuale() {
     this.__proto__ = ScrittoreFileAstratto;

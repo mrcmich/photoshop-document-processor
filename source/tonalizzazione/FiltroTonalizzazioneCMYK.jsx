@@ -1,214 +1,291 @@
 #include "../oggetti-minimi/Asserzione.jsx"
 #include "FiltroTonalizzazioneAstratto.jsx"
-#include "../gestione-io/ScrittoreFileTestuale.jsx"
+#include "FiltroLetturaTonoCMYK.jsx"
 
-function FiltroTonalizzazioneCMYK(tabellaToni, scrittoreFileTestuale) {
+function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     this.__proto__ = FiltroTonalizzazioneAstratto;
+    this._canaliUscitaMiscelatore = [
+        [1, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0],
+        [0, 0, 1, 0, 0],
+        [0, 0, 0, 1, 0],
+    ];
 
-    this.settaTabellaToni = function(tabellaToni) {
+    this.settaFiltroLetturaTonoCMYK = function(filtroLetturaTonoCMYK) {
         asserzione(
-            tabellaToni != undefined, 
-            "settaTabellaToni(tabellaToni)", 
+            filtroLetturaTonoCMYK != undefined, 
+            "settaFiltroLetturaTonoCMYK(filtroLetturaTonoCMYK)", 
             "FiltroTonalizzazioneCMYK", 
-            "tabellaToni null o undefined."
+            "filtroLetturaTonoCMYK null o undefined."
         );
 
-        this._tabellaToni = tabellaToni;
+        this._filtroLetturaTonoCMYK = filtroLetturaTonoCMYK;
     };
 
-    this.settaScrittoreFileTestuale = function(scrittoreFileTestuale) {
-         asserzione(
-            scrittoreFileTestuale != undefined, 
-            "settaScrittoreFileTestuale(scrittoreFileTestuale)", 
-            "FiltroTonalizzazioneCMYK", 
-            "scrittoreFileTestuale null o undefined."
-        );
+    // Ritorna un oggetto con proprietà cyan, magenta, yellow, black
+    // oppure undefined se premuto "Cancella"
+    this._determinaTonoRiferimento = function(tonoDefault) {
+        var riferimentiUtente;
 
-        this._scrittoreFileTestuale = scrittoreFileTestuale;
-    };
+        riferimentiUtente.cyan = this._determinaRiferimentoCanale("Ciano", tonoDefault.cyan);
 
-    // Opera sul livello attivo del documento passato come parametro
-    this._rilevaTono = function(documento) {
-        var tono = new SolidColor().cmyk;
-        var campionatoreColore = documento.colorSamplers.add([new UnitValue(0, 'px'), new UnitValue(0, 'px')]);
-
-        tono.cyan = Math.round(campionatoreColore.color.cmyk.cyan);
-        tono.magenta = Math.round(campionatoreColore.color.cmyk.magenta);
-        tono.yellow = Math.round(campionatoreColore.color.cmyk.yellow);
-        tono.black = Math.round(campionatoreColore.color.cmyk.black);
-        documento.colorSamplers.removeAll();
-
-        return tono;
-    };
-
-    this._determinaTonoRiferimento = function() {
-        
-    };
-
-    // Esternamente aggiungere controllo documenti allo 0%
-    this._calcolaFattoriTonalizzazione = function(documento, tonoRiferimento) {
-        var tono;
-        
-        var stimaFattoriTonalizzazione = new SolidColor().cmyk;
-
-        if (tonoRiferimento == undefined) {
-            throw new Error(
-                "Invocazione del metodo _calcolaFattoriTonalizzazione(documento, tono) " +
-                "di FiltroTonalizzazioneCMYK con argomento tonoRiferimento null o undefined."
-            );
-        }
-
-        tono = this._rilevaTono(documento);
-        
-        stimaFattoriTonalizzazione.cyan = Math.round((tonoRiferimento.cyan * 100) / tono.cyan);
-        stimaFattoriTonalizzazione.magenta = Math.round((tonoRiferimento.magenta * 100) / tono.magenta);
-        stimaFattoriTonalizzazione.yellow = Math.round((tonoRiferimento.yellow * 100) / tono.yellow);
-        stimaFattoriTonalizzazione.black = Math.round((tonoRiferimento.black * 100) / tono.black);
-
-        if (
-            fixChannelValues_v2(document, 0, referenceValues, deltaValues) &&
-            fixChannelValues_v2(document, 1, referenceValues, deltaValues) &&
-            fixChannelValues_v2(document, 2, referenceValues, deltaValues) &&
-            fixChannelValues_v2(document, 3, referenceValues, deltaValues)
-        ) {
-            mixChannelValues_CMYK(document.activeLayer, deltaValues);
-            $.writeln("Bilanciato " + document.name);
-        }
-
-    };
-
-    this._bilanciaTonoDocumento = function(documento, tonoRiferimento) {
-         if (tonoRiferimento == undefined || tonoRiferimento.cmyk == undefined) {
-            throw new Error(
-                "Invocazione del metodo _calcolaFattoriTonalizzazione(documento, tono) " +
-                "di FiltroTonalizzazioneCMYK con argomento tono null, undefined o non CMYK."
-            );
-        }
-    };
-
-    // Aggiungi controllo canali allo 0%
-    this.esegui = function(documenti) {
-        var tonoIniziale;
-        var livelloRiferimento;
-        var statoInizialeDocumento;
-        var tabellaToniFormattata;
-        var nomeDocumentiNonConformi;
-
-        asserzione(
-            documenti != undefined, 
-            "esegui(documenti)", 
-            "FiltroTonalizzazioneCMYK", 
-            "documenti null o undefined."
-        );
-
-        nomeDocumentiNonConformi = this._elencoDocumentiNonCMYK(documenti);
-
-        if (nomeDocumentiNonConformi.length != 0) {
-            alert(
-                "Impossibile procedere con la tonalizzazione: i documenti " +
-                nomeDocumentiNonConformi.toString() + " non usano il metodo colore CMYK.",
-                "Errore di formato documenti.", 
-                true
-            );
-
+        if (riferimentiUtente.cyan == undefined) {
             return;
         }
 
-        this._applicaSfocaturaMedia(documenti);
-        nomeDocumentiNonConformi = this._compilaTabellaToni(documenti);
+        riferimentiUtente.magenta = this._determinaRiferimentoCanale("Magenta", tonoDefault.magenta);
 
-        if (nomeDocumentiNonConformi.length != 0) {
-            alert(
-                "Impossibile procedere con la tonalizzazione: i documenti " +
-                nomeDocumentiNonConformi.toString() + " hanno uno o più canali allo 0%.",
-                "Errore di formato documenti.", 
-                true
-            );
-
+        if (riferimentiUtente.magenta == undefined) {
             return;
         }
 
-        this._tabellaToni.calcolaTonoMedio();
-        tabellaToniFormattata = this._tabellaToni.toString();
-        beep();
-        alert(
-            tabellaToniFormattata,
-            "Tabella dei toni"
-        );
-        this._scrittoreFileTestuale.scriviSuFile(tabellaToniFormattata);
-        
-        // determinazione tono riferimento
+        riferimentiUtente.yellow = this._determinaRiferimentoCanale("Giallo", tonoDefault.yellow);
 
-        // bilancio tono documenti
-        // che comprende calcolo del riferimento in base all'input, calcolo dei fattori di tonalizzazione, applicazione dei fattori
-       
-        for (var i = 0; i < documenti.length; i++) {
-            documenti[i].activeLayer.remove();
-            documenti[i].mergeVisibleLayers();
-            documenti[i].save();
+        if (riferimentiUtente.yellow == undefined) {
+            return;
         }
-        
+
+        riferimentiUtente.black = this._determinaRiferimentoCanale("Nero", tonoDefault.black);
+
+        if (riferimentiUtente.black == undefined) {
+            return;
+        }
+
+        return riferimentiUtente;
     };
 
-    // Come effetto secondario, imposta i duplicati dei livelli di sfondo come livelli attivi dei documenti
-    this._applicaSfocaturaMedia(documenti) {
-        var livelloRiferimento;
+    // Ritorna un array con il riferimento (valore o range) oppure undefined se premuto cancella
+    this._determinaRiferimentoCanale = function(canale, riferimentoDefault) {
+        var input;
+        var riferimento = [];
 
-        for (var i = 0; i < documenti.length; i++) {
-            app.activeDocument = documenti[i];
-            documenti[i].activeLayer = documenti[i].backgroundLayer;
-            livelloRiferimento = documenti[i].activeLayer.duplicate();
-            livelloRiferimento.applyAverage();
-        }
-    };
+        while (true) {
+            input = prompt("Inserisci riferimento " + canale + ":", riferimentoDefault, "Riferimento " + canale);
 
-    // Lavora sui livelli attivi di ogni documento
-    // Ritorna la lista dei documenti con canali allo 0%
-    this._compilaTabellaToni = function(documenti) {
-        var tono;
-        var nomeDocumentiNonConformi = [];
-
-        for (var i = 0; i < documenti.length; i++) {
-            app.activeDocument = documenti[i];
-            tono = this._rilevaTono(documento[i]);
-
-            if (this._tonoConCanaliNulli(tono)) {
-                nomeDocumentiNonConformi.push(documenti[i].name);
+            if (input == null) {
+                return;
             }
 
-            this._tabellaToni.aggiungiTono(documento[i], tono);
+            input = input.split("-");
+
+            if (input.length == 0 || input.length > 2) {
+                alert(
+                    "Riferimento non valido: inserisci un singolo valore numerico oppure un intervallo nella forma min-max.", 
+                    "Riferimento non valido"
+                );
+
+                continue;
+            }
+
+            if (input.length == 1) {
+                if (!this._validaPercentualeCanale(input[0])) {
+                    alert(
+                    "Riferimento non valido: inserisci una quantità percentuale.", 
+                    "Riferimento non valido"
+                    );
+
+                    continue;
+                }
+
+                riferimento.push(Math.round(Number(input[0])));
+                break;
+            } 
+
+            if (!this._validaPercentualeCanale(input[0]) || !this._validaPercentualeCanale(input[1])) {
+                alert(
+                    "Riferimento non valido: inserisci un intervallo di quantità percentuali nella forma min-max.", 
+                    "Riferimento non valido"
+                );
+
+                continue;
+            }
+
+            riferimento.push(Math.round(Number(input[0])));
+            riferimento.push(Math.round(Number(input[1])));
+            break;
         }
 
-        return nomeDocumentiNonConformi;
+        return riferimento;
     };
 
-    this._tonoConCanaliNulli(tono) {
+    this._validaPercentualeCanale = function(stringaPercentuale) {
+        var percentuale;
+
         if (
-            tono.cyan == 0 ||
-            tono.magenta == 0||
-            tono.yellow == 0 ||
-            tono.black == 0
+            stringaPercentuale == null ||
+            "NaN" == String(Number(stringaPercentuale))
         ) {
-            return true;
+            return false;
         }
 
-        return false;
+        percentuale = Number(stringaPercentuale);
+
+        if (percentuale < 0 || percentuale > 100) {
+            return false;
+        }
+
+        return true;
     }
 
-    // Ritorna un array contenente i documenti con metodo colore diverso CMYK
-    this._elencoDocumentiNonCMYK = function(documenti) {
-        var nomeDocumentiNonCMYK = [];
+    // ritorna undeinfed se non è possibile tonalizzare
+    this._calcolaFattoriTonalizzazione = function(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore) {
+        var fattoriTonalizzazione = new SolidColor().cmyk;
 
-        for (var i = 0; i < documenti.length; i++) {
-            if (documenti[i].mode != DocumentMode.CMYK) {
-                nomeDocumentiNonCMYK.push(documenti[i].name);
-            }
+        if (tonoIniziale == undefined) {
+            tonoIniziale = this._filtroLetturaTonoCMYK.rilevaTono(livelloRiferimento, campionatoreColore);
         }
 
-        return nomeDocumentiNonCMYK;
+        fattoriTonalizzazione.cyan = Math.round((tonoRiferimento.cyan * 100) / tono.cyan);
+        fattoriTonalizzazione.magenta = Math.round((tonoRiferimento.magenta * 100) / tono.magenta);
+        fattoriTonalizzazione.yellow = Math.round((tonoRiferimento.yellow * 100) / tono.yellow);
+        fattoriTonalizzazione.black = Math.round((tonoRiferimento.black * 100) / tono.black);
+
+        if (
+            this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cyan, fattoriTonalizzazione, campionatoreColore) ||
+            this._calcolaFattoreCanale(livelloRiferimento, "magenta", tonoRiferimento.magenta, fattoriTonalizzazione, campionatoreColore) ||
+            this._calcolaFattoreCanale(livelloRiferimento, "yellow", tonoRiferimento.yellow, fattoriTonalizzazione, campionatoreColore) ||
+            this._calcolaFattoreCanale(livelloRiferimento, "black", tonoRiferimento.black, fattoriTonalizzazione, campionatoreColore)
+        ) {
+            return;
+        }
+  
+        return fattoriTonalizzazione;
     };
 
-    this.settaTabellaToni(tabellaToni);
-    this.settaScrittoreFileTestuale(scrittoreFileTestuale);
+    this._applicaMiscelatoreCanale = function(livello, canaliUscita, fattoriTonalizzazione) {
+        canaliUscita[0][0] = fattoriTonalizzazione.cyan;
+        canaliUscita[1][1] = fattoriTonalizzazione.magenta;
+        canaliUscita[2][2] = fattoriTonalizzazione.yellow;
+        canaliUscita[3][3] = fattoriTonalizzazione.black;
+
+        livello.mixChannels(canaliUscita);
+    };
+
+    this._calcolaFattoreCanale = function(livelloRiferimento, canale, riferimentoCanale, fattoriTonalizzazione, campionatoreColore) {
+        var incremento;
+        var percentualeCanale;
+        var statoInizialeDocumento;
+    
+        statoInizialeDocumento = livelloRiferimento.parent.activeHistoryState;
+        this._applicaMiscelatoreCanale(livelloRiferimento, this._canaliUscitaMiscelatore, fattoriTonalizzazione);
+        percentualeCanale = this._filtroLetturaTonoCMYK.rilevaPercentualeCanale(livelloRiferimento, campionatoreColore, canale);
+        livelloRiferimento.parent.activeHistoryState = statoInizialeDocumento;
+        
+        if (percentualeCanale == riferimentoCanale) {
+            return true;
+        }
+    
+        incremento = (percentualeCanale > riferimentoCanale) ? -1 : 1;
+        
+        do {
+            fattoriTonalizzazione[canale] += incremento;
+            
+            if (fattoriTonalizzazione[canale] < 0 || fattoriTonalizzazione[canale] > 200) {
+                beep();
+                alert(
+                    "Impossibile tonalizzare documento " + documento.name + 
+                    ": incremento del canale " + canale + " fuori dall'intervallo [0,200]. Il documento sarà ignorato.", 
+                    "Errore di tonalizzazione", 
+                    true
+                );
+
+                livelloRiferimento.parent.activeHistoryState = statoInizialeDocumento;
+                app.purge(PurgeTarget.HISTORYCACHES);
+                return false;
+            }
+        
+            this._applicaMiscelatoreCanale(livelloRiferimento, this._canaliUscitaMiscelatore, fattoriTonalizzazione);
+            percentualeCanale = this._filtroLetturaTonoCMYK.rilevaPercentualeCanale(livelloRiferimento, campionatoreColore, canale);
+            livelloRiferimento.parent.activeHistoryState = statoInizialeDocumento;
+
+        } while (percentualeCanale != riferimentoCanale);
+
+        app.purge(PurgeTarget.HISTORYCACHES);
+        return true;
+    };
+
+    this._tonalizza = function(livelloRiferimento, campionatoreColore, riferimentiUtente) {
+        var tonoIniziale;
+        var fattoriTonalizzazione;
+        var tonoRiferimento = new SolidColor().cmyk;
+        
+        tonoIniziale = this._filtroLetturaTonoCMYK.rilevaTono(livelloRiferimento, campionatoreColore);
+        tonoRiferimento.cyan = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.cyan, tonoIniziale.cyan);
+        tonoRiferimento.magenta = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.magenta, tonoIniziale.magenta);
+        tonoRiferimento.yellow = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.yellow, tonoIniziale.yellow);
+        tonoRiferimento.black = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.black, tonoIniziale.black);
+        fattoriTonalizzazione = this._calcolaFattoriTonalizzazione(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore);
+
+        if (fattoriTonalizzazione != undefined) {
+            this._applicaMiscelatoreCanale(livelloRiferimento.parent.backgroundLayer, this._canaliUscitaMiscelatore, fattoriTonalizzazione);
+        }
+    }
+
+    // riferimento è assunto come array contenente 1 o 2 elementi, a seconda che sia un valore o un range
+    this._determinaRiferimentoEffettivoCanale = function(riferimento, valoreIniziale) {
+        if (riferimento.length == 1) {
+            return riferimento;
+        }
+
+        if (valoreIniziale > riferimento[1]) {
+            return riferimento[1];
+        }
+
+        if (valoreIniziale < riferimento[0]) {
+            return riferimento[0];
+        }
+
+        return valoreIniziale;
+    };
+
+    this.esegui = function(documenti) {
+        var riferimentiUtente;
+        var documentiNonValidi;
+        var tabellaToni;
+        var campionatoreColore;
+        var livelloRiferimento;
+
+        this._filtroLetturaTonoCMYK.esegui(documenti);
+
+        if (documenti.length == 0) {
+            return;
+        }
+
+        tabellaToni = this._filtroLetturaTonoCMYK.leggiTabellaToni;
+        documentiNonValidi = this._filtroLetturaTonoCMYK.leggiDocumentiConTonoNonValido();
+
+        if (documentiNonValidi.length != 0) {
+            alert(
+                "Impossibile procedere con la tonalizzazione: i documenti " +
+                documentiNonValidi.toString() + " hanno uno o più canali allo 0%.",
+                "Errore di formato documenti.", 
+                true
+            );
+
+            return;
+        }
+
+        riferimentiUtente = this._determinaTonoRiferimento(tabellaToni.leggiTonoMedio());
+
+        if (riferimentiUtente == undefined) {
+            return;
+        }
+
+        for (var i = 0; i < documenti.length; i++) {
+            app.activeDocument = documenti[i];
+            documenti[i].colorSamplers.add([new UnitValue(1, 'px'), new UnitValue(1, 'px')]);
+            campionatoreColore = documenti[i].colorSamplers[documenti[i].colorSamplers.length - 1];
+            livelloRiferimento = documenti[i].backgroundLayer.duplicate();
+            documenti[i].activeLayer = livelloRiferimento;
+            livelloRiferimento.applyAverage();
+            this._tonalizza(livelloRiferimento, campionatoreColore, riferimentiUtente);
+            documenti[i].colorSamplers.removeAll();
+            livelloRiferimento.remove();
+            documenti[i].save();
+        }
+
+    };
+
+    this.settaFiltroLetturaTonoCMYK(filtroLetturaTonoCMYK);
 
 }

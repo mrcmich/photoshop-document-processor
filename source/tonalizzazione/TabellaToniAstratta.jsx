@@ -6,14 +6,20 @@ var TabellaToniAstratta = {
     },
 
     calcolaTonoMedio: function() {
-         throw new Error(
+        throw new Error(
             "Invocazione del metodo astratto calcolaTonoMedio() di TabellaToniAstratta."
         );
     },
 
     toString: function() {
-         throw new Error(
+        throw new Error(
             "Invocazione del metodo astratto toString() di TabellaToniAstratta."
+        );
+    },
+
+    toFile: function() {
+        throw new Error(
+            "Invocazione del metodo astratto toFile() di TabellaToniAstratta."
         );
     },
 
