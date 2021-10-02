@@ -52,6 +52,7 @@ function ScrittoreTabellaToni() {
                 );
 
                 file.close();
+                file.remove();
                 return;
             }
         }
