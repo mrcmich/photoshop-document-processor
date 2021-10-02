@@ -251,7 +251,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             return;
         }
 
-        tabellaToni = this._filtroLetturaTonoCMYK.leggiTabellaToni;
+        tabellaToni = this._filtroLetturaTonoCMYK.leggiTabellaToni();
         documentiNonValidi = this._filtroLetturaTonoCMYK.leggiDocumentiConTonoNonValido();
 
         if (documentiNonValidi.length != 0) {
