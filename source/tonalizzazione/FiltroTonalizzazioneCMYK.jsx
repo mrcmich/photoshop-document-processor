@@ -141,15 +141,15 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         fattoriTonalizzazione.black = Math.round((tonoRiferimento.black * 100) / tonoIniziale.black);
 
         if (
-            this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cyan, fattoriTonalizzazione, campionatoreColore) ||
-            this._calcolaFattoreCanale(livelloRiferimento, "magenta", tonoRiferimento.magenta, fattoriTonalizzazione, campionatoreColore) ||
-            this._calcolaFattoreCanale(livelloRiferimento, "yellow", tonoRiferimento.yellow, fattoriTonalizzazione, campionatoreColore) ||
+            this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cyan, fattoriTonalizzazione, campionatoreColore) &&
+            this._calcolaFattoreCanale(livelloRiferimento, "magenta", tonoRiferimento.magenta, fattoriTonalizzazione, campionatoreColore) &&
+            this._calcolaFattoreCanale(livelloRiferimento, "yellow", tonoRiferimento.yellow, fattoriTonalizzazione, campionatoreColore) &&
             this._calcolaFattoreCanale(livelloRiferimento, "black", tonoRiferimento.black, fattoriTonalizzazione, campionatoreColore)
         ) {
-            return;
+            return fattoriTonalizzazione;
         }
   
-        return fattoriTonalizzazione;
+        return;
     };
 
     this._applicaMiscelatoreCanale = function(livello, canaliUscita, fattoriTonalizzazione) {
