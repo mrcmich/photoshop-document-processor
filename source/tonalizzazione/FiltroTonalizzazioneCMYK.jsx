@@ -135,10 +135,10 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             tonoIniziale = this._filtroLetturaTonoCMYK.rilevaTono(livelloRiferimento, campionatoreColore);
         }
 
-        fattoriTonalizzazione.cyan = Math.round((tonoRiferimento.cyan * 100) / tono.cyan);
-        fattoriTonalizzazione.magenta = Math.round((tonoRiferimento.magenta * 100) / tono.magenta);
-        fattoriTonalizzazione.yellow = Math.round((tonoRiferimento.yellow * 100) / tono.yellow);
-        fattoriTonalizzazione.black = Math.round((tonoRiferimento.black * 100) / tono.black);
+        fattoriTonalizzazione.cyan = Math.round((tonoRiferimento.cyan * 100) / tonoIniziale.cyan);
+        fattoriTonalizzazione.magenta = Math.round((tonoRiferimento.magenta * 100) / tonoIniziale.magenta);
+        fattoriTonalizzazione.yellow = Math.round((tonoRiferimento.yellow * 100) / tonoIniziale.yellow);
+        fattoriTonalizzazione.black = Math.round((tonoRiferimento.black * 100) / tonoIniziale.black);
 
         if (
             this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cyan, fattoriTonalizzazione, campionatoreColore) ||
