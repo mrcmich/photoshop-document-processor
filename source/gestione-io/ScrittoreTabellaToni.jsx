@@ -52,16 +52,17 @@ function ScrittoreTabellaToni() {
                 );
 
                 file.close();
+                file.remove();
                 return;
             }
         }
 
+        file.close();
+
         alert(
             "Tabella dei toni salvata sul Desktop come " + nomeFile + ".",
-            "Salvataggio tabella toni"
+            "Salvataggio tabella toni riuscito"
         );
-        
-        file.close();
     };
 
 }
