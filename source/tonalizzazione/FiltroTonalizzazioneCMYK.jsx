@@ -224,7 +224,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     // riferimento è assunto come array contenente 1 o 2 elementi, a seconda che sia un valore o un range
     this._determinaRiferimentoEffettivoCanale = function(riferimento, valoreIniziale) {
         if (riferimento.length == 1) {
-            return riferimento;
+            return riferimento[0];
         }
 
         if (valoreIniziale > riferimento[1]) {
