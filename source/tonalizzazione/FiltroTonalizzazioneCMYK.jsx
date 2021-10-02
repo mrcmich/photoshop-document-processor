@@ -25,7 +25,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     // Ritorna un oggetto con proprietà cyan, magenta, yellow, black
     // oppure undefined se premuto "Cancella"
     this._determinaTonoRiferimento = function(tonoDefault) {
-        var riferimentiUtente;
+        var riferimentiUtente = {};
 
         riferimentiUtente.cyan = this._determinaRiferimentoCanale("Ciano", tonoDefault.cyan);
 
