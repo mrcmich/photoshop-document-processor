@@ -6,13 +6,13 @@ var PosizionatoreLivelloAstratto = {
 
     rilevaRegione: function(livello) {
         throw new Error(
-            "Invocazione del metodo astratto rilevaRegione(livello, documento) di PosizionatoreLivelloAstratto."
+            "Invocazione del metodo astratto rilevaRegione(livello) di PosizionatoreLivelloAstratto."
         );
     },
 
     riposizionaLivello: function() {
         throw new Error(
-            "Invocazione del metodo astratto riposizionaLivello(livello, documento, regione, margine) di PosizionatoreLivelloAstratto."
+            "Invocazione del metodo astratto riposizionaLivello() di PosizionatoreLivelloAstratto."
         );
     },
 
