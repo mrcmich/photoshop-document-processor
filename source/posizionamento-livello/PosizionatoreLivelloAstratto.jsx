@@ -10,18 +10,21 @@ var PosizionatoreLivelloAstratto = {
 
     /**
     * Costante che rappresenta la regione sinistra di un documento.
+    * @type {number}
     * @protected
     */
     _REGIONE_SINISTRA: -1,
 
     /**
     * Costante che rappresenta la regione centrale di un documento.
+    * @type {number}
     * @protected
     */
     _REGIONE_CENTRALE: -2,
 
     /**
     * Costante che rappresenta la regione destra di un documento.
+    * @type {number}
     * @protected
     */
     _REGIONE_DESTRA: -3,
@@ -29,6 +32,7 @@ var PosizionatoreLivelloAstratto = {
     /**
     * Costante che rappresenta il margine di default, da usare per l'allineamento 
     * quando in un posizionatore livello non ne viene specificato uno.
+    * @type {number}
     * @protected
     */
     _MARGINE_DEFAULT: 0,
