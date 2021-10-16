@@ -12,6 +12,7 @@ function Pipeline(documenti) {
 
     /**
     * Array contenente i filtri di cui si compone la pipeline.
+    * @type {Array}
     * @protected
     */
     this._filtri = [];
