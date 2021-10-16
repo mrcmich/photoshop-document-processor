@@ -2,7 +2,7 @@
 //@include "../oggetti-minimi/Asserzione.jsx"
 
 /**
-* Constructor function per la creazione di un estrattore mome standard, che estrae dal 
+* Constructor function per la creazione di un estrattore nome standard, che estrae dal 
 * documento il suo nome, privato dell'estensione. 
 * Ha EstrattoreInfoAstratto come prototipo.
 * @constructor
