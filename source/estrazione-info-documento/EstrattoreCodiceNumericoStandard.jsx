@@ -12,8 +12,8 @@ function EstrattoreCodiceNumericoStandard() {
 
     /**
     * Metodo per l'estrazione del codice numerico del documento passato come parametro.
-    * Assume che il nome del documento sia in formato standard, del tipo 
-    * "codice-numerico-intero_parole-separate-da-underscore.estensione".
+    * Assume che il nome del documento sia in formato standard, del tipo "CN_STR.FFF" (con CN codice numerico intero, STR stringa costituita
+    * di una o più parole separate dal carattere underscore e FFF estensione del documento).
     * @param {Document} documento - il documento di cui si vuole estrarre il codice numerico.
     * @throws Lancia un errore se il parametro passato è null o undefined.
     * @returns {string}
