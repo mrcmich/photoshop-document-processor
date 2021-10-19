@@ -52,6 +52,7 @@ function PosizionatoreLivello(margine) {
 
     /**
     * Metodo getter per l'attributo _regioneLivello.
+    * @returns {number}
     */
     this.leggiRegioneLivello = function() {
         return this._regioneLivello;
@@ -78,6 +79,7 @@ function PosizionatoreLivello(margine) {
 
     /**
     * Metodo getter per l'attributo _margine.
+    * @returns {number}
     */
     this.leggiMargine = function() {
         return this._margine;
@@ -85,6 +87,7 @@ function PosizionatoreLivello(margine) {
 
     /**
     * Metodo getter per l'attributo _MARGINE_DEFAULT (ereditato da PosizionatoreLivelloAstratto).
+    * @returns {number}
     */
     this.leggiMargineDefault = function() {
         return this._MARGINE_DEFAULT;
