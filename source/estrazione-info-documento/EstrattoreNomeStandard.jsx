@@ -12,7 +12,7 @@ function EstrattoreNomeStandard() {
 
     /**
     * Metodo per l'estrazione del nome del documento passato come parametro, privato dell'estensione.
-    * Assume che il nome sia in formato standard, del tipo "<codice-numerico-intero>_<parole-separate-da-underscore>.<estensione>".
+    * Assume che il nome sia in formato standard, del tipo "codice-numerico-intero_parole-separate-da-underscore.estensione".
     * @param {Document} documento - il documento di cui si vuole estrarre il nome.
     * @throws Lancia un errore se il parametro passato è null o undefined.
     * @returns {string}
@@ -29,3 +29,5 @@ function EstrattoreNomeStandard() {
     };
 
 }
+
+// ATTENZIONE: correggi errore di visualizzazione in documentazione metodo estraiInfo()
