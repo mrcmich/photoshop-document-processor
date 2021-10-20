@@ -70,6 +70,7 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
     * Metodo setter per l'attributo _azioneConfigurazione.
     * @param {Object} parametriConfigurazione - oggetto che individua l'azione di configurazione usata dal filtro sovrimpressione.
     * @throws Lancia un errore se parametriConfigurazione non ha azioneConfigurazione come chiave.
+    * @returns {undefined}
     */
     this.settaAzioneConfigurazione = function(parametriConfigurazione) {
         asserzione(
@@ -86,6 +87,7 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
     * Metodo setter per l'attributo _setAzioneConfigurazione.
     * @param {Object} parametriConfigurazione - oggetto che individua l'azione di configurazione usata dal filtro sovrimpressione.
     * @throws Lancia un errore se parametriConfigurazione non ha setAzioneConfigurazione come chiave.
+    * @returns {undefined}
     */
     this.settaSetAzioneConfigurazione = function(parametriConfigurazione) {
         asserzione(
@@ -102,6 +104,7 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
     * Metodo setter per l'attributo _estrattoreInfo.
     * @param {EstrattoreInfoAstratto} estrattoreInfo - componente che gestisce l'estrazione di informazioni da sovrimprimere.
     * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @returns {undefined}
     */
     this.settaEstrattoreInfo = function(estrattoreInfo) {
         asserzione(
@@ -118,6 +121,7 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
     * Metodo setter per l'attributo _posizionatoreLivello.
     * @param {PosizionatoreLivelloAstratto} posizionatoreLivello - componente che gestisce il posizionamento delle informazioni sovrimpresse.
     * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @returns {undefined}
     */
     this.settaPosizionatoreLivello = function(posizionatoreLivello) {
         asserzione(
@@ -134,6 +138,7 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
     * Metodo con cui il filtro sovrimpressione processa tutti i documenti dell'array omonimo passato come parametro.
     * @param {Array} documenti - array contenente i documenti da processare.
     * @throws Lancia un errore se il parametro passato è null o undefined, o se non è possibile portare a termine l'elaborazione.
+    * @returns {undefined}
     */
     this.esegui = function(documenti) {
         var infoDocumento;
