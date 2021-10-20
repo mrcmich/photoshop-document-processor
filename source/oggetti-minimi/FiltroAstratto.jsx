@@ -1,7 +1,7 @@
 /**
 * Oggetto JavaScript che rappresenta l'astrazione di un filtro. 
 * Deve essere settato come prototipo di un filtro, il quale deve implementarne i metodi.
-* Vedi sorgente per i dettagli sui metodi da implementare.
+* @interface
 */
 var FiltroAstratto = {
 
@@ -10,7 +10,7 @@ var FiltroAstratto = {
     * Il filtro si applica all'array' di documenti passato come parametro.
     * @abstract
     * @param {Array} documenti - i documenti che il filtro deve processare.
-    * @throws {Error}
+    * @throws Lancia un errore quando invocato.
     */
     esegui: function(documenti) {
         throw new Error(

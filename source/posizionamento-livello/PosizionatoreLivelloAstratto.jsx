@@ -4,7 +4,7 @@
 * base alla regione cui appartiene nel suo documento. Deve essere settato come prototipo di un posizionatore livello, 
 * il quale deve implementarne i metodi, oltre che avere come proprietà delle variabili per memorizzare il livello da riposizionare,
 * la regione di tale livello e un margine per l'allineamento.
-* Vedi sorgente per i dettagli sugli attributi e sui metodi da implementare.
+* @interface
 */
 var PosizionatoreLivelloAstratto = {
 
@@ -43,7 +43,8 @@ var PosizionatoreLivelloAstratto = {
     * di tale metodo è invocata.
     * @abstract
     * @param {ArtLayer} livello - il livello di cui si vuole determinare la regione nel documento.
-    * @throws {Error}
+    * @throws Lancia un errore quando invocato. 
+    * @returns {undefined}
     */
     rilevaRegione: function(livello) {
         throw new Error(
@@ -54,7 +55,8 @@ var PosizionatoreLivelloAstratto = {
     /**
     * Metodo senza implementazione per il riposizionamento del livello impostato come proprietà di un posizionatore livello.
     * @abstract
-    * @throws {Error}
+    * @throws Lancia un errore quando invocato. 
+    * @returns {undefined}
     */
     riposizionaLivello: function() {
         throw new Error(
