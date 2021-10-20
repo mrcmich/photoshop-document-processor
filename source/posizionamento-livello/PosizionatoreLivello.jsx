@@ -38,6 +38,7 @@ function PosizionatoreLivello(margine) {
     * Metodo setter per il livello del posizionatore.
     * @param {ArtLayer} livello - il livello che il posizionatore deve riposizionare.
     * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @returns {undefined}
     */
     this.settaLivello = function(livello) {
         asserzione(
@@ -63,6 +64,7 @@ function PosizionatoreLivello(margine) {
     * Assume che il parametro margine sia un numero o al più una stringa numerica (convertita in number).
     * @param {number} margine - il margine che il posizionatore deve applicare nel riposizionamento.
     * @throws Lancia un errore se viene passato un margine negativo.
+    * @returns {undefined}
     */
     this.settaMargine = function(margine) {
         margine = (margine == undefined) ? this._MARGINE_DEFAULT : Number(margine);
@@ -99,6 +101,7 @@ function PosizionatoreLivello(margine) {
     * ereditate da PosizionatoreLivelloAstratto. Notare che la regione non viene restituita, piuttosto viene settato
     * l'attributo _regioneLivello (così come l'attributo _livello).
     * @param {ArtLayer} livello - il livello di cui si vuole determinare la regione.
+    * @returns {undefined}
     */
     this.rilevaRegione = function(livello) {
         var bordiLivello;
@@ -128,6 +131,7 @@ function PosizionatoreLivello(margine) {
     * troppo grande per le dimensioni del documento cui _livello appartiene viene usato il margine di default.
     *
     * N.B. Il metodo usa le unità di misura attualmente impostate per i righelli in Photoshop.
+    * @returns {undefined}
     */
     this.riposizionaLivello = function() {
         var margine = this._margine;
@@ -151,6 +155,7 @@ function PosizionatoreLivello(margine) {
     *
     * N.B. Il metodo usa le unità di misura attualmente impostate per i righelli in Photoshop.
     * @protected
+    * @returns {undefined}
     */
     this._allineaVerticalmenteLivello = function(margine) {
         var bordiLivello;
@@ -171,6 +176,7 @@ function PosizionatoreLivello(margine) {
     *
     * N.B. Il metodo usa le unità di misura attualmente impostate per i righelli in Photoshop.
     * @protected
+    * @returns {undefined}
     */
     this._allineaOrizzontalmenteLivello = function(margine) {
         var bordiLivello;
