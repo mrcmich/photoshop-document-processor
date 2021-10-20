@@ -6,6 +6,7 @@
 * @param {string} oggetto - il nome dell'oggetto in cui la condizione è valutata.
 * @param {string} descrizione - la descrizione dell'errore che deve essere generato se la condizione non è verificata.
 * @throws Lancia un errore se la condizione non è verificata.
+* @returns {undefined}
 */
 function asserzione(condizione, metodo, oggetto, descrizione) {
     if (!condizione) {

@@ -21,6 +21,7 @@ function Pipeline(documenti) {
     * Metodo setter per i documenti della pipeline.
     * @param {Array} documenti - array contenente i nuovi documenti che la pipeline deve processare.
     * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @returns {undefined}
     */
     this.settaDocumenti = function(documenti) {
         asserzione(
@@ -37,6 +38,7 @@ function Pipeline(documenti) {
     * Metodo per l'aggiunta di un nuovo filtro alla pipeline.
     * @param {FiltroAstratto} filtro - il filtro da aggiungere alla pipeline.
     * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @returns {undefined}
     */
     this.aggiungiFiltro = function(filtro) {
          asserzione(
@@ -54,6 +56,7 @@ function Pipeline(documenti) {
     * all'intero più vicino. Un indice passato sotto forma di stringa viene prima convertito in number.
     * @param {number} indiceFiltro - l'indice del filtro da eliminare, corrispondente alla sua posizione nell'array _filtri.
     * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @returns {undefined}
     */
     this.rimuoviFiltro = function(indiceFiltro) {
         asserzione(
@@ -109,6 +112,7 @@ function Pipeline(documenti) {
 
     /**
     * Metodo per l'eliminazione di tutti i filtri della pipeline.
+    * @returns {undefined}
     */
     this.svuota = function() {
         this._filtri.length = 0;
@@ -118,6 +122,7 @@ function Pipeline(documenti) {
     * Metodo per l'esecuzione di tutti i filtri della pipeline.
     * Terminata l'elaborazione dei documenti, l'utente viene avvisato tramite un suono e
     * una finestra di dialogo.
+    * @returns {undefined}
     */
     this.esegui = function() {   
         if (this._documenti.length != 0) {
