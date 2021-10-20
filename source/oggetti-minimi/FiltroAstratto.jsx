@@ -11,6 +11,7 @@ var FiltroAstratto = {
     * @abstract
     * @param {Array} documenti - i documenti che il filtro deve processare.
     * @throws Lancia un errore quando invocato.
+    * @returns {undefined}
     */
     esegui: function(documenti) {
         throw new Error(
