@@ -111,11 +111,11 @@ function PosizionatoreLivello(margine) {
         this.settaLivello(livello);
         bordiLivello = livello.bounds;
         larghezzaDocumento = livello.parent.width;
-        ascissaMediaLivello = (bordiLivello[0] + bordiLivello[2]) / 2;
+        ascissaMediaLivello = Math.round((bordiLivello[0] + bordiLivello[2]) / 2);
 
-        if (ascissaMediaLivello < larghezzaDocumento / 3) {
+        if (ascissaMediaLivello < Math.round(larghezzaDocumento / 3)) {
 		    this._regioneLivello = this._REGIONE_SINISTRA;
-	    } else if (ascissaMediaLivello > (2/3) * larghezzaDocumento) {
+	    } else if (ascissaMediaLivello >= Math.round((2/3) * larghezzaDocumento)) {
 		    this._regioneLivello = this._REGIONE_DESTRA;
 	    } else {
             this._regioneLivello = this._REGIONE_CENTRALE;
