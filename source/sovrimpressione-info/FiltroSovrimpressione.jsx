@@ -137,10 +137,11 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
     /**
     * Metodo con cui il filtro sovrimpressione processa tutti i documenti dell'array omonimo passato come parametro.
     * @param {Array} documenti - array contenente i documenti da processare.
-    * @throws Lancia un errore se il parametro passato è null o undefined, o se non è possibile portare a termine l'elaborazione.
+    * @throws Lancia un errore se il parametro passato è null o undefined.
     * @returns {undefined}
     */
     this.esegui = function(documenti) {
+        var statoInizialeDocumenti = [];
         var infoDocumento;
         var livelloConfigurazione;
         var regioneLivelloConfigurazione;
@@ -155,14 +156,16 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
         for (var i = 0; i < documenti.length; i++) {
             livelloConfigurazione = null;
             app.activeDocument = documenti[i];
+            statoInizialeDocumenti.push(documenti[i].activeHistoryState);
 
             try {
                 app.doAction(this._azioneConfigurazione, this._setAzioneConfigurazione);
             } catch (errore) {
                 alert(
-                    "Impossibile proseguire con la sovrimpressione:\n" +
-                    "non è stato possibile eseguire l'azione " + this._azioneConfigurazione +
-                    " dal set " + this._setAzioneConfigurazione + ". Verifica di aver definito l'azione.",
+                    "Sovrimpressione impossibile:\n" +
+                    "nessuna azione " + this._azioneConfigurazione +
+                    " trovata nel set " + this._setAzioneConfigurazione + 
+                    " . Verifica di aver definito correttamente l'azione di configurazione.",
                     "Errore",
                     true
                 );
@@ -178,6 +181,11 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
             }
 
             if (livelloConfigurazione == null) {
+                for (var j = 0; j <= i; j++) {
+                    documenti[j].activeHistoryState = statoInizialeDocumenti[j];
+                    documenti[j].save();
+                }
+
                 alert(
                     "Impossibile proseguire con la sovrimpressione:\n" +
                     "nessun livello con campo di testo nel documento " + documenti[i].name + 
