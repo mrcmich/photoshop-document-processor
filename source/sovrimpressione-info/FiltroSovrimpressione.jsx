@@ -153,6 +153,7 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
         );
 
         for (var i = 0; i < documenti.length; i++) {
+            livelloConfigurazione = null;
             app.activeDocument = documenti[i];
 
             try {
@@ -169,13 +170,18 @@ function FiltroSovrimpressione(parametriConfigurazione, estrattoreInfo, posizion
                 return;
             }
             
-            livelloConfigurazione = documenti[i].artLayers[0];
+            for (var j = 0; j < documenti[i].artLayers.length; j++) {
+                if (documenti[i].artLayers[j].kind == LayerKind.TEXT) {
+                    livelloConfigurazione = documenti[i].artLayers[j];
+                    break;
+                }
+            }
 
-            if (livelloConfigurazione.kind != LayerKind.TEXT) {
+            if (livelloConfigurazione == null) {
                 alert(
                     "Impossibile proseguire con la sovrimpressione:\n" +
-                    "nessun livello con campo di testo nel documento " + documenti[i].name + ". Verifica di aver impostato " +
-                    "correttamente l'azione di configurazione " + this._azioneConfigurazione + ".",
+                    "nessun livello con campo di testo nel documento " + documenti[i].name + 
+                    ". Verifica di aver impostato correttamente l'azione di configurazione.",
                     "Errore",
                     true
                 );
