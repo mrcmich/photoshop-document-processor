@@ -1,5 +1,5 @@
-#include "ScrittoreFileAstratto.jsx"
-#include "../oggetti-minimi/Asserzione.jsx"
+//@include "ScrittoreFileAstratto.jsx"
+//@include "../oggetti-minimi/Asserzione.jsx"
 
 function ScrittoreTabellaToni() {
     this.__proto__ = ScrittoreFileAstratto;

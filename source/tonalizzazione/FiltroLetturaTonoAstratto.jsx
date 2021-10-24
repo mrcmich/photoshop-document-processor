@@ -1,4 +1,4 @@
-#include "../oggetti-minimi/FiltroAstratto.jsx"
+//@include "../oggetti-minimi/FiltroAstratto.jsx"
 
 var FiltroLetturaTonoAstratto = {
     __proto__: FiltroAstratto,

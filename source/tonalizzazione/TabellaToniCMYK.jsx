@@ -1,6 +1,6 @@
-#include "../estrazione-info-documento/EstrattoreCodiceNumericoStandard.jsx"
-#include "../oggetti-minimi/Asserzione.jsx"
-#include "TabellaToniAstratta.jsx"
+//@include "../estrazione-info-documento/EstrattoreCodiceNumericoStandard.jsx"
+//@include "../oggetti-minimi/Asserzione.jsx"
+//@include "TabellaToniAstratta.jsx"
 
 function TabellaToniCMYK(estrattoreCodiceNumerico) {
     this.__proto__ = TabellaToniAstratta;

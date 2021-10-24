@@ -110,12 +110,12 @@ function PosizionatoreLivello(margine) {
         
         this.settaLivello(livello);
         bordiLivello = livello.bounds;
-        larghezzaDocumento = livello.parent.width;
-        ascissaMediaLivello = (bordiLivello[0] + bordiLivello[2]) / 2;
+        larghezzaDocumento = livello.parent.width.value;
+        ascissaMediaLivello = Math.round((bordiLivello[0].value + bordiLivello[2].value) / 2);
 
-        if (ascissaMediaLivello < larghezzaDocumento / 3) {
+        if (ascissaMediaLivello < Math.round(larghezzaDocumento / 3)) {
 		    this._regioneLivello = this._REGIONE_SINISTRA;
-	    } else if (ascissaMediaLivello > (2/3) * larghezzaDocumento) {
+	    } else if (ascissaMediaLivello >= Math.round((2/3) * larghezzaDocumento)) {
 		    this._regioneLivello = this._REGIONE_DESTRA;
 	    } else {
             this._regioneLivello = this._REGIONE_CENTRALE;
@@ -127,21 +127,25 @@ function PosizionatoreLivello(margine) {
     * Metodo per il riposizionamento di _livello.
     * Il riposizionamento avviene secondo il valore di _regioneLivello e _margine, come
     * definito dai due metodi interni _allineaVerticalmenteLivello e _allineaOrizzontalmenteLivello.
-    * Se almeno uno dei suddetti attributi è null/undefined, il metodo non fa nulla, se _margine è
-    * troppo grande per le dimensioni del documento cui _livello appartiene viene usato il margine di default.
+    * Se almeno uno dei suddetti attributi è null/undefined, il metodo non fa nulla. Si noti che il margine
+    * massimo è imposto pari al 20% della dimensione più piccola del documento, e che un margine superiore a tale
+    * valore viene riportato al massimo.
     *
     * N.B. Il metodo usa le unità di misura attualmente impostate per i righelli in Photoshop.
     * @returns {undefined}
     */
     this.riposizionaLivello = function() {
+        var margineMax;
         var margine = this._margine;
-
+        
         if (this._livello == undefined || this._regioneLivello == undefined) {
             return;
         }
 
-        if (this._margine > (1/2) * Math.min(this._livello.parent.width, this._livello.parent.height)) {
-             margine = this._MARGINE_DEFAULT;
+        margineMax = 0.20 * Math.min(this._livello.parent.width.value, this._livello.parent.height.value);
+
+        if (this._margine > margineMax) {
+            margine = margineMax;
         }
 
         this._allineaVerticalmenteLivello(margine);
@@ -150,8 +154,9 @@ function PosizionatoreLivello(margine) {
 
     /**
     * Metodo per l'allineamento verticale di _livello, invocato internamente a riposizionaLivello().
-    * Il livello _livello viene allineato al bordo superiore del documento, lasciando un margine pari a _margine.
-    * Se almeno uno dei suddetti attributi è null/undefined, il metodo non fa nulla.
+    * Il livello _livello viene allineato al bordo superiore del documento, lasciando un margine pari a margine.
+    * Si osservi che questo metodo assume che gli attributi _livello e _regioneLivello siano definiti e 
+    * che si abbia 0 <= margine <= margineMax, dove margineMax è imposto pari al 20% della dimensione più piccola del documento.
     *
     * N.B. Il metodo usa le unità di misura attualmente impostate per i righelli in Photoshop.
     * @protected
@@ -169,10 +174,11 @@ function PosizionatoreLivello(margine) {
     /**
     * Metodo per l'allineamento orizzontale di _livello, invocato internamente a riposizionaLivello().
     * Il livello _livello viene allineato:
-    *   - al bordo sinistro, lasciando un margine pari a _margine, se _regioneLivello == _REGIONE_SINISTRA
+    *   - al bordo sinistro, lasciando un margine pari a margine, se _regioneLivello == _REGIONE_SINISTRA
     *   - al centro se _regioneLivello == _REGIONE_CENTRALE
-    *   - al bordo destro, lasciando un margine pari a _margine, se _regioneLivello == _REGIONE_DESTRA
-    * Se almeno uno dei suddetti attributi è null/undefined, il metodo non fa nulla.
+    *   - al bordo destro, lasciando un margine pari a margine, se _regioneLivello == _REGIONE_DESTRA
+    * Si osservi che questo metodo assume che gli attributi _livello e _regioneLivello siano definiti e 
+    * che si abbia 0 <= margine <= margineMax, dove margineMax è imposto pari al 20% della dimensione più piccola del documento.
     *
     * N.B. Il metodo usa le unità di misura attualmente impostate per i righelli in Photoshop.
     * @protected
@@ -185,7 +191,7 @@ function PosizionatoreLivello(margine) {
         var ascissaMassimaLivello;
 
         bordiLivello = this._livello.bounds;
-        larghezzaDocumento = this._livello.parent.width;
+        larghezzaDocumento = this._livello.parent.width.value;
         ascissaMinimaLivello = bordiLivello[0].value;
         ascissaMassimaLivello = bordiLivello[2].value;
 

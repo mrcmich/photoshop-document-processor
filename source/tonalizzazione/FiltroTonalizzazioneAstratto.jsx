@@ -1,4 +1,4 @@
-#include "../oggetti-minimi/FiltroAstratto.jsx"
+//@include "../oggetti-minimi/FiltroAstratto.jsx"
 
 var FiltroTonalizzazioneAstratto = {
     __proto__: FiltroAstratto,
