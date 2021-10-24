@@ -1,6 +1,6 @@
-#include "../oggetti-minimi/Asserzione.jsx"
-#include "FiltroTonalizzazioneAstratto.jsx"
-#include "FiltroLetturaTonoCMYK.jsx"
+//@include "../oggetti-minimi/Asserzione.jsx"
+//@include "FiltroTonalizzazioneAstratto.jsx"
+//@include "FiltroLetturaTonoCMYK.jsx"
 
 function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     this.__proto__ = FiltroTonalizzazioneAstratto;

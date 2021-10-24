@@ -1,7 +1,7 @@
-#include "FiltroLetturaTonoAstratto.jsx"
-#include "../oggetti-minimi/Asserzione.jsx"
-#include "TabellaToniCMYK.jsx"
-#include "../gestione-io/ScrittoreTabellaToni.jsx"
+//@include "FiltroLetturaTonoAstratto.jsx"
+//@include "../oggetti-minimi/Asserzione.jsx"
+//@include "TabellaToniCMYK.jsx"
+//@include "../gestione-io/ScrittoreTabellaToni.jsx"
 
 function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
     this.__proto__ = FiltroLetturaTonoAstratto;
