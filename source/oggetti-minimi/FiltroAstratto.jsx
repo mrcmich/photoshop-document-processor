@@ -4,6 +4,18 @@
 * @interface
 */
 var FiltroAstratto = {
+    /**
+    * Metodo senza implementazione per recuperare il nome del filtro.
+    * Ogni filtro deve essere contraddistinto da un nome, che ne specifica la tipologia.
+    * @abstract
+    * @throws Lancia un errore quando invocato.
+    * @returns {string}
+    */
+    leggiNome: function() {
+        throw new Error(
+            "Invocazione del metodo astratto leggiNome() di FiltroAstratto."
+        );
+    },
 
     /**
     * Metodo senza implementazione per l'esecuzione del filtro.
