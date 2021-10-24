@@ -1,6 +1,6 @@
-﻿#include "source/oggetti-minimi/Pipeline.jsx"
-#include "source/sovrimpressione-info/FiltroSovrimpressione.jsx"
-#include "source/tonalizzazione/FiltroTonalizzazioneCMYK.jsx"
+﻿//@include "source/oggetti-minimi/Pipeline.jsx"
+//@include "source/sovrimpressione-info/FiltroSovrimpressione.jsx"
+//@include "source/tonalizzazione/FiltroTonalizzazioneCMYK.jsx"
 
 // Salvataggio preferenze Photoshop
 var preferenzeRighelli = app.preferences.rulerUnits;
@@ -22,7 +22,6 @@ var scrittoreFile = new ScrittoreTabellaToni();
 var filtroLetturaTono = new FiltroLetturaTonoCMYK(tabellaToni, scrittoreFile);
 
 // Definizione FiltroTonalizzazioneCMYK e composizione con FiltroLetturaTonoCMYK
-// Notare che si potrebbe anche usare singolarmente FiltroLetturaTonoCMYK, se si volesse solo rilevare il tono dei documenti
 var filtroTonalizzazione = new FiltroTonalizzazioneCMYK(filtroLetturaTono);
 
 // Definizione Pipeline e aggiunta filtri
