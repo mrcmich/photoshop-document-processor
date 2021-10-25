@@ -93,7 +93,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
     * @returns {SolidColor}
     */
     this.calcolaTonoMedio = function() {
-        var tonoMedio = new SolidColor().cmyk;
+        var tonoMedio = new SolidColor();
         var tonoCorrente;
         var sommeCanaliDocumenti = {
             ciano: 0,
@@ -108,16 +108,16 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
 
         for (var i = 0; i < this._toni.length; i++) {
             tonoCorrente = this._toni[i].tono;
-            sommeCanaliDocumenti.ciano += tonoCorrente.cyan;
-            sommeCanaliDocumenti.magenta += tonoCorrente.magenta;
-            sommeCanaliDocumenti.giallo += tonoCorrente.yellow;
-            sommeCanaliDocumenti.nero += tonoCorrente.black;
+            sommeCanaliDocumenti.ciano += tonoCorrente.cmyk.cyan;
+            sommeCanaliDocumenti.magenta += tonoCorrente.cmyk.magenta;
+            sommeCanaliDocumenti.giallo += tonoCorrente.cmyk.yellow;
+            sommeCanaliDocumenti.nero += tonoCorrente.cmyk.black;
         }
 
-        tonoMedio.cyan = Math.round(sommeCanaliDocumenti.ciano / this._toni.length);
-        tonoMedio.magenta = Math.round(sommeCanaliDocumenti.magenta / this._toni.length);
-        tonoMedio.yellow = Math.round(sommeCanaliDocumenti.giallo / this._toni.length);
-        tonoMedio.black = Math.round(sommeCanaliDocumenti.nero / this._toni.length);
+        tonoMedio.cmyk.cyan = Math.round(sommeCanaliDocumenti.ciano / this._toni.length);
+        tonoMedio.cmyk.magenta = Math.round(sommeCanaliDocumenti.magenta / this._toni.length);
+        tonoMedio.cmyk.yellow = Math.round(sommeCanaliDocumenti.giallo / this._toni.length);
+        tonoMedio.cmyk.black = Math.round(sommeCanaliDocumenti.nero / this._toni.length);
         this._tonoMedio = tonoMedio;
 
         return tonoMedio;
@@ -158,10 +158,10 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
             tonoCorrente = this._toni[i].tono;
 
             tabella = tabella.concat(this._toni[i].id).concat(": [").
-                concat(tonoCorrente.cyan).concat(", ").
-                concat(tonoCorrente.magenta).concat(", ").
-                concat(tonoCorrente.yellow).concat(", ").
-                concat(tonoCorrente.black).concat("]\n")
+                concat(tonoCorrente.cmyk.cyan).concat(", ").
+                concat(tonoCorrente.cmyk.magenta).concat(", ").
+                concat(tonoCorrente.cmyk.yellow).concat(", ").
+                concat(tonoCorrente.cmyk.black).concat("]\n")
             ;
         }
 
@@ -170,10 +170,10 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         }
 
         tabella = tabella.concat("\nIl tono medio, valutato su tutti i documenti, è il seguente: \n[").
-            concat(this._tonoMedio.cyan).concat(", ").
-            concat(this._tonoMedio.magenta).concat(", ").
-            concat(this._tonoMedio.yellow).concat(", ").
-            concat(this._tonoMedio.black).concat("]")
+            concat(this._tonoMedio.cmyk.cyan).concat(", ").
+            concat(this._tonoMedio.cmyk.magenta).concat(", ").
+            concat(this._tonoMedio.cmyk.yellow).concat(", ").
+            concat(this._tonoMedio.cmyk.black).concat("]")
         ;
 
         return tabella;
@@ -201,10 +201,10 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
 
             righeTabella.push(
                 "".concat(this._toni[i].id).concat(": [").
-                concat(tonoCorrente.cyan).concat(", ").
-                concat(tonoCorrente.magenta).concat(", ").
-                concat(tonoCorrente.yellow).concat(", ").
-                concat(tonoCorrente.black).concat("]")
+                concat(tonoCorrente.cmyk.cyan).concat(", ").
+                concat(tonoCorrente.cmyk.magenta).concat(", ").
+                concat(tonoCorrente.cmyk.yellow).concat(", ").
+                concat(tonoCorrente.cmyk.black).concat("]")
             );
         }
 
@@ -216,10 +216,10 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         righeTabella.push("Il tono medio, valutato su tutti i documenti, è il seguente:");
 
         righeTabella.push(
-            ("[").concat(this._tonoMedio.cyan).concat(", ").
-            concat(this._tonoMedio.magenta).concat(", ").
-            concat(this._tonoMedio.yellow).concat(", ").
-            concat(this._tonoMedio.black).concat("]")
+            ("[").concat(this._tonoMedio.cmyk.cyan).concat(", ").
+            concat(this._tonoMedio.cmyk.magenta).concat(", ").
+            concat(this._tonoMedio.cmyk.yellow).concat(", ").
+            concat(this._tonoMedio.cmyk.black).concat("]")
         );
 
         return righeTabella;
