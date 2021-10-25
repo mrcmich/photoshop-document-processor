@@ -100,6 +100,15 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
                 continue;
             }
 
+            if (Number(input[0]) > Number(input[1])) {
+                alert(
+                    "Riferimento non valido: il minimo di un range non può essere maggiore del massimo.", 
+                    "Riferimento non valido"
+                );
+
+                continue;
+            }
+
             riferimento.push(Math.round(Number(input[0])));
             riferimento.push(Math.round(Number(input[1])));
             break;
