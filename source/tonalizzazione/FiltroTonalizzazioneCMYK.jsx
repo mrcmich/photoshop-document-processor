@@ -144,16 +144,16 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             tonoIniziale = this._filtroLetturaTonoCMYK.rilevaTono(livelloRiferimento, campionatoreColore);
         }
 
-        fattoriTonalizzazione.cyan = Math.round((tonoRiferimento.cyan * 100) / tonoIniziale.cyan);
-        fattoriTonalizzazione.magenta = Math.round((tonoRiferimento.magenta * 100) / tonoIniziale.magenta);
-        fattoriTonalizzazione.yellow = Math.round((tonoRiferimento.yellow * 100) / tonoIniziale.yellow);
-        fattoriTonalizzazione.black = Math.round((tonoRiferimento.black * 100) / tonoIniziale.black);
+        fattoriTonalizzazione.cyan = Math.round((tonoRiferimento.cmyk.cyan * 100) / tonoIniziale.cmyk.cyan);
+        fattoriTonalizzazione.magenta = Math.round((tonoRiferimento.cmyk.magenta * 100) / tonoIniziale.cmyk.magenta);
+        fattoriTonalizzazione.yellow = Math.round((tonoRiferimento.cmyk.yellow * 100) / tonoIniziale.cmyk.yellow);
+        fattoriTonalizzazione.black = Math.round((tonoRiferimento.cmyk.black * 100) / tonoIniziale.cmyk.black);
 
         if (
-            this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cyan, fattoriTonalizzazione, campionatoreColore) &&
-            this._calcolaFattoreCanale(livelloRiferimento, "magenta", tonoRiferimento.magenta, fattoriTonalizzazione, campionatoreColore) &&
-            this._calcolaFattoreCanale(livelloRiferimento, "yellow", tonoRiferimento.yellow, fattoriTonalizzazione, campionatoreColore) &&
-            this._calcolaFattoreCanale(livelloRiferimento, "black", tonoRiferimento.black, fattoriTonalizzazione, campionatoreColore)
+            this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cmyk.cyan, fattoriTonalizzazione, campionatoreColore) &&
+            this._calcolaFattoreCanale(livelloRiferimento, "magenta", tonoRiferimento.cmyk.magenta, fattoriTonalizzazione, campionatoreColore) &&
+            this._calcolaFattoreCanale(livelloRiferimento, "yellow", tonoRiferimento.cmyk.yellow, fattoriTonalizzazione, campionatoreColore) &&
+            this._calcolaFattoreCanale(livelloRiferimento, "black", tonoRiferimento.cmyk.black, fattoriTonalizzazione, campionatoreColore)
         ) {
             return fattoriTonalizzazione;
         }
@@ -216,13 +216,13 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     this._tonalizza = function(livelloRiferimento, campionatoreColore, riferimentiUtente) {
         var tonoIniziale;
         var fattoriTonalizzazione;
-        var tonoRiferimento = new SolidColor().cmyk;
+        var tonoRiferimento = new SolidColor();
         
         tonoIniziale = this._filtroLetturaTonoCMYK.rilevaTono(livelloRiferimento, campionatoreColore);
-        tonoRiferimento.cyan = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.cyan, tonoIniziale.cyan);
-        tonoRiferimento.magenta = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.magenta, tonoIniziale.magenta);
-        tonoRiferimento.yellow = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.yellow, tonoIniziale.yellow);
-        tonoRiferimento.black = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.black, tonoIniziale.black);
+        tonoRiferimento.cmyk.cyan = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.cyan, tonoIniziale.cmyk.cyan);
+        tonoRiferimento.cmyk.magenta = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.magenta, tonoIniziale.cmyk.magenta);
+        tonoRiferimento.cmyk.yellow = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.yellow, tonoIniziale.cmyk.yellow);
+        tonoRiferimento.cmyk.black = this._determinaRiferimentoEffettivoCanale(riferimentiUtente.black, tonoIniziale.cmyk.black);
         fattoriTonalizzazione = this._calcolaFattoriTonalizzazione(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore);
 
         if (fattoriTonalizzazione != undefined) {

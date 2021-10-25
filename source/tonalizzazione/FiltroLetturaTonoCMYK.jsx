@@ -85,12 +85,12 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
     };
 
     this.rilevaTono = function(livello, campionatoreColore) {
-        var tono = new SolidColor().cmyk;
+        var tono = new SolidColor();
 
-        tono.cyan = this.rilevaPercentualeCanale(livello, campionatoreColore, "cyan");
-        tono.magenta = this.rilevaPercentualeCanale(livello, campionatoreColore, "magenta");
-        tono.yellow = this.rilevaPercentualeCanale(livello, campionatoreColore, "yellow");
-        tono.black = this.rilevaPercentualeCanale(livello, campionatoreColore, "black");
+        tono.cmyk.cyan = this.rilevaPercentualeCanale(livello, campionatoreColore, "cyan");
+        tono.cmyk.magenta = this.rilevaPercentualeCanale(livello, campionatoreColore, "magenta");
+        tono.cmyk.yellow = this.rilevaPercentualeCanale(livello, campionatoreColore, "yellow");
+        tono.cmyk.black = this.rilevaPercentualeCanale(livello, campionatoreColore, "black");
 
         return tono;
     };
@@ -98,10 +98,10 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
     this.validaTono = function(tono) {
          if (
             tono == undefined ||
-            tono.cyan == 0 ||
-            tono.magenta == 0||
-            tono.yellow == 0 ||
-            tono.black == 0
+            tono.cmyk.cyan == 0 ||
+            tono.cmyk.magenta == 0||
+            tono.cmyk.yellow == 0 ||
+            tono.cmyk.black == 0
         ) {
             return false;
         }
