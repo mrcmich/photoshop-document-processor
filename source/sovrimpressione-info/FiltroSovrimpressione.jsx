@@ -10,9 +10,8 @@
 * da sovrimprimere e il posizionamento del livello in cui vengono scritte tali informazioni a 
 * due componenti esterni: estrattoreInfo e posizionatoreLivello. Le caratteristiche che tale testo
 * deve avere (come font, colore, ecc.) sono definite mediante un'azione di Photoshop, individuata
-* dall'oggetto parametriConfigurazione passato come parametro.
-* @param {Object} parametriConfigurazione - oggetto con forma { azioneConfigurazione: "azione-conf", setAzioneConfigurazione: "set-azione-conf" }, 
-*                                           per il passaggio dell'azione di configurazione.
+* dall'oggetto parametriConfigurazione passato come parametro. Ha FiltroAstratto come prototipo.
+* @param {Object} parametriConfigurazione - oggetto con forma { azioneConfigurazione: "azione-conf", setAzioneConfigurazione: "set-azione-conf" }, per il passaggio dell'azione di configurazione.
 * @param {EstrattoreInfoAstratto} estrattoreInfo - componente che gestisce l'estrazione di informazioni da sovrimprimere.
 * @param {PosizionatoreLivelloAstratto} posizionatoreLivello - componente che gestisce il posizionamento delle informazioni sovrimpresse.
 * @constructor
