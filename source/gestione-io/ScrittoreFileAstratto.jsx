@@ -1,6 +1,19 @@
+/**
+* Oggetto JavaScript che rappresenta l'astrazione di uno scrittore file, ovvero di un componente
+* deputato al salvataggio su file di informazioni testuali codificate opportunamente.
+* Deve essere settato come prototipo di uno scrittore file, il quale deve implementarne i metodi.
+* @interface
+*/
 var ScrittoreFileAstratto = {
 
-    // Riceve un array di stringhe, in cui ogni stringa rappresenta una diversa linea da scrivere
+    /**
+    * Metodo senza implementazione per il salvataggio su file dell'array di stringhe passato
+    * come parametro.
+    * @abstract
+    * @param {Array} listaLineeFile - array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa linea.
+    * @throws Lancia un errore quando invocato.
+    * @returns {undefined}
+    */
     scriviSuFile: function(listaLineeFile) {
         throw new Error(
             "Invocazione del metodo astratto scriviSuFile(listaLineeFile) di ScrittoreFileAstratto."

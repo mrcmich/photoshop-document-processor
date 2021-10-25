@@ -2,14 +2,45 @@
 //@include "../oggetti-minimi/Asserzione.jsx"
 //@include "TabellaToniAstratta.jsx"
 
+/**
+* Constructor function per la creazione di una nuova tabella dei toni, dove i toni
+* sono espressi secondo il metodo colore CMYK. Si noti che i toni della tabella sono indicizzati
+* mediante il codice numerico del documento cui si riferiscono, e sono ordinati sulla base di tale
+* indice (in ordine crescente).
+* @param {EstrattoreInfoAstratto} estrattoreCodiceNumerico - l'estrattore di informazioni utilizzato per estrarre il codice numerico dei documenti, usato come indice della tabella.
+* @constructor
+*/
 function TabellaToniCMYK(estrattoreCodiceNumerico) {
     this.__proto__ = TabellaToniAstratta;
 
-    // Array di oggetti del tipo { id: <id>, tono: <tono> }
+    /**
+    * Array contenente i toni della tabella, memorizzati come oggetti con chiavi id (l'indice)
+    * e tono (il tono vero e proprio).
+    * @type {Array}
+    * @protected
+    */
     this._toni = [];
 
+    /**
+    * Attributo che rappresenta il tono medio, valutato su tutti i toni della tabella.
+    * @type {SolidColor}
+    * @protected
+    */
     this._tonoMedio = null;
 
+    /**
+    * L'estrattore di informazioni utilizzato per estrarre il codice numerico dei documenti.
+    * @type {EstrattoreInfoAstratto}
+    * @protected
+    */
+    this._estrattoreCodiceNumerico = null;
+
+    /**
+    * Metodo setter per _estrattoreCodiceNumerico.
+    * @param {EstrattoreInfoAstratto} estrattoreCodiceNumerico - l'estrattore di informazioni utilizzato per estrarre il codice numerico dei documenti, usato come indice della tabella.
+    * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @returns {undefined}
+    */
     this.settaEstrattoreCodiceNumerico = function(estrattoreCodiceNumerico) {
         asserzione(
             estrattoreCodiceNumerico != undefined, 
@@ -21,6 +52,13 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         this._estrattoreCodiceNumerico = estrattoreCodiceNumerico;
     };
 
+    /**
+    * Metodo per l'aggiunta di un nuovo tono alla tabella.
+    * @param {Document} documento - il documento cui il tono da aggiungere fa riferimento.
+    * @param {SolidColor} tono - il tono da aggiungere.
+    * @throws Lancia un errore se almeno uno dei parametri passati è null o undefined.
+    * @returns {undefined}
+    */
     this.aggiungiTono = function(documento, tono) {
         var idDocumento;
         var entryTabella = {};
@@ -49,7 +87,11 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         });
     };
 
-    // Ritorna undefined se la tabella è vuota
+    /**
+    * Metodo per il calcolo del tono medio, valutato su tutti i toni 
+    * della tabella. Ritorna undefined se la tabella è vuota.
+    * @returns {SolidColor}
+    */
     this.calcolaTonoMedio = function() {
         var tonoMedio = new SolidColor().cmyk;
         var tonoCorrente;
@@ -81,6 +123,11 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         return tonoMedio;
     };
 
+    /**
+    * Metodo getter per _tonoMedio. 
+    * Invoca il metodo calcolaTonoMedio() se _tonoMedio è null o undefined.
+    * @returns {SolidColor}
+    */
     this.leggiTonoMedio = function() {
         if (this._tonoMedio == null) {
             this.calcolaTonoMedio();
@@ -89,6 +136,12 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         return this._tonoMedio;
     };
 
+    /**
+    * Metodo per la formattazione dei toni della tabella e del tono medio,
+    * in modo che queste informazioni siano adatte ad essere visualizzate, sotto forma di un'unica stringa.
+    * Ritorna undefined se la tabella è vuota.
+    * @returns {string}
+    */
     this.toString = function() {
         var tabella = "";
         var tonoCorrente;
@@ -126,7 +179,13 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         return tabella;
     };
 
-    // Ritorna array vuoto se la tabella è vuota
+    /**
+    * Metodo per la formattazione dei toni della tabella e del tono medio,
+    * in modo che queste informazioni siano adatte ad essere salvate su file.
+    * Ritorna un array di stringhe, dove ogni stringa rappresenta una singola riga della tabella
+    * oppure la riga corrispondente al tono medio. Se la tabella è vuota, ritorna invece undefined.
+    * @returns {Array}
+    */
     this.toFile = function() {
         var righeTabella = [];
         var tonoCorrente;
