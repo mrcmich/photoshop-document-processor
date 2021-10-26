@@ -19,7 +19,7 @@ var FiltroAstratto = {
 
     /**
     * Metodo senza implementazione per l'esecuzione del filtro.
-    * Il filtro si applica all'array' di documenti passato come parametro.
+    * Il filtro si applica all'array di documenti passato come parametro.
     * @abstract
     * @param {Array} documenti - i documenti che il filtro deve processare.
     * @throws Lancia un errore quando invocato.
