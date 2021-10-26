@@ -3,8 +3,19 @@
 //@include "TabellaToniCMYK.jsx"
 //@include "../gestione-io/ScrittoreTabellaToni.jsx"
 
+/**
+* Constructor function per la creazione di un filtro lettura tono CMYK, oggetto che 
+* si occupa della rilevazione del tono di un set di documenti e della compilazione di una tabella dei toni,
+* che viene poi visualizzata all'utente e salvata su file.
+* Ha FiltroLetturaTonoAstratto come prototipo.
+* @param {TabellaToniAstratta} tabellaToni - la tabella dei toni dei documenti, compilata dal filtro lettura tono.
+* @param {ScrittoreFileAstratto} scrittoreTabellaToni - oggetto deputato al salvataggio della tabella dei toni su file.
+* @constructor
+*/
 function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
     this.__proto__ = FiltroLetturaTonoAstratto;
+
+    //
     this._documentiConTonoNonValido = [];
 
     this.validaDocumenti = function(documenti) {
@@ -49,6 +60,13 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
         this._documenti = documenti;
     };
 
+    /**
+    * Metodo per l'esecuzione del filtro lettura tono.
+    * Il filtro si applica all'array di documenti passato come parametro.
+    * @abstract
+    * @param {Array} documenti - i documenti che il filtro deve processare.
+    * @returns {undefined}
+    */
     this.esegui = function(documenti) {
         try {
             this.settaDocumenti(documenti);
@@ -84,6 +102,14 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
         return Math.round(coloreCampionato[canale]);
     };
 
+    /**
+    * Metodo per la rilevazione del tono di un documento, valutato sul livello
+    * di tale documento passato come parametro.
+    * @abstract
+    * @param {ArtLayer} livello - il livello del documento rispetto al quale il tono viene rilevato, tipicamente una tinta piatta.
+    * @param {ColorSampler} campionatoreColore - oggetto deputato alla lettura delle quantità percentuali dei canali del documento.
+    * @returns {SolidColor}
+    */
     this.rilevaTono = function(livello, campionatoreColore) {
         var tono = new SolidColor();
 
