@@ -229,13 +229,13 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     * @param {SolidColor} fattoriTonalizzazione - i fattori con cui il miscelatore deve essere applicato.
     * @returns {undefined}
     */
-    this._applicaMiscelatoreCanale = function(livello, canaliUscita, fattoriTonalizzazione) {
-        canaliUscita[0][0] = fattoriTonalizzazione.cyan;
-        canaliUscita[1][1] = fattoriTonalizzazione.magenta;
-        canaliUscita[2][2] = fattoriTonalizzazione.yellow;
-        canaliUscita[3][3] = fattoriTonalizzazione.black;
+    this._applicaMiscelatoreCanale = function(livello, fattoriTonalizzazione) {
+        this._canaliUscitaMiscelatore[0][0] = fattoriTonalizzazione.cyan;
+        this._canaliUscitaMiscelatore[1][1] = fattoriTonalizzazione.magenta;
+        this._canaliUscitaMiscelatore[2][2] = fattoriTonalizzazione.yellow;
+        this._canaliUscitaMiscelatore[3][3] = fattoriTonalizzazione.black;
 
-        livello.mixChannels(canaliUscita);
+        livello.mixChannels(this._canaliUscitaMiscelatore);
     };
 
     this._calcolaFattoreCanale = function(livelloRiferimento, canale, riferimentoCanale, fattoriTonalizzazione, campionatoreColore) {
@@ -244,7 +244,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         var statoInizialeDocumento;
     
         statoInizialeDocumento = livelloRiferimento.parent.activeHistoryState;
-        this._applicaMiscelatoreCanale(livelloRiferimento, this._canaliUscitaMiscelatore, fattoriTonalizzazione);
+        this._applicaMiscelatoreCanale(livelloRiferimento, fattoriTonalizzazione);
         percentualeCanale = this._filtroLetturaTonoCMYK.rilevaPercentualeCanale(livelloRiferimento, campionatoreColore, canale);
         livelloRiferimento.parent.activeHistoryState = statoInizialeDocumento;
         
@@ -271,7 +271,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
                 return false;
             }
         
-            this._applicaMiscelatoreCanale(livelloRiferimento, this._canaliUscitaMiscelatore, fattoriTonalizzazione);
+            this._applicaMiscelatoreCanale(livelloRiferimento, fattoriTonalizzazione);
             percentualeCanale = this._filtroLetturaTonoCMYK.rilevaPercentualeCanale(livelloRiferimento, campionatoreColore, canale);
             livelloRiferimento.parent.activeHistoryState = statoInizialeDocumento;
 
@@ -294,7 +294,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         fattoriTonalizzazione = this._calcolaFattoriTonalizzazione(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore);
 
         if (fattoriTonalizzazione != undefined) {
-            this._applicaMiscelatoreCanale(livelloRiferimento.parent.backgroundLayer, this._canaliUscitaMiscelatore, fattoriTonalizzazione);
+            this._applicaMiscelatoreCanale(livelloRiferimento.parent.backgroundLayer, fattoriTonalizzazione);
         }
     }
 
