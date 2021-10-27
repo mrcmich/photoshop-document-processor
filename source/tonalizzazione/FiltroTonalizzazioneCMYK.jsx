@@ -63,25 +63,25 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     this._determinaTonoRiferimento = function(tonoDefault) {
         var riferimentiUtente = {};
 
-        riferimentiUtente.cyan = this._determinaRiferimentoCanale("Ciano", tonoDefault.cyan);
+        riferimentiUtente.cyan = this._determinaRiferimentoCanale("Ciano", tonoDefault.cmyk.cyan);
 
         if (riferimentiUtente.cyan == undefined) {
             return;
         }
 
-        riferimentiUtente.magenta = this._determinaRiferimentoCanale("Magenta", tonoDefault.magenta);
+        riferimentiUtente.magenta = this._determinaRiferimentoCanale("Magenta", tonoDefault.cmyk.magenta);
 
         if (riferimentiUtente.magenta == undefined) {
             return;
         }
 
-        riferimentiUtente.yellow = this._determinaRiferimentoCanale("Giallo", tonoDefault.yellow);
+        riferimentiUtente.yellow = this._determinaRiferimentoCanale("Giallo", tonoDefault.cmyk.yellow);
 
         if (riferimentiUtente.yellow == undefined) {
             return;
         }
 
-        riferimentiUtente.black = this._determinaRiferimentoCanale("Nero", tonoDefault.black);
+        riferimentiUtente.black = this._determinaRiferimentoCanale("Nero", tonoDefault.cmyk.black);
 
         if (riferimentiUtente.black == undefined) {
             return;
@@ -200,16 +200,16 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     * @returns {SolidColor}
     */
     this._calcolaFattoriTonalizzazione = function(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore) {
-        var fattoriTonalizzazione = new SolidColor().cmyk;
+        var fattoriTonalizzazione = new SolidColor();
 
         if (tonoIniziale == undefined) {
             tonoIniziale = this._filtroLetturaTonoCMYK.rilevaTono(livelloRiferimento, campionatoreColore);
         }
 
-        fattoriTonalizzazione.cyan = Math.round((tonoRiferimento.cmyk.cyan * 100) / tonoIniziale.cmyk.cyan);
-        fattoriTonalizzazione.magenta = Math.round((tonoRiferimento.cmyk.magenta * 100) / tonoIniziale.cmyk.magenta);
-        fattoriTonalizzazione.yellow = Math.round((tonoRiferimento.cmyk.yellow * 100) / tonoIniziale.cmyk.yellow);
-        fattoriTonalizzazione.black = Math.round((tonoRiferimento.cmyk.black * 100) / tonoIniziale.cmyk.black);
+        fattoriTonalizzazione.cmyk.cyan = Math.round((tonoRiferimento.cmyk.cyan * 100) / tonoIniziale.cmyk.cyan);
+        fattoriTonalizzazione.cmyk.magenta = Math.round((tonoRiferimento.cmyk.magenta * 100) / tonoIniziale.cmyk.magenta);
+        fattoriTonalizzazione.cmyk.yellow = Math.round((tonoRiferimento.cmyk.yellow * 100) / tonoIniziale.cmyk.yellow);
+        fattoriTonalizzazione.cmyk.black = Math.round((tonoRiferimento.cmyk.black * 100) / tonoIniziale.cmyk.black);
 
         if (
             this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cmyk.cyan, fattoriTonalizzazione, campionatoreColore) &&
@@ -230,10 +230,10 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     * @returns {undefined}
     */
     this._applicaMiscelatoreCanale = function(livello, fattoriTonalizzazione) {
-        this._canaliUscitaMiscelatore[0][0] = fattoriTonalizzazione.cyan;
-        this._canaliUscitaMiscelatore[1][1] = fattoriTonalizzazione.magenta;
-        this._canaliUscitaMiscelatore[2][2] = fattoriTonalizzazione.yellow;
-        this._canaliUscitaMiscelatore[3][3] = fattoriTonalizzazione.black;
+        this._canaliUscitaMiscelatore[0][0] = fattoriTonalizzazione.cmyk.cyan;
+        this._canaliUscitaMiscelatore[1][1] = fattoriTonalizzazione.cmyk.magenta;
+        this._canaliUscitaMiscelatore[2][2] = fattoriTonalizzazione.cmyk.yellow;
+        this._canaliUscitaMiscelatore[3][3] = fattoriTonalizzazione.cmyk.black;
 
         livello.mixChannels(this._canaliUscitaMiscelatore);
     };
@@ -267,9 +267,9 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         incremento = (percentualeCanale > riferimentoCanale) ? -1 : 1;
         
         do {
-            fattoriTonalizzazione[canale] += incremento;
+            fattoriTonalizzazione.cmyk[canale] += incremento;
             
-            if (fattoriTonalizzazione[canale] < 0 || fattoriTonalizzazione[canale] > 200) {
+            if (fattoriTonalizzazione.cmyk[canale] < 0 || fattoriTonalizzazione.cmyk[canale] > 200) {
                 beep();
                 alert(
                     "Impossibile tonalizzare documento " + documento.name + 
