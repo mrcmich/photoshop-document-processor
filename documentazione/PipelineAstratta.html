@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Interface: PipelineAstratta</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Interface: PipelineAstratta</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>PipelineAstratta</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Oggetto JavaScript che rappresenta l'astrazione di una pipeline. Deve essere settato come prototipo di una pipeline, la quale deve implementarne i metodi.Si noti che ogni filtro di una pipeline deve essere identificato mediante un indice numerico.</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="oggetti-minimi_PipelineAstratta.jsx.html">oggetti-minimi/PipelineAstratta.jsx</a>, <a href="oggetti-minimi_PipelineAstratta.jsx.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".aggiungiFiltro"><span class="type-signature">(abstract, static) </span>aggiungiFiltro<span class="signature">(filtro)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo senza implementazione per l'aggiunta di un nuovo filtro alla pipeline.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>filtro</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FiltroAstratto.html">FiltroAstratto</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il filtro da aggiungere alla pipeline.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="oggetti-minimi_PipelineAstratta.jsx.html">oggetti-minimi/PipelineAstratta.jsx</a>, <a href="oggetti-minimi_PipelineAstratta.jsx.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore quando invocato.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".concatena"><span class="type-signature">(abstract, static) </span>concatena<span class="signature">(pipeline)</span><span class="type-signature"> &rarr; {<a href="PipelineAstratta.html">PipelineAstratta</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo senza implementazione per la concatenazione di pipeline: tutti i filtri della pipelinepassata come argomento vengono aggiunti in coda alla pipeline su cui il metodo è invocato.Ritorna la pipeline ottenuta dalla concatenazione.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pipeline</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PipelineAstratta.html">PipelineAstratta</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">la pipeline da concatenare.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="oggetti-minimi_PipelineAstratta.jsx.html">oggetti-minimi/PipelineAstratta.jsx</a>, <a href="oggetti-minimi_PipelineAstratta.jsx.html#line81">line 81</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore quando invocato.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="PipelineAstratta.html">PipelineAstratta</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".elencoFiltri"><span class="type-signature">(abstract, static) </span>elencoFiltri<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo senza implementazione per il ritorno di una stringa contenente l'elenco dei filtridella pipeline, indicando per ciascuno il relativo indice.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="oggetti-minimi_PipelineAstratta.jsx.html">oggetti-minimi/PipelineAstratta.jsx</a>, <a href="oggetti-minimi_PipelineAstratta.jsx.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore quando invocato.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".esegui"><span class="type-signature">(abstract, static) </span>esegui<span class="signature">()</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo senza implementazione per l'esecuzione di tutti i filtri della pipeline.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="oggetti-minimi_PipelineAstratta.jsx.html">oggetti-minimi/PipelineAstratta.jsx</a>, <a href="oggetti-minimi_PipelineAstratta.jsx.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore quando invocato.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".rimuoviFiltro"><span class="type-signature">(abstract, static) </span>rimuoviFiltro<span class="signature">(indiceFiltro)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo senza implementazione per la rimozione di un filtro dalla pipeline.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>indiceFiltro</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">l'indice del filtro da eliminare.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="oggetti-minimi_PipelineAstratta.jsx.html">oggetti-minimi/PipelineAstratta.jsx</a>, <a href="oggetti-minimi_PipelineAstratta.jsx.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore quando invocato.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".svuota"><span class="type-signature">(abstract, static) </span>svuota<span class="signature">()</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo senza implementazione per l'eliminazione di tutti i filtri della pipeline.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="oggetti-minimi_PipelineAstratta.jsx.html">oggetti-minimi/PipelineAstratta.jsx</a>, <a href="oggetti-minimi_PipelineAstratta.jsx.html#line54">line 54</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore quando invocato.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EstrattoreCodiceNumericoStandard.html">EstrattoreCodiceNumericoStandard</a></li><li><a href="EstrattoreNomeStandard.html">EstrattoreNomeStandard</a></li><li><a href="FiltroLetturaTonoCMYK.html">FiltroLetturaTonoCMYK</a></li><li><a href="FiltroSovrimpressione.html">FiltroSovrimpressione</a></li><li><a href="FiltroTonalizzazioneCMYK.html">FiltroTonalizzazioneCMYK</a></li><li><a href="Pipeline.html">Pipeline</a></li><li><a href="PosizionatoreLivello.html">PosizionatoreLivello</a></li><li><a href="ScrittoreTabellaToni.html">ScrittoreTabellaToni</a></li><li><a href="TabellaToniCMYK.html">TabellaToniCMYK</a></li></ul><h3>Interfaces</h3><ul><li><a href="EstrattoreInfoAstratto.html">EstrattoreInfoAstratto</a></li><li><a href="FiltroAstratto.html">FiltroAstratto</a></li><li><a href="FiltroLetturaTonoAstratto.html">FiltroLetturaTonoAstratto</a></li><li><a href="FiltroTonalizzazioneAstratto.html">FiltroTonalizzazioneAstratto</a></li><li><a href="PipelineAstratta.html">PipelineAstratta</a></li><li><a href="PosizionatoreLivelloAstratto.html">PosizionatoreLivelloAstratto</a></li><li><a href="ScrittoreFileAstratto.html">ScrittoreFileAstratto</a></li><li><a href="TabellaToniAstratta.html">TabellaToniAstratta</a></li></ul><h3>Global</h3><ul><li><a href="global.html#asserzione">asserzione</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Oct 27 2021 12:39:52 GMT+0200 (Ora legale dell’Europa centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

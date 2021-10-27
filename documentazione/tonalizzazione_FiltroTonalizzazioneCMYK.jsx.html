@@ -1,4 +1,32 @@
-//@include "../oggetti-minimi/Asserzione.jsx"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: tonalizzazione/FiltroTonalizzazioneCMYK.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: tonalizzazione/FiltroTonalizzazioneCMYK.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//@include "../oggetti-minimi/Asserzione.jsx"
 //@include "FiltroTonalizzazioneAstratto.jsx"
 //@include "FiltroLetturaTonoCMYK.jsx"
 
@@ -182,7 +210,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
 
         percentuale = Number(stringaPercentuale);
 
-        if (percentuale < 0 || percentuale > 100) {
+        if (percentuale &lt; 0 || percentuale > 100) {
             return false;
         }
 
@@ -212,9 +240,9 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         fattoriTonalizzazione.cmyk.black = Math.round((tonoRiferimento.cmyk.black * 100) / tonoIniziale.cmyk.black);
 
         if (
-            this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cmyk.cyan, fattoriTonalizzazione, campionatoreColore) &&
-            this._calcolaFattoreCanale(livelloRiferimento, "magenta", tonoRiferimento.cmyk.magenta, fattoriTonalizzazione, campionatoreColore) &&
-            this._calcolaFattoreCanale(livelloRiferimento, "yellow", tonoRiferimento.cmyk.yellow, fattoriTonalizzazione, campionatoreColore) &&
+            this._calcolaFattoreCanale(livelloRiferimento, "cyan", tonoRiferimento.cmyk.cyan, fattoriTonalizzazione, campionatoreColore) &amp;&amp;
+            this._calcolaFattoreCanale(livelloRiferimento, "magenta", tonoRiferimento.cmyk.magenta, fattoriTonalizzazione, campionatoreColore) &amp;&amp;
+            this._calcolaFattoreCanale(livelloRiferimento, "yellow", tonoRiferimento.cmyk.yellow, fattoriTonalizzazione, campionatoreColore) &amp;&amp;
             this._calcolaFattoreCanale(livelloRiferimento, "black", tonoRiferimento.cmyk.black, fattoriTonalizzazione, campionatoreColore)
         ) {
             return fattoriTonalizzazione;
@@ -269,7 +297,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         do {
             fattoriTonalizzazione.cmyk[canale] += incremento;
             
-            if (fattoriTonalizzazione.cmyk[canale] < 0 || fattoriTonalizzazione.cmyk[canale] > 200) {
+            if (fattoriTonalizzazione.cmyk[canale] &lt; 0 || fattoriTonalizzazione.cmyk[canale] > 200) {
                 beep();
                 alert(
                     "Impossibile tonalizzare documento " + documento.name + 
@@ -339,7 +367,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             return riferimento[1];
         }
 
-        if (valoreIniziale < riferimento[0]) {
+        if (valoreIniziale &lt; riferimento[0]) {
             return riferimento[0];
         }
 
@@ -387,7 +415,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             return;
         }
 
-        for (var i = 0; i < documenti.length; i++) {
+        for (var i = 0; i &lt; documenti.length; i++) {
             app.activeDocument = documenti[i];
             documenti[i].colorSamplers.add([new UnitValue(1, 'px'), new UnitValue(1, 'px')]);
             campionatoreColore = documenti[i].colorSamplers[documenti[i].colorSamplers.length - 1];
@@ -405,3 +433,26 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     this.settaFiltroLetturaTonoCMYK(filtroLetturaTonoCMYK);
 
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EstrattoreCodiceNumericoStandard.html">EstrattoreCodiceNumericoStandard</a></li><li><a href="EstrattoreNomeStandard.html">EstrattoreNomeStandard</a></li><li><a href="FiltroLetturaTonoCMYK.html">FiltroLetturaTonoCMYK</a></li><li><a href="FiltroSovrimpressione.html">FiltroSovrimpressione</a></li><li><a href="FiltroTonalizzazioneCMYK.html">FiltroTonalizzazioneCMYK</a></li><li><a href="Pipeline.html">Pipeline</a></li><li><a href="PosizionatoreLivello.html">PosizionatoreLivello</a></li><li><a href="ScrittoreTabellaToni.html">ScrittoreTabellaToni</a></li><li><a href="TabellaToniCMYK.html">TabellaToniCMYK</a></li></ul><h3>Interfaces</h3><ul><li><a href="EstrattoreInfoAstratto.html">EstrattoreInfoAstratto</a></li><li><a href="FiltroAstratto.html">FiltroAstratto</a></li><li><a href="FiltroLetturaTonoAstratto.html">FiltroLetturaTonoAstratto</a></li><li><a href="FiltroTonalizzazioneAstratto.html">FiltroTonalizzazioneAstratto</a></li><li><a href="PipelineAstratta.html">PipelineAstratta</a></li><li><a href="PosizionatoreLivelloAstratto.html">PosizionatoreLivelloAstratto</a></li><li><a href="ScrittoreFileAstratto.html">ScrittoreFileAstratto</a></li><li><a href="TabellaToniAstratta.html">TabellaToniAstratta</a></li></ul><h3>Global</h3><ul><li><a href="global.html#asserzione">asserzione</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Oct 27 2021 12:39:51 GMT+0200 (Ora legale dell’Europa centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

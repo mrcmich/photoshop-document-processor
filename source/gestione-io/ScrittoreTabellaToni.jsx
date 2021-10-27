@@ -12,7 +12,7 @@ function ScrittoreTabellaToni() {
 
     /**
     * Metodo per il salvataggio su file dell'array di stringhe passato
-    * come parametro, crea un nuovo file con nome tabella_toni_gg-mm-yyyy_oo-mm.txt sul Desktop
+    * come parametro, crea un nuovo file con nome del tipo "tabella_toni_gg-mm-yyyy_oo-mm.txt" sul Desktop
     * e in esso scrive le informazioni.
     * @abstract
     * @param {Array} listaLineeFile - array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa riga della tabella dei toni.

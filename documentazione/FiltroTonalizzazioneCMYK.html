@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: FiltroTonalizzazioneCMYK</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: FiltroTonalizzazioneCMYK</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>FiltroTonalizzazioneCMYK<span class="signature">(filtroLetturaTonoCMYK)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="FiltroTonalizzazioneCMYK"><span class="type-signature"></span>new FiltroTonalizzazioneCMYK<span class="signature">(filtroLetturaTonoCMYK)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Constructor function per la creazione di un filtro tonalizzazione CMYK, oggetto che si occupa della tonalizzazione di un set di documenti ad un tono di riferimento specificato dall'utente,collaborando con un filtro lettura tono cui demanda la rilevazione e validazione del tono dei documenti e la loro organizzazionein una tabella dei toni.Ha FiltroTonalizzazioneAstratto come prototipo.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>filtroLetturaTonoCMYK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FiltroLetturaTonoAstratto.html">FiltroLetturaTonoAstratto</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il filtro lettura tono da associare al filtro tonalizzazione.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="_canaliUscitaMiscelatore"><span class="type-signature">(protected) </span>_canaliUscitaMiscelatore<span class="type-signature"> :Array</span></h4>
+
+
+
+
+<div class="description">
+    Array utilizzato per l'applicazione dei fattori di tonalizzazione al miscelatore canale.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="_filtroLetturaTonoCMYK"><span class="type-signature">(protected) </span>_filtroLetturaTonoCMYK<span class="type-signature"> :<a href="FiltroLetturaTonoAstratto.html">FiltroLetturaTonoAstratto</a></span></h4>
+
+
+
+
+<div class="description">
+    Il filtro lettura tono CMYK con cui il filtro tonalizzazione si integra.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="FiltroLetturaTonoAstratto.html">FiltroLetturaTonoAstratto</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_applicaMiscelatoreCanale"><span class="type-signature"></span>_applicaMiscelatoreCanale<span class="signature">(livello, fattoriTonalizzazione)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo che applica un miscelatore canale con i fattori dati da fattoriTonalizzazione al livello fornito come parametro.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>livello</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ArtLayer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il livello cui applicare il miscelatore.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fattoriTonalizzazione</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SolidColor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">i fattori con cui il miscelatore deve essere applicato.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line232">line 232</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_calcolaFattoreCanale"><span class="type-signature"></span>_calcolaFattoreCanale<span class="signature">(livelloRiferimento, canale, riferimentoCanale, fattoriTonalizzazione, campionatoreColore)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo per il calcolo del fattore di tonalizzazione di uno specifico canale, ovvero dell'incremento da applicare al miscelatore canale per portare la quantità percentuale del canale a riferimento, valutato sulla base del livello di riferimento passato come parametro. Il fattore calcolato è inserito all'interno del parametro fattoriTonalizzazione.Ritorna true se il fattore calcolato è valido, cioè dentro al range [0, 200], false altrimenti.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>livelloRiferimento</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ArtLayer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il livello rispetto al quale calcolare il fattore di tonalizzazione.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>canale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il nome del canale per cui si vuole calcolare il fattore, uno dei quattro canali CMYK (cyan, magenta, yellow, black).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>riferimentoCanale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">la quantità percentuale di riferimento per il canale, a cui questo deve essere riportato.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fattoriTonalizzazione</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SolidColor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">oggetto in cui viene inserito il fattore di tonalizzazione calcolato per il canale.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>campionatoreColore</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ColorSampler</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">oggetto deputato alla rilevazione della quantità percentuale del canale.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line253">line 253</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_calcolaFattoriTonalizzazione"><span class="type-signature"></span>_calcolaFattoriTonalizzazione<span class="signature">(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore)</span><span class="type-signature"> &rarr; {SolidColor}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo per il calcolo dei fattori di tonalizzazione, ovvero degli incrementi da applicare al miscelatore canale per portare il tonodi un documento a riferimento, valutati sulla base del livello di riferimento passato come parametro.Ritorna i fattori calcolati come SolidColor, o undefined se uno o più fattori calcolati sono fuori dall'intervallo [0, 200].
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>livelloRiferimento</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ArtLayer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il livello rispetto al quale calcolare i fattori di tonalizzazione.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tonoIniziale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SolidColor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il tono iniziale del documento cui il livello di riferimento fa riferimento (opzionale).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tonoRiferimento</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SolidColor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il tono a cui il livello di riferimento deve essere riportato.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>campionatoreColore</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ColorSampler</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">oggetto deputato alla rilevazione delle quantità percentuali di ciascun canale.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line202">line 202</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">SolidColor</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_determinaRiferimentoCanale"><span class="type-signature"></span>_determinaRiferimentoCanale<span class="signature">(canale, riferimentoDefault)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo per la richiesta del riferimento per uno specifico canale all'utente, sotto forma di un un array contenenteun singolo valore percentuale (se l'utente inserisce un valore) oppure due valori percentuali (nel caso in cui l'utente inserisca un range del tipo [min, max], i due valori ne identificano gli estremi). Il riferimento di default passato come parametro viene usato per inizializzare il campo di testo in cui l'utente inserirà il riferimento per il canale.Ritorna l'array di cui sopra, o undefined se l'utente ha annullato l'inserimento. Se l'input dell'utente non è valido, all'utente viene mostrato un avvertimento e richiesto di inserire nuovamente il riferimento.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>canale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il nome del canale di cui si richiede il riferimento, come mostrato all'utente.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>riferimentoDefault</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il riferimento di default per il canale, usato per inizializzare il relativo campo di testo.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line105">line 105</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore se il parametro passato è null o undefined.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_determinaRiferimentoEffettivoCanale"><span class="type-signature"></span>_determinaRiferimentoEffettivoCanale<span class="signature">(riferimento, valoreIniziale)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo per la determinazione della quantità percentuale di riferimento effettiva di un canale, a partire da un riferimento e dalla quantità percentuale iniziale del canale. Se riferimento contiene un singolo valore, tale quantità coincide con il valore. Se riferimento contiene due valori (che identificano gli estremi di un intervallo) tale quantità viene posta uguale al minimo dell'intervallose la quantità iniziale è inferiore al minimo oppure al massimo se la quantità iniziale è superiore al massimo.Ritorna la quantità percentuale di riferimento effettiva.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>riferimento</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">array contenente il riferimento per il canale, sotto forma di singolo valore o di coppia di valori (nel secondo caso, i due valori rappresentano gli estremi del range del tipo [min, max]).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>valoreIniziale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">quantità percentuale iniziale del canale, usata per valutare la quantità percentuale di riferimento effettiva.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line333">line 333</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_determinaTonoRiferimento"><span class="type-signature"></span>_determinaTonoRiferimento<span class="signature">(tonoDefault)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo per la richiesta del tono di riferimento all'utente, sotto forma di una lista di riferimenti (uno per ciascuncanale CMYK) che possono essere costituiti da singoli valori oppure da range del tipo [min, max]. Il tono di default passato come parametro viene usato per inizializzare i campi di testo in cui l'utente inserirà poi i riferimenti.Ritorna un oggetto con proprietà "cyan", "magenta", "yellow", "black" e valori dati dai riferimenti di cui sopra, o undefinedse l'utente ha annullato l'inserimento.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tonoDefault</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SolidColor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il tono usato per l'inizializzazione delle finestre di dialogo di raccolta dei riferimenti.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line63">line 63</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore se il parametro passato è null o undefined.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_tonalizza"><span class="type-signature"></span>_tonalizza<span class="signature">(livelloRiferimento, campionatoreColore, riferimentiUtente)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo per la tonalizzazione del livello passato come parametro, sulla base dell'oggetto riferimentiUtente (contenente i valori di riferimento inseriti dall'utente per il tono). Si noti che riferimentiUtente è un oggetto con proprietà "cyan", "magenta", "yellow","black" e valori costituiti dagli array contenenti il valore (o i valori, nel caso di un range del tipo [min, max]) di riferimentoper il canale corrispondente.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>livelloRiferimento</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ArtLayer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il livello rispetto al quale calcolare il fattore di tonalizzazione.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>campionatoreColore</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ColorSampler</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">oggetto deputato alla rilevazione della quantità percentuale del canale.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>riferimentiUtente</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">oggetto che, per ogni canale, riporta il corrispondente riferimento inserito dall'utente (leggere sopra).</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line306">line 306</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_validaPercentualeCanale"><span class="type-signature"></span>_validaPercentualeCanale<span class="signature">(stringaPercentuale)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo per la validazione della quantità percentuale passata come parametro, sotto formadi stringa. Ritorna true se il parametro rappresenta una quantità percentuale valida, false altrimenti.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stringaPercentuale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">la quantità percentuale da valutare, come stringa.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line173">line 173</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="esegui"><span class="type-signature"></span>esegui<span class="signature">(documenti)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo per l'esecuzione del filtro tonalizzazione.Il filtro si applica all'array di documenti passato come parametro.Visualizza un messaggio di errore all'utente e termina se sono presenti documenti non validi.Termina senza errori se l'utente ha annullato l'inserimento del tono di riferimento.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>documenti</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">i documenti che il filtro deve processare.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line357">line 357</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="settaFiltroLetturaTonoCMYK"><span class="type-signature"></span>settaFiltroLetturaTonoCMYK<span class="signature">(filtroLetturaTonoCMYK)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Metodo setter per l'attributo _filtroLetturaTonoCMYK.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>filtroLetturaTonoCMYK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FiltroLetturaTonoAstratto.html">FiltroLetturaTonoAstratto</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">il filtro lettura tono da associare al filtro tonalizzazione.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html">tonalizzazione/FiltroTonalizzazioneCMYK.jsx</a>, <a href="tonalizzazione_FiltroTonalizzazioneCMYK.jsx.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Lancia un errore se il parametro passato è null o undefined.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EstrattoreCodiceNumericoStandard.html">EstrattoreCodiceNumericoStandard</a></li><li><a href="EstrattoreNomeStandard.html">EstrattoreNomeStandard</a></li><li><a href="FiltroLetturaTonoCMYK.html">FiltroLetturaTonoCMYK</a></li><li><a href="FiltroSovrimpressione.html">FiltroSovrimpressione</a></li><li><a href="FiltroTonalizzazioneCMYK.html">FiltroTonalizzazioneCMYK</a></li><li><a href="Pipeline.html">Pipeline</a></li><li><a href="PosizionatoreLivello.html">PosizionatoreLivello</a></li><li><a href="ScrittoreTabellaToni.html">ScrittoreTabellaToni</a></li><li><a href="TabellaToniCMYK.html">TabellaToniCMYK</a></li></ul><h3>Interfaces</h3><ul><li><a href="EstrattoreInfoAstratto.html">EstrattoreInfoAstratto</a></li><li><a href="FiltroAstratto.html">FiltroAstratto</a></li><li><a href="FiltroLetturaTonoAstratto.html">FiltroLetturaTonoAstratto</a></li><li><a href="FiltroTonalizzazioneAstratto.html">FiltroTonalizzazioneAstratto</a></li><li><a href="PipelineAstratta.html">PipelineAstratta</a></li><li><a href="PosizionatoreLivelloAstratto.html">PosizionatoreLivelloAstratto</a></li><li><a href="ScrittoreFileAstratto.html">ScrittoreFileAstratto</a></li><li><a href="TabellaToniAstratta.html">TabellaToniAstratta</a></li></ul><h3>Global</h3><ul><li><a href="global.html#asserzione">asserzione</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Oct 27 2021 12:39:52 GMT+0200 (Ora legale dell’Europa centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
