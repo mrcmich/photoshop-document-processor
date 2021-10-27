@@ -52,7 +52,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
 
     /**
     * Metodo per la richiesta del tono di riferimento all'utente, sotto forma di una lista di riferimenti (uno per ciascun
-    * canale) che possono essere costituiti da singoli valori oppure da range del tipo [min, max]. Il tono di default passato come 
+    * canale CMYK) che possono essere costituiti da singoli valori oppure da range del tipo [min, max]. Il tono di default passato come 
     * parametro viene usato per inizializzare i campi di testo in cui l'utente inserirà poi i riferimenti.
     * Ritorna un oggetto con proprietà "cyan", "magenta", "yellow", "black" e valori dati dai riferimenti di cui sopra, o undefined
     * se l'utente ha annullato l'inserimento.
@@ -238,6 +238,18 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         livello.mixChannels(this._canaliUscitaMiscelatore);
     };
 
+    /**
+    * Metodo per il calcolo del fattore di tonalizzazione di uno specifico canale, ovvero dell'incremento da applicare al 
+    * miscelatore canale per portare la quantità percentuale del canale a riferimento, valutato sulla base del livello 
+    * di riferimento passato come parametro. Il fattore calcolato è inserito all'interno del parametro fattoriTonalizzazione.
+    * Ritorna true se il fattore calcolato è valido, cioè dentro al range [0, 200], false altrimenti.
+    * @param {ArtLayer} livelloRiferimento - il livello rispetto al quale calcolare il fattore di tonalizzazione.
+    * @param {string} canale - il nome del canale per cui si vuole calcolare il fattore, uno dei quattro canali CMYK (cyan, magenta, yellow, black).
+    * @param {number} riferimentoCanale - la quantità percentuale di riferimento per il canale, a cui questo deve essere riportato.
+    * @param {SolidColor} fattoriTonalizzazione - oggetto in cui viene inserito il fattore di tonalizzazione calcolato per il canale.
+    * @param {ColorSampler} campionatoreColore - oggetto deputato alla rilevazione della quantità percentuale del canale.
+    * @returns {boolean}
+    */
     this._calcolaFattoreCanale = function(livelloRiferimento, canale, riferimentoCanale, fattoriTonalizzazione, campionatoreColore) {
         var incremento;
         var percentualeCanale;
@@ -281,6 +293,16 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         return true;
     };
 
+    /**
+    * Metodo per la tonalizzazione del livello passato come parametro, sulla base dell'oggetto riferimentiUtente (contenente 
+    * i valori di riferimento inseriti dall'utente per il tono). Si noti che riferimentiUtente è un oggetto con proprietà "cyan", "magenta", 
+    * "yellow","black" e valori costituiti dagli array contenenti il valore (o i valori, nel caso di un range del tipo [min, max]) di riferimento
+    * per il canale corrispondente.
+    * @param {ArtLayer} livelloRiferimento - il livello rispetto al quale calcolare il fattore di tonalizzazione.
+    * @param {ColorSampler} campionatoreColore - oggetto deputato alla rilevazione della quantità percentuale del canale.
+    * @param {Object} riferimentiUtente - oggetto che, per ogni canale, riporta il corrispondente riferimento inserito dall'utente (leggere sopra).
+    * @returns {undefined}
+    */
     this._tonalizza = function(livelloRiferimento, campionatoreColore, riferimentiUtente) {
         var tonoIniziale;
         var fattoriTonalizzazione;
@@ -298,7 +320,16 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         }
     }
 
-    // riferimento è assunto come array contenente 1 o 2 elementi, a seconda che sia un valore o un range
+    /**
+    * Metodo per la determinazione della quantità percentuale di riferimento effettiva di un canale, a partire da un riferimento e 
+    * dalla quantità percentuale iniziale del canale. Se riferimento contiene un singolo valore, tale quantità coincide con il valore. 
+    * Se riferimento contiene due valori (che identificano gli estremi di un intervallo) tale quantità viene posta uguale al minimo dell'intervallo
+    * se la quantità iniziale è inferiore al minimo oppure al massimo se la quantità iniziale è superiore al massimo.
+    * Ritorna la quantità percentuale di riferimento effettiva.
+    * @param {Array} riferimento - array contenente il riferimento per il canale, sotto forma di singolo valore o di coppia di valori (nel secondo caso, i due valori rappresentano gli estremi del range del tipo [min, max]).
+    * @param {number} valoreIniziale - quantità percentuale iniziale del canale, usata per valutare la quantità percentuale di riferimento effettiva.
+    * @returns {number}
+    */
     this._determinaRiferimentoEffettivoCanale = function(riferimento, valoreIniziale) {
         if (riferimento.length == 1) {
             return riferimento[0];
@@ -315,6 +346,14 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         return valoreIniziale;
     };
 
+    /**
+    * Metodo per l'esecuzione del filtro tonalizzazione.
+    * Il filtro si applica all'array di documenti passato come parametro.
+    * Visualizza un messaggio di errore all'utente e termina se sono presenti documenti non validi.
+    * Termina senza errori se l'utente ha annullato l'inserimento del tono di riferimento.
+    * @param {Array} documenti - i documenti che il filtro deve processare.
+    * @returns {undefined}
+    */
     this.esegui = function(documenti) {
         var riferimentiUtente;
         var documentiNonValidi;
