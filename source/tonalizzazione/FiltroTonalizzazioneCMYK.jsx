@@ -2,8 +2,23 @@
 //@include "FiltroTonalizzazioneAstratto.jsx"
 //@include "FiltroLetturaTonoCMYK.jsx"
 
+/**
+* Constructor function per la creazione di un filtro tonalizzazione CMYK, oggetto che 
+* si occupa della tonalizzazione di un set di documenti ad un tono di riferimento specificato dall'utente,
+* collaborando con un filtro lettura tono cui demanda la rilevazione e validazione del tono dei documenti e la loro organizzazione
+* in una tabella dei toni.
+* Ha FiltroTonalizzazioneAstratto come prototipo.
+* @param {FiltroLetturaTonoAstratto} filtroLetturaTonoCMYK - il filtro lettura tono da associare al filtro tonalizzazione.
+* @constructor
+*/
 function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     this.__proto__ = FiltroTonalizzazioneAstratto;
+
+    /**
+    * Array utilizzato per l'applicazione dei fattori di tonalizzazione al miscelatore canale.
+    * @type {Array}
+    * @protected
+    */
     this._canaliUscitaMiscelatore = [
         [1, 0, 0, 0, 0],
         [0, 1, 0, 0, 0],
@@ -11,6 +26,19 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         [0, 0, 0, 1, 0],
     ];
 
+    /**
+    * Il filtro lettura tono CMYK con cui il filtro tonalizzazione si integra.
+    * @type {FiltroLetturaTonoAstratto}
+    * @protected
+    */
+    this._filtroLetturaTonoCMYK = null;
+
+    /**
+    * Metodo setter per l'attributo _filtroLetturaTonoCMYK.
+    * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @param {FiltroLetturaTonoAstratto} filtroLetturaTonoCMYK - il filtro lettura tono da associare al filtro tonalizzazione.
+    * @returns {undefined}
+    */
     this.settaFiltroLetturaTonoCMYK = function(filtroLetturaTonoCMYK) {
         asserzione(
             filtroLetturaTonoCMYK != undefined, 
@@ -22,8 +50,16 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         this._filtroLetturaTonoCMYK = filtroLetturaTonoCMYK;
     };
 
-    // Ritorna un oggetto con proprietà cyan, magenta, yellow, black
-    // oppure undefined se premuto "Cancella"
+    /**
+    * Metodo per la richiesta del tono di riferimento all'utente, sotto forma di una lista di riferimenti (uno per ciascun
+    * canale) che possono essere costituiti da singoli valori oppure da range del tipo [min, max]. Il tono di default passato come 
+    * parametro viene usato per inizializzare i campi di testo in cui l'utente inserirà poi i riferimenti.
+    * Ritorna un oggetto con proprietà "cyan", "magenta", "yellow", "black" e valori dati dai riferimenti di cui sopra, o undefined
+    * se l'utente ha annullato l'inserimento.
+    * @throws Lancia un errore se il parametro passato è null o undefined. 
+    * @param {SolidColor} tonoDefault - il tono usato per l'inizializzazione delle finestre di dialogo di raccolta dei riferimenti.
+    * @returns {Object}
+    */
     this._determinaTonoRiferimento = function(tonoDefault) {
         var riferimentiUtente = {};
 
@@ -54,7 +90,18 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         return riferimentiUtente;
     };
 
-    // Ritorna un array con il riferimento (valore o range) oppure undefined se premuto cancella
+    /**
+    * Metodo per la richiesta del riferimento per uno specifico canale all'utente, sotto forma di un un array contenente
+    * un singolo valore percentuale (se l'utente inserisce un valore) oppure due valori percentuali (nel caso in cui l'utente 
+    * inserisca un range del tipo [min, max], i due valori ne identificano gli estremi). Il riferimento di default passato come 
+    * parametro viene usato per inizializzare il campo di testo in cui l'utente inserirà il riferimento per il canale.
+    * Ritorna l'array di cui sopra, o undefined se l'utente ha annullato l'inserimento. 
+    * Se l'input dell'utente non è valido, all'utente viene mostrato un avvertimento e richiesto di inserire nuovamente il riferimento.
+    * @throws Lancia un errore se il parametro passato è null o undefined. 
+    * @param {string} canale - il nome del canale di cui si richiede il riferimento, come mostrato all'utente.
+    * @param {number} riferimentoDefault - il riferimento di default per il canale, usato per inizializzare il relativo campo di testo.
+    * @returns {Array}
+    */
     this._determinaRiferimentoCanale = function(canale, riferimentoDefault) {
         var input;
         var riferimento = [];
@@ -117,6 +164,12 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         return riferimento;
     };
 
+    /**
+    * Metodo per la validazione della quantità percentuale passata come parametro, sotto forma
+    * di stringa. Ritorna true se il parametro rappresenta una quantità percentuale valida, false altrimenti.
+    * @param {string} stringaPercentuale - la quantità percentuale da valutare, come stringa.
+    * @returns {boolean}
+    */
     this._validaPercentualeCanale = function(stringaPercentuale) {
         var percentuale;
 
@@ -136,7 +189,16 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         return true;
     }
 
-    // ritorna undeinfed se non è possibile tonalizzare
+    /**
+    * Metodo per il calcolo dei fattori di tonalizzazione, ovvero degli incrementi da applicare al miscelatore canale per portare il tono
+    * di un documento a riferimento, valutati sulla base del livello di riferimento passato come parametro.
+    * Ritorna i fattori calcolati come SolidColor, o undefined se uno o più fattori calcolati sono fuori dall'intervallo [0, 200].
+    * @param {ArtLayer} livelloRiferimento - il livello rispetto al quale calcolare i fattori di tonalizzazione.
+    * @param {SolidColor} tonoIniziale - il tono iniziale del documento cui il livello di riferimento fa riferimento (opzionale).
+    * @param {SolidColor} tonoRiferimento - il tono a cui il livello di riferimento deve essere riportato.
+    * @param {ColorSampler} campionatoreColore - oggetto deputato alla rilevazione delle quantità percentuali di ciascun canale.
+    * @returns {SolidColor}
+    */
     this._calcolaFattoriTonalizzazione = function(livelloRiferimento, tonoIniziale, tonoRiferimento, campionatoreColore) {
         var fattoriTonalizzazione = new SolidColor().cmyk;
 
@@ -161,6 +223,12 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         return;
     };
 
+    /**
+    * Metodo che applica un miscelatore canale con i fattori dati da fattoriTonalizzazione al livello fornito come parametro.
+    * @param {ArtLayer} livello - il livello cui applicare il miscelatore.
+    * @param {SolidColor} fattoriTonalizzazione - i fattori con cui il miscelatore deve essere applicato.
+    * @returns {undefined}
+    */
     this._applicaMiscelatoreCanale = function(livello, canaliUscita, fattoriTonalizzazione) {
         canaliUscita[0][0] = fattoriTonalizzazione.cyan;
         canaliUscita[1][1] = fattoriTonalizzazione.magenta;
