@@ -18,14 +18,19 @@ describe("Il metodo scriviSuFile(listaLineeFile) di ScrittoreTabellaToni", funct
 
     it("\n\tnon deve creare alcun file sul desktop se listaLineeFile è l'array vuoto", function() {
         timestamp = new Date();
+        giorno = (timestamp.getDate() < 10) ? "0".concat(timestamp.getDate()) : timestamp.getDate();
+        mese = (timestamp.getMonth() < 10) ? "0".concat(timestamp.getMonth()) : timestamp.getMonth();
+        anno = timestamp.getYear() + 1900;
+        ore = (timestamp.getHours() < 10) ? "0".concat(timestamp.getHours()) : timestamp.getHours();
+        minuti = (timestamp.getMinutes() < 10) ? "0".concat(timestamp.getMinutes()) : timestamp.getMinutes();
+
         scrittoreTabellaToni.scriviSuFile([]);
         $.writeln(
             "Verifica che sul desktop non sia stato creato il file tabella_toni_" + 
-            timestamp.getDate() + "-" +
-            timestamp.getMonth() + "-" +
-            (timestamp.getYear() + 1900 ) + "_" +
-            timestamp.getHours() + "-" +
-            timestamp.getMinutes() + ".txt"
+            giorno + "-" + mese + "-" + anno + 
+            "_" +
+            ore + "-" + minuti +
+            ".txt"
         );
     });
 
@@ -50,11 +55,10 @@ describe("Il metodo scriviSuFile(listaLineeFile) di ScrittoreTabellaToni", funct
                 scrittoreTabellaToni.scriviSuFile(inputs[i]);
                 $.writeln(
                     "Verifica che sul desktop sia stato creato il file 'tabella_toni_" + 
-                    timestamp.getDate() + "-" +
-                    timestamp.getMonth() + "-" +
-                    (timestamp.getYear() + 1900 ) + "_" +
-                    timestamp.getHours() + "-" +
-                    timestamp.getMinutes() + ".txt'" + 
+                    giorno + "-" + mese + "-" + anno + 
+                    "_" +
+                    ore + "-" + minuti +
+                    ".txt" +
                     " con contenuto " +
                     inputs[i] +
                     " (un elemento per riga)"
