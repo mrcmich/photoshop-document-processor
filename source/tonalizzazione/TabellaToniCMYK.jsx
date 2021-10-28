@@ -194,16 +194,16 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
             return;
         }
 
-        righeTabella.push("Per ogni documento, si riporta la quaterna di valori [C, M, Y, K] corrispondente:");
+        righeTabella.push("Tono:[Ciano,Magenta,Giallo,Nero]");
 
         for (var i = 0; i < this._toni.length; i++) {
             tonoCorrente = this._toni[i].tono;
 
             righeTabella.push(
-                "".concat(this._toni[i].id).concat(": [").
-                concat(tonoCorrente.cmyk.cyan).concat(", ").
-                concat(tonoCorrente.cmyk.magenta).concat(", ").
-                concat(tonoCorrente.cmyk.yellow).concat(", ").
+                "".concat(this._toni[i].id).concat(":[").
+                concat(tonoCorrente.cmyk.cyan).concat(",").
+                concat(tonoCorrente.cmyk.magenta).concat(",").
+                concat(tonoCorrente.cmyk.yellow).concat(",").
                 concat(tonoCorrente.cmyk.black).concat("]")
             );
         }
@@ -212,14 +212,12 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
             this.calcolaTonoMedio();
         }
 
-        righeTabella.push(" ");
-        righeTabella.push("Il tono medio, valutato su tutti i documenti, è il seguente:");
-
         righeTabella.push(
-            ("[").concat(this._tonoMedio.cmyk.cyan).concat(", ").
-            concat(this._tonoMedio.cmyk.magenta).concat(", ").
-            concat(this._tonoMedio.cmyk.yellow).concat(", ").
-            concat(this._tonoMedio.cmyk.black).concat("]")
+            "".concat("Medio").concat(":[").
+                concat(this._tonoMedio.cmyk.cyan).concat(",").
+                concat(this._tonoMedio.cmyk.magenta).concat(",").
+                concat(this._tonoMedio.cmyk.yellow).concat(",").
+                concat(this._tonoMedio.cmyk.black).concat("]")
         );
 
         return righeTabella;
