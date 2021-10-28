@@ -7,6 +7,7 @@ var filtroLetturaTono = new FiltroLetturaTonoCMYK(
     new ScrittoreTabellaToni()
 );
 
+var docsCreati = [];
 var docModeList = [];
 
 for (var i = 0; i < 12; i++) {
@@ -38,7 +39,7 @@ for (var i = 0; i < 12; i++) {
 
     var docname = (cn < 10) ? "0" : "";
     docname = docname.concat(cn).concat("_TEST_LETTURA_35X35_").concat(docModeName).concat(".tif");
-    app.documents.add(35, 35, 200, docname, docMode);
+    docsCreati.push(app.documents.add(35, 35, 200, docname, docMode));
     $.writeln("Creato documento " + docModeName + " di nome '" + docname);
 }
 
@@ -76,8 +77,8 @@ describe("Il metodo validaDocumenti(documenti) di FiltroLetturaTonoCMYK", functi
 
         expect(filtroLetturaTono.validaDocumenti([]).length).toEqual(0);
 
-        for (var j = 0; j < app.documents.length; j++) {
-            docsToTest.push(app.documents[j]);
+        for (var j = 0; j < docsCreati.length; j++) {
+            docsToTest.push(docsCreati[j]);
             $.writeln("Verifica che quelli che seguono siano tutti e soli i documenti non CMYK nei primi " + (j + 1) + " documenti creati:");
             $.writeln(filtroLetturaTono.validaDocumenti(docsToTest));
         }
@@ -102,13 +103,13 @@ describe("Il metodo settaDocumenti(documenti) di FiltroLetturaTonoCMYK", functio
         var throwError = 0;
 
         for (var i = 0; i < 8; i++) {
-            var ix = Math.floor(Math.random() * app.documents.length);
+            var ix = Math.floor(Math.random() * docsCreati.length);
             
             if (docModeList[ix] != DocumentMode.CMYK) {
                 throwError++;
             }
 
-            docsToTest.push(app.documents[ix]);
+            docsToTest.push(docsCreati[ix]);
         }
 
         $.writeln("docsToTest di settaDocumenti:");
@@ -126,9 +127,9 @@ describe("Il metodo settaDocumenti(documenti) di FiltroLetturaTonoCMYK", functio
     it("\n\tdeve settare i documenti se tutti i documenti sono validi", function() {
         var docsValidi = [];
 
-        for (var k = 0; k < app.documents.length; k++) {
+        for (var k = 0; k < docsCreati.length; k++) {
             if (docModeList[k] == DocumentMode.CMYK) {
-                docsValidi.push(app.documents[k]);
+                docsValidi.push(docsCreati[k]);
             }
         }
 
@@ -140,7 +141,12 @@ describe("Il metodo settaDocumenti(documenti) di FiltroLetturaTonoCMYK", functio
 });
 
 describe("Il metodo rilevaTono(livello, campionatoreColore) di FiltroLetturaTonoCMYK", function() {
-
+    beforeAll(function() {
+        for (var i = 0; i < docsCreati.length; i++) {
+            docsCreati[i].save();
+            docsCreati[i].close();
+        }
+    });
 });
 
 describe("Il metodo validaTono(tono) di FiltroLetturaTonoCMYK", function() {
