@@ -75,7 +75,7 @@ function ScrittoreTabellaToni() {
         file.close();
 
         alert(
-            "Tabella dei toni salvata sul Desktop come " + nomeFile + ".",
+            "Tabella dei toni salvata sul Desktop come '" + nomeFile + "''.",
             "Salvataggio tabella toni riuscito"
         );
     };
