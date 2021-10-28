@@ -2,6 +2,13 @@
 //@include "../../source/tonalizzazione/TabellaToniCMYK.jsx"
 //@include "../../source/tonalizzazione/FiltroLetturaTonoCMYK.jsx"
 
+if (app.documents.length == 0) {
+    throw new Error(
+        "Nessun documento aperto in Photoshop!" +
+        "Aprire i documenti salvati in ./test/docs/FiltroLetturaTonoCMYK e riprovare!"
+    );
+}
+
 var filtroLetturaTono = new FiltroLetturaTonoCMYK(
     new TabellaToniCMYK(new EstrattoreCodiceNumericoStandard()), 
     new ScrittoreTabellaToni()
@@ -73,15 +80,9 @@ describe("Il metodo settaScrittoreTabellaToni(scrittoreTabellaToni) di FiltroLet
 
 describe("Il metodo validaDocumenti(documenti) di FiltroLetturaTonoCMYK", function() {
     it("\n\tdeve ritornare un array contenente i nomi dei documenti non validi (cioè con metodo colore diverso da CMYK)", function() {
-        var docsToTest = [];
-
         expect(filtroLetturaTono.validaDocumenti([]).length).toEqual(0);
-
-        for (var j = 0; j < docsCreati.length; j++) {
-            docsToTest.push(docsCreati[j]);
-            $.writeln("Verifica che quelli che seguono siano tutti e soli i documenti non CMYK nei primi " + (j + 1) + " documenti creati:");
-            $.writeln(filtroLetturaTono.validaDocumenti(docsToTest));
-        }
+        $.writeln("Verifica documenti non validi tra quelli creati:");
+        $.writeln(filtroLetturaTono.validaDocumenti(docsCreati));
     });
 });
 
@@ -137,15 +138,6 @@ describe("Il metodo settaDocumenti(documenti) di FiltroLetturaTonoCMYK", functio
         $.writeln(docsValidi);
         filtroLetturaTono.settaDocumenti(docsValidi);
         expect(filtroLetturaTono._documenti).toEqual(docsValidi);
-    });
-});
-
-describe("Il metodo rilevaTono(livello, campionatoreColore) di FiltroLetturaTonoCMYK", function() {
-    beforeAll(function() {
-        for (var i = 0; i < docsCreati.length; i++) {
-            docsCreati[i].save();
-            docsCreati[i].close();
-        }
     });
 });
 
@@ -211,10 +203,44 @@ describe("Il metodo validaTono(tono) di FiltroLetturaTonoCMYK", function() {
 });
 
 describe("Il metodo _compilaTabellaToni() di FiltroLetturaTonoCMYK", function() {
+    it("\n\tdeve compilare la tabella dei toni, e inserire in _documentiConTonoNonValido i nomi dei documenti con tono non valido", function() {
+        var docs = [];
 
+        for (var i = 0; i < app.documents.length; i++) {
+            if (app.documents[i].name.match("_35X35_") == null) {
+                docs.push(app.documents[i]);
+            }
+        }
+
+        $.writeln("Documenti usati per test compilazione tabella toni:");
+        $.writeln(docs);
+
+        filtroLetturaTono.settaDocumenti(docs);
+        filtroLetturaTono._compilaTabellaToni();
+        expect(filtroLetturaTono._documentiConTonoNonValido.length).toEqual(2);
+        $.writeln("Verificare che di seguito siano riportati i documenti non validi '08_TEST_LETTURA.jpg' e '15_TEST_LETTURA.jpg':");
+        $.writeln(filtroLetturaTono._documentiConTonoNonValido);
+        $.writeln("Verificare che la tabella dei toni sia corretta:");
+        $.writeln(filtroLetturaTono._tabellaToni.toString());
+    });
 });
 
 describe("Il metodo esegui(documenti) di FiltroLetturaTonoCMYK", function() {
+    it("\n\tdeve abortire l'esecuzione - mostrando una finestra di dialogo - se ci sono documenti non validi", function() {
+       filtroLetturaTono.esegui(app.documents);
+    });
 
+    it("\n\tdeve compilare la tabella dei toni, visualizzarla a schermo e salvarla su file se NON ci sono documenti non validi", function() {
+        var docs = [];
+
+        for (var i = 0; i < app.documents.length; i++) {
+            if (app.documents[i].name.match("_35X35_") == null) {
+                docs.push(app.documents[i]);
+            }
+        }
+
+        filtroLetturaTono.settaTabellaToni(new TabellaToniCMYK(new EstrattoreCodiceNumericoStandard()));
+        filtroLetturaTono.esegui(docs);
+     });
 });
 
