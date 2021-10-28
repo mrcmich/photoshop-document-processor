@@ -8,6 +8,8 @@ Si consiglia fortemente di fare riferimento alla relazione di progetto (file "Ph
 Attualmente sono in fase di test i componenti che fanno riferimento al modulo di tonalizzazione. Sono già stati testati tutti gli altri componenti.
 
 ### Utilizzo del software
-Il codice può essere liberamente impiegato, a patto che non sia usato a fini commerciali. **Non utilizzare il codice a fini commerciali senza esplicita autorizzazione del sottoscritto.**
+Il codice può essere liberamente impiegato, a patto che non sia usato a fini commerciali. 
+
+#### Non utilizzare il codice a fini commerciali senza esplicita autorizzazione del sottoscritto.
 
 
