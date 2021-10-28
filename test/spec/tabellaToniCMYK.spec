@@ -142,13 +142,17 @@ describe("Il metodo calcolaTonoMedio() di TabellaToniCMYK", function() {
         expect(new TabellaToniCMYK(new EstrattoreCodiceNumericoStandard()).calcolaTonoMedio()).toEqual(undefined);
     });
 
+    // metodo verificato eliminando gli ultimi 5 toni (uno alla volta)
+    // dopo l'esecuzione, nella tabella rimangono i toni dei documenti con CN in {"00", "01", "02", "03", "05", "08"}
     it("\n\tdeve calcolare e ritornare il tono medio se la tabella non è vuota", function() {
         var tonoMedio;
         var numeroToni;
-        var indiciToniEliminati = [9, 8, 6, 7, 3];
 
-        for (var i = 0; i < 5; i++) {
-            // Calcolo tono medio effettivo
+        tabellaToni = new TabellaToniCMYK(new EstrattoreCodiceNumericoStandard());
+
+        for (var i = 0; i < app.documents.length; i++) {
+            tabellaToni.aggiungiTono(app.documents[i], toni[i]);
+
             numeroToni = 0;
             tonoMedio = new SolidColor();
             tonoMedio.cmyk.cyan = 0;
@@ -156,16 +160,12 @@ describe("Il metodo calcolaTonoMedio() di TabellaToniCMYK", function() {
             tonoMedio.cmyk.yellow = 0;
             tonoMedio.cmyk.black = 0;
 
-            for (var i = 0; i < toni.length; i++) {
-                if (toni[i].cmyk.cyan == -1) {
-                    continue;
-                }
-
+            for (var j = 0; j <= i; j++) {
                 numeroToni++;
-                tonoMedio.cmyk.cyan += toni[i].cmyk.cyan;
-                tonoMedio.cmyk.magenta += toni[i].cmyk.magenta;
-                tonoMedio.cmyk.yellow += toni[i].cmyk.yellow;
-                tonoMedio.cmyk.black += toni[i].cmyk.black;
+                tonoMedio.cmyk.cyan += toni[j].cmyk.cyan;
+                tonoMedio.cmyk.magenta += toni[j].cmyk.magenta;
+                tonoMedio.cmyk.yellow += toni[j].cmyk.yellow;
+                tonoMedio.cmyk.black += toni[j].cmyk.black;
             }
 
             tonoMedio.cmyk.cyan = Math.round(tonoMedio.cmyk.cyan / numeroToni);
@@ -180,20 +180,46 @@ describe("Il metodo calcolaTonoMedio() di TabellaToniCMYK", function() {
             expect(tonoMedioRitornato.cmyk.yellow).toEqual(tonoMedio.cmyk.yellow);
             expect(tonoMedioRitornato.cmyk.black).toEqual(tonoMedio.cmyk.black);
 
-            // Eliminazione ultimo tono
-            tabellaToni._toni.length--;
+            $.writeln(
+                "Tono medio iter. #" + (i + 1) + " --> [" + 
+                tonoMedioRitornato.cmyk.cyan + "," + 
+                tonoMedioRitornato.cmyk.magenta + "," + 
+                tonoMedioRitornato.cmyk.yellow + "," + 
+                tonoMedioRitornato.cmyk.black + "]"
+            );
         }
     });
 });
 
 describe("Il metodo toString() di TabellaToniCMYK", function() {
-    it("\n\t", function() {
-        
+    it("\n\tdeve ritornare undefined se la tabella è vuota", function() {
+        expect(new TabellaToniCMYK(new EstrattoreCodiceNumericoStandard()).toString()).toEqual(undefined);
+    });
+
+    it("\n\tdeve ritornare la tabella, formattata come stringa, se non vuota", function() {
+        var tab = tabellaToni.toString();
+
+        $.writeln(
+            "Verificare che siano presenti i toni di tutti i documenti, e che il tono medio sia corretto:"
+        );
+        $.writeln(tab);
     });
 });
 
 describe("Il metodo toFile() di TabellaToniCMYK", function() {
-    it("\n\t", function() {
+    it("\n\tdeve ritornare undefined se la tabella è vuota", function() {
+        expect(new TabellaToniCMYK(new EstrattoreCodiceNumericoStandard()).toFile()).toEqual(undefined);
+    });
+
+    it("\n\tdeve ritornare la tabella, formattata come array di stringhe, se non vuota", function() {
+        var tab = tabellaToni.toFile();
+
+        $.writeln(
+            "Verificare che siano presenti i toni di tutti i documenti, e che il tono medio sia corretto:"
+        );
         
+        for (var i = 0; i < tab.length; i++) {
+            $.writeln(tab[i]);
+        }
     });
 });
