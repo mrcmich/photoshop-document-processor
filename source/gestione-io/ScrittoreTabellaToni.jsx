@@ -23,6 +23,11 @@ function ScrittoreTabellaToni() {
         var file;
         var timestamp;
         var nomeFile;
+        var giorno;
+        var mese;
+        var anno;
+        var ore;
+        var minuti;
 
         asserzione(
             listaLineeFile != undefined, 
@@ -36,13 +41,16 @@ function ScrittoreTabellaToni() {
         }
 
         timestamp = new Date();
+        giorno = (timestamp.getDate() < 10) ? "0".concat(timestamp.getDate()) : timestamp.getDate();
+        mese = (timestamp.getMonth() < 10) ? "0".concat(timestamp.getMonth()) : timestamp.getMonth();
+        anno = timestamp.getYear() + 1900;
+        ore = (timestamp.getHours() < 10) ? "0".concat(timestamp.getHours()) : timestamp.getHours();
+        minuti = (timestamp.getMinutes() < 10) ? "0".concat(timestamp.getMinutes()) : timestamp.getMinutes();
+
         nomeFile = "tabella_toni_" + 
-            timestamp.getDate() + "-" +
-            timestamp.getMonth() + "-" +
-            (timestamp.getYear() + 1900 ) + 
+            giorno + "-" + mese + "-" + anno + 
             "_" +
-            timestamp.getHours() + "-" +
-            timestamp.getMinutes() +
+            ore + "-" + minuti +
             ".txt"
         ;
 
@@ -75,7 +83,7 @@ function ScrittoreTabellaToni() {
         file.close();
 
         alert(
-            "Tabella dei toni salvata sul Desktop come '" + nomeFile + "''.",
+            "Tabella dei toni salvata sul Desktop come " + nomeFile + ".",
             "Salvataggio tabella toni riuscito"
         );
     };

@@ -102,7 +102,8 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
             documentiNonValidi.length == 0, 
             "settaDocumenti(documenti)", 
             "FiltroLetturaTonoCMYK", 
-            "i documenti " + documentiNonValidi.toString() + " hanno metodo colore diverso da CMYK."
+            "i documenti " + documentiNonValidi.toString() + " hanno metodo colore diverso da CMYK.",
+            documentiNonValidi
         );
 
         this._documenti = documenti;
@@ -115,14 +116,26 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
     * @returns {undefined}
     */
     this.esegui = function(documenti) {
+        var documentiNonValidi;
+
         try {
             this.settaDocumenti(documenti);
         } catch (errore) {
-            alert(
-                "Impossibile procedere: " + errore.description,
-                "Errore",
-                true
-            );
+            if (errore.dati == undefined) {
+                alert(
+                    "Impossibile procedere: " + errore.description,
+                    "Errore",
+                    true
+                );
+            } else {
+                alert(
+                    "Impossibile procedere: i documenti " + 
+                    errore.dati +
+                    " hanno metodo colore diverso da CMYK.",
+                    "Errore",
+                    true
+                );
+            }
 
             return;
         }
