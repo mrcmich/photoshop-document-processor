@@ -113,9 +113,6 @@ describe("Il metodo settaDocumenti(documenti) di FiltroLetturaTonoCMYK", functio
             docsToTest.push(docsCreati[ix]);
         }
 
-        $.writeln("docsToTest di settaDocumenti:");
-        $.writeln(docsToTest);
-
         if (throwError > 0) {
             expect(function() {
                 filtroLetturaTono.settaDocumenti(docsToTest);
@@ -133,9 +130,6 @@ describe("Il metodo settaDocumenti(documenti) di FiltroLetturaTonoCMYK", functio
                 docsValidi.push(docsCreati[k]);
             }
         }
-
-        $.writeln("docsValidi:");
-        $.writeln(docsValidi);
         filtroLetturaTono.settaDocumenti(docsValidi);
         expect(filtroLetturaTono._documenti).toEqual(docsValidi);
     });
@@ -183,10 +177,10 @@ describe("Il metodo validaTono(tono) di FiltroLetturaTonoCMYK", function() {
 
     for (var i = 0; i < 15; i++) {
         toniValidi.push(new SolidColor);
-        toniValidi[i].cmyk.cyan = Math.floor(Math.random() * 101);
-        toniValidi[i].cmyk.magenta = Math.floor(Math.random() * 101);
-        toniValidi[i].cmyk.yellow = Math.floor(Math.random() * 101);
-        toniValidi[i].cmyk.black = Math.floor(Math.random() * 101);
+        toniValidi[i].cmyk.cyan = Math.floor(Math.random() * 100 + 1);
+        toniValidi[i].cmyk.magenta = Math.floor(Math.random() * 100 + 1);
+        toniValidi[i].cmyk.yellow = Math.floor(Math.random() * 100 + 1);
+        toniValidi[i].cmyk.black = Math.floor(Math.random() * 100 + 1);
     }
 
     it("\n\tdeve ritornare false se tono non è valido", function() {
@@ -211,9 +205,6 @@ describe("Il metodo _compilaTabellaToni() di FiltroLetturaTonoCMYK", function() 
                 docs.push(app.documents[i]);
             }
         }
-
-        $.writeln("Documenti usati per test compilazione tabella toni:");
-        $.writeln(docs);
 
         filtroLetturaTono.settaDocumenti(docs);
         filtroLetturaTono._compilaTabellaToni();
