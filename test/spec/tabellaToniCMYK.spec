@@ -180,13 +180,15 @@ describe("Il metodo calcolaTonoMedio() di TabellaToniCMYK", function() {
             expect(tonoMedioRitornato.cmyk.yellow).toEqual(tonoMedio.cmyk.yellow);
             expect(tonoMedioRitornato.cmyk.black).toEqual(tonoMedio.cmyk.black);
 
-            $.writeln(
-                "Tono medio iter. #" + (i + 1) + " --> [" + 
-                tonoMedioRitornato.cmyk.cyan + "," + 
-                tonoMedioRitornato.cmyk.magenta + "," + 
-                tonoMedioRitornato.cmyk.yellow + "," + 
-                tonoMedioRitornato.cmyk.black + "]"
-            );
+            if (i == app.documents.length - 1) {
+                $.writeln(
+                    "Tono medio finale (verificato)" + " --> [" + 
+                    tonoMedioRitornato.cmyk.cyan + "," + 
+                    tonoMedioRitornato.cmyk.magenta + "," + 
+                    tonoMedioRitornato.cmyk.yellow + "," + 
+                    tonoMedioRitornato.cmyk.black + "]"
+                );
+            }
         }
     });
 });
@@ -200,7 +202,7 @@ describe("Il metodo toString() di TabellaToniCMYK", function() {
         var tab = tabellaToni.toString();
 
         $.writeln(
-            "Verificare che siano presenti i toni di tutti i documenti, e che il tono medio sia corretto:"
+            "Verificare che siano presenti i toni di tutti i documenti, e che il tono medio coincida con il tono medio finale di sopra:"
         );
         $.writeln(tab);
     });
@@ -215,7 +217,7 @@ describe("Il metodo toFile() di TabellaToniCMYK", function() {
         var tab = tabellaToni.toFile();
 
         $.writeln(
-            "Verificare che siano presenti i toni di tutti i documenti, e che il tono medio sia corretto:"
+            "Verificare che siano presenti i toni di tutti i documenti, e che il tono medio coincida con il tono medio finale di sopra:"
         );
         
         for (var i = 0; i < tab.length; i++) {
