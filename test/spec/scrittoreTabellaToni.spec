@@ -19,7 +19,7 @@ describe("Il metodo scriviSuFile(listaLineeFile) di ScrittoreTabellaToni", funct
     it("\n\tnon deve creare alcun file sul desktop se listaLineeFile è l'array vuoto", function() {
         timestamp = new Date();
         giorno = (timestamp.getDate() < 10) ? "0".concat(timestamp.getDate()) : timestamp.getDate();
-        mese = (timestamp.getMonth() < 10) ? "0".concat(timestamp.getMonth()) : timestamp.getMonth();
+        mese = ((timestamp.getMonth() + 1) < 10) ? "0".concat(timestamp.getMonth() + 1) : timestamp.getMonth() + 1;
         anno = timestamp.getYear() + 1900;
         ore = (timestamp.getHours() < 10) ? "0".concat(timestamp.getHours()) : timestamp.getHours();
         minuti = (timestamp.getMinutes() < 10) ? "0".concat(timestamp.getMinutes()) : timestamp.getMinutes();
@@ -30,16 +30,16 @@ describe("Il metodo scriviSuFile(listaLineeFile) di ScrittoreTabellaToni", funct
             giorno + "-" + mese + "-" + anno + 
             "_" +
             ore + "-" + minuti +
-            ".txt"
+            ".csv"
         );
     });
 
     it("\n\tdeve creare file sul desktop se listaLineeFile non è l'array vuoto", function() {
         var inputs = [
-            ["1"],
-            ["1", "2", "3"],
-            ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-            ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+            ["1;1"],
+            ["1;3", "2;0", "3;9"],
+            ["1;10", "2;9", "3;7", "4;3", "5;4", "6;9", "7;7", "8;1", "9;0", "10;1", "11;0", "12;12"],
+            ["1;10", "2;9", "3;7", "4;3", "5;4", "6;9", "7;7", "8;1", "9;0", "10;1", "11;0", "12;12", "13;a", "14;a", "15;a", "16;a", "17;a"],
         ];
 
         var i = 0;
@@ -52,16 +52,21 @@ describe("Il metodo scriviSuFile(listaLineeFile) di ScrittoreTabellaToni", funct
 
             if (new Date().getMinutes() - timestamp.getMinutes() > 0) {
                 timestamp = new Date();
+                giorno = (timestamp.getDate() < 10) ? "0".concat(timestamp.getDate()) : timestamp.getDate();
+                mese = ((timestamp.getMonth() + 1) < 10) ? "0".concat(timestamp.getMonth() + 1) : timestamp.getMonth() + 1;
+                anno = timestamp.getYear() + 1900;
+                ore = (timestamp.getHours() < 10) ? "0".concat(timestamp.getHours()) : timestamp.getHours();
+                minuti = (timestamp.getMinutes() < 10) ? "0".concat(timestamp.getMinutes()) : timestamp.getMinutes();
                 scrittoreTabellaToni.scriviSuFile(inputs[i]);
                 $.writeln(
-                    "Verifica che sul desktop sia stato creato il file 'tabella_toni_" + 
+                    "Verifica che sul desktop sia stato creato il file tabella_toni_" + 
                     giorno + "-" + mese + "-" + anno + 
                     "_" +
                     ore + "-" + minuti +
-                    ".txt" +
+                    ".csv" +
                     " con contenuto " +
                     inputs[i] +
-                    " (un elemento per riga)"
+                    " (una coppia di elementi per riga)"
                 );
                 i++;
             }
