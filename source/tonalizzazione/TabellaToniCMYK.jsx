@@ -145,6 +145,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
     this.toString = function() {
         var tabella = "";
         var tonoCorrente;
+        var idString;
 
         if (this._toni.length == 0) {
             return;
@@ -156,8 +157,9 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
 
         for (var i = 0; i < this._toni.length; i++) {
             tonoCorrente = this._toni[i].tono;
+            idString = this._toni[i].id < 10 ? "0".concat(this._toni[i].id) : this._toni[i].id;
 
-            tabella = tabella.concat(this._toni[i].id).concat(": [").
+            tabella = tabella.concat(idString).concat(": [").
                 concat(tonoCorrente.cmyk.cyan).concat(", ").
                 concat(tonoCorrente.cmyk.magenta).concat(", ").
                 concat(tonoCorrente.cmyk.yellow).concat(", ").
@@ -181,7 +183,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
 
     /**
     * Metodo per la formattazione dei toni della tabella e del tono medio,
-    * in modo che queste informazioni siano adatte ad essere salvate su file.
+    * in modo che queste informazioni siano adatte ad essere salvate su file in formato csv.
     * Ritorna un array di stringhe, dove ogni stringa rappresenta una singola riga della tabella
     * oppure la riga corrispondente al tono medio. Se la tabella è vuota, ritorna invece undefined.
     * @returns {Array}
@@ -189,22 +191,24 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
     this.toFile = function() {
         var righeTabella = [];
         var tonoCorrente;
+        var idString;
 
         if (this._toni.length == 0) {
             return;
         }
 
-        righeTabella.push("Tono:[Ciano,Magenta,Giallo,Nero]");
+        righeTabella.push("Tono;Ciano;Magenta;Giallo;Nero");
 
         for (var i = 0; i < this._toni.length; i++) {
             tonoCorrente = this._toni[i].tono;
+            idString = this._toni[i].id < 10 ? "0".concat(this._toni[i].id) : this._toni[i].id;
 
             righeTabella.push(
-                "".concat(this._toni[i].id).concat(":[").
-                concat(tonoCorrente.cmyk.cyan).concat(",").
-                concat(tonoCorrente.cmyk.magenta).concat(",").
-                concat(tonoCorrente.cmyk.yellow).concat(",").
-                concat(tonoCorrente.cmyk.black).concat("]")
+                "".concat(idString).concat(";").
+                concat(tonoCorrente.cmyk.cyan).concat(";").
+                concat(tonoCorrente.cmyk.magenta).concat(";").
+                concat(tonoCorrente.cmyk.yellow).concat(";").
+                concat(tonoCorrente.cmyk.black)
             );
         }
 
@@ -213,11 +217,11 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         }
 
         righeTabella.push(
-            "".concat("Medio").concat(":[").
-                concat(this._tonoMedio.cmyk.cyan).concat(",").
-                concat(this._tonoMedio.cmyk.magenta).concat(",").
-                concat(this._tonoMedio.cmyk.yellow).concat(",").
-                concat(this._tonoMedio.cmyk.black).concat("]")
+            "".concat("Medio").concat(";").
+                concat(this._tonoMedio.cmyk.cyan).concat(";").
+                concat(this._tonoMedio.cmyk.magenta).concat(";").
+                concat(this._tonoMedio.cmyk.yellow).concat(";").
+                concat(this._tonoMedio.cmyk.black)
         );
 
         return righeTabella;
