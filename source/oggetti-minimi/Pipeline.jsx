@@ -120,8 +120,7 @@ function Pipeline(documenti) {
 
     /**
     * Metodo per l'esecuzione di tutti i filtri della pipeline.
-    * Terminata l'elaborazione dei documenti, l'utente viene avvisato tramite un suono e
-    * una finestra di dialogo.
+    * Terminata l'elaborazione dei documenti, l'utente viene avvisato tramite una finestra di dialogo.
     * @returns {undefined}
     */
     this.esegui = function() {   
@@ -131,8 +130,7 @@ function Pipeline(documenti) {
             }
         }
 
-        beep();
-        alert("Elaborazioni terminate. Controlla i documenti processati.", "Elaborazioni terminate");
+        alert("Elaborazioni terminate.\nControlla i documenti processati.", "Elaborazioni terminate");
         
     };
 
