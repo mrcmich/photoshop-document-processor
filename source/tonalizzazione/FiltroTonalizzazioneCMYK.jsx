@@ -1,4 +1,4 @@
-//@include "../oggetti-minimi/Asserzione.jsx"
+﻿//@include "../oggetti-minimi/Asserzione.jsx"
 //@include "FiltroTonalizzazioneAstratto.jsx"
 //@include "FiltroLetturaTonoCMYK.jsx"
 
@@ -32,6 +32,14 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     * @protected
     */
     this._filtroLetturaTonoCMYK = null;
+
+    /**
+    * Array contenente il nome dei documenti con tono che il filtro non è in grado di 
+    * portare a riferimento perché sono richiesti uno o più fattori di tonalizzazione fuori dal range [0, 200].
+    * @type {Array}
+    * @protected
+    */
+    this._documentiNonTonalizzabili = [];
 
     /**
     * Metodo setter per l'attributo _filtroLetturaTonoCMYK.
@@ -107,17 +115,23 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         var riferimento = [];
 
         while (true) {
-            input = prompt("Inserisci riferimento " + canale + ":", riferimentoDefault, "Riferimento " + canale);
+            input = prompt(
+                "Inserisci riferimento per il canale " + canale + ".\nIl riferimento può essere un singolo valore percentuale oppure un intervallo" +
+                " di valori percentuali nella forma min:max (con min <= max)." +
+                "\nSe necessario, usa il carattere punto come separatore decimale." , 
+                riferimentoDefault, 
+                "Riferimento " + canale
+            );
 
             if (input == null) {
                 return;
             }
 
-            input = input.split("-");
+            input = input.split(":");
 
             if (input.length == 0 || input.length > 2) {
                 alert(
-                    "Riferimento non valido: inserisci un singolo valore numerico oppure un intervallo nella forma min-max.", 
+                    "Riferimento non valido: numero di riferimenti errato.", 
                     "Riferimento non valido"
                 );
 
@@ -127,7 +141,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             if (input.length == 1) {
                 if (!this._validaPercentualeCanale(input[0])) {
                     alert(
-                    "Riferimento non valido: inserisci una quantità percentuale.", 
+                    "Riferimento non valido: il riferimento inserito non è una quantità percentuale valida.",
                     "Riferimento non valido"
                     );
 
@@ -140,7 +154,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
 
             if (!this._validaPercentualeCanale(input[0]) || !this._validaPercentualeCanale(input[1])) {
                 alert(
-                    "Riferimento non valido: inserisci un intervallo di quantità percentuali nella forma min-max.", 
+                    "Riferimento non valido: i riferimenti inseriti non sono quantità percentuali valide.", 
                     "Riferimento non valido"
                 );
 
@@ -149,7 +163,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
 
             if (Number(input[0]) > Number(input[1])) {
                 alert(
-                    "Riferimento non valido: il minimo di un range non può essere maggiore del massimo.", 
+                    "Riferimento non valido: il minimo dell'intervallo di riferimento deve essere inferiore al massimo.",
                     "Riferimento non valido"
                 );
 
@@ -254,30 +268,24 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         var incremento;
         var percentualeCanale;
         var statoInizialeDocumento;
+        var erroreTonalizzazioneCanale = 0.5;
     
         statoInizialeDocumento = livelloRiferimento.parent.activeHistoryState;
         this._applicaMiscelatoreCanale(livelloRiferimento, fattoriTonalizzazione);
         percentualeCanale = this._filtroLetturaTonoCMYK.rilevaPercentualeCanale(livelloRiferimento, campionatoreColore, canale);
         livelloRiferimento.parent.activeHistoryState = statoInizialeDocumento;
         
-        if (percentualeCanale == riferimentoCanale) {
+        if (Math.abs(riferimentoCanale - percentualeCanale) <= erroreTonalizzazioneCanale) {
             return true;
         }
-    
+        
         incremento = (percentualeCanale > riferimentoCanale) ? -1 : 1;
         
-        do {
+        while (true) {
             fattoriTonalizzazione.cmyk[canale] += incremento;
             
             if (fattoriTonalizzazione.cmyk[canale] < 0 || fattoriTonalizzazione.cmyk[canale] > 200) {
-                beep();
-                alert(
-                    "Impossibile tonalizzare documento " + documento.name + 
-                    ": incremento del canale " + canale + " fuori dall'intervallo [0,200]. Il documento sarà ignorato.", 
-                    "Errore di tonalizzazione", 
-                    true
-                );
-
+                this._documentiNonTonalizzabili.push(livelloRiferimento.parent.name);
                 livelloRiferimento.parent.activeHistoryState = statoInizialeDocumento;
                 app.purge(PurgeTarget.HISTORYCACHES);
                 return false;
@@ -286,9 +294,13 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             this._applicaMiscelatoreCanale(livelloRiferimento, fattoriTonalizzazione);
             percentualeCanale = this._filtroLetturaTonoCMYK.rilevaPercentualeCanale(livelloRiferimento, campionatoreColore, canale);
             livelloRiferimento.parent.activeHistoryState = statoInizialeDocumento;
+            
+            if (Math.abs(riferimentoCanale - percentualeCanale) <= erroreTonalizzazioneCanale) {
+                break;
+            }
 
-        } while (percentualeCanale != riferimentoCanale);
-
+        }
+        
         app.purge(PurgeTarget.HISTORYCACHES);
         return true;
     };
@@ -356,38 +368,38 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     */
     this.esegui = function(documenti) {
         var riferimentiUtente;
-        var documentiNonValidi;
+        var documentiConTonoNonValido = []; 
         var tabellaToni;
         var campionatoreColore;
         var livelloRiferimento;
-
+        var documentiDaIgnorare = {};
+        
         this._filtroLetturaTonoCMYK.esegui(documenti);
 
         if (documenti.length == 0) {
             return;
         }
 
+        this._documentiNonTonalizzabili.length = 0;
         tabellaToni = this._filtroLetturaTonoCMYK.leggiTabellaToni();
-        documentiNonValidi = this._filtroLetturaTonoCMYK.leggiDocumentiConTonoNonValido();
-
-        if (documentiNonValidi.length != 0) {
-            alert(
-                "Impossibile procedere con la tonalizzazione: i documenti " +
-                documentiNonValidi.toString() + " hanno uno o più canali allo 0%.",
-                "Errore di formato documenti.", 
-                true
-            );
-
-            return;
-        }
-
+        documentiConTonoNonValido = this._filtroLetturaTonoCMYK.leggiDocumentiConTonoNonValido();
         riferimentiUtente = this._determinaTonoRiferimento(tabellaToni.leggiTonoMedio());
 
         if (riferimentiUtente == undefined) {
             return;
         }
+    
+        for (var i = 0; i < documentiConTonoNonValido.length; i++) {
+            var doc = documentiConTonoNonValido[i];
+            
+            documentiDaIgnorare[doc] = 0;
+        }
 
         for (var i = 0; i < documenti.length; i++) {
+            if (documenti[i].name in documentiDaIgnorare) {
+                continue;
+            }
+            
             app.activeDocument = documenti[i];
             documenti[i].colorSamplers.add([new UnitValue(1, 'px'), new UnitValue(1, 'px')]);
             campionatoreColore = documenti[i].colorSamplers[documenti[i].colorSamplers.length - 1];
@@ -398,6 +410,23 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             documenti[i].colorSamplers.removeAll();
             livelloRiferimento.remove();
             documenti[i].save();
+        }
+
+        if (documentiConTonoNonValido.length > 0) {
+            alert(
+                "I documenti " + documentiConTonoNonValido + 
+                " hanno canali allo 0%, pertanto non sono tonalizzabili da PDP:\ntonalizzare manualmente.", 
+                "Documenti con tono non valido"
+            );
+        }
+
+        if (this._documentiNonTonalizzabili.length > 0) {
+            alert(
+                "I documenti " + this._documentiNonTonalizzabili + 
+                " richiedono fattori di tonalizzazione superiori al 200%" +
+                ", pertanto non sono tonalizzabili da PDP:\ntonalizzare manualmente.", 
+                "Documenti non tonalizzabili"
+            );
         }
 
     };

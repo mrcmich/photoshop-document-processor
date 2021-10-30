@@ -1,4 +1,4 @@
-//@include "../estrazione-info-documento/EstrattoreCodiceNumericoStandard.jsx"
+﻿//@include "../estrazione-info-documento/EstrattoreCodiceNumericoStandard.jsx"
 //@include "../oggetti-minimi/Asserzione.jsx"
 //@include "TabellaToniAstratta.jsx"
 
@@ -160,10 +160,10 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
             idString = this._toni[i].id < 10 ? "0".concat(this._toni[i].id) : this._toni[i].id;
 
             tabella = tabella.concat(idString).concat(": [").
-                concat(tonoCorrente.cmyk.cyan).concat(", ").
-                concat(tonoCorrente.cmyk.magenta).concat(", ").
-                concat(tonoCorrente.cmyk.yellow).concat(", ").
-                concat(tonoCorrente.cmyk.black).concat("]\n")
+                concat(Math.round(tonoCorrente.cmyk.cyan)).concat(", ").
+                concat(Math.round(tonoCorrente.cmyk.magenta)).concat(", ").
+                concat(Math.round(tonoCorrente.cmyk.yellow)).concat(", ").
+                concat(Math.round(tonoCorrente.cmyk.black)).concat("]\n")
             ;
         }
 
@@ -205,10 +205,10 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
 
             righeTabella.push(
                 "".concat(idString).concat(";").
-                concat(tonoCorrente.cmyk.cyan).concat(";").
-                concat(tonoCorrente.cmyk.magenta).concat(";").
-                concat(tonoCorrente.cmyk.yellow).concat(";").
-                concat(tonoCorrente.cmyk.black)
+                concat(Math.round(tonoCorrente.cmyk.cyan)).concat(";").
+                concat(Math.round(tonoCorrente.cmyk.magenta)).concat(";").
+                concat(Math.round(tonoCorrente.cmyk.yellow)).concat(";").
+                concat(Math.round(tonoCorrente.cmyk.black))
             );
         }
 
@@ -225,6 +225,15 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         );
 
         return righeTabella;
+    };
+
+    /**
+    * Metodo per l'eliminazione di tutti i toni finora inseriti nella tabella.
+    * @returns {undefined}
+    */
+    this.svuota = function() {
+        this._toni.length = 0;
+        this._tonoMedio = null;
     };
 
     this.settaEstrattoreCodiceNumerico(estrattoreCodiceNumerico);
