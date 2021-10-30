@@ -61,4 +61,16 @@ var TabellaToniAstratta = {
         );
     },
 
+    /**
+    * Metodo senza implementazione per l'eliminazione di tutti i toni finora inseriti nella tabella.
+    * @abstract
+    * @throws Lancia un errore quando invocato.
+    * @returns {undefined}
+    */
+    svuota: function() {
+        throw new Error(
+            "Invocazione del metodo astratto svuota() di TabellaToniAstratta."
+        );
+    },
+
 };
