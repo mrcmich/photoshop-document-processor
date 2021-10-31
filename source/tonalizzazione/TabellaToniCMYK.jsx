@@ -152,7 +152,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         }
 
         tabella = tabella.concat(
-            "Per ogni documento, si riporta la quaterna di valori [C, M, Y, K] corrispondente:\n"
+            "Tono dei documenti in formato [C, M, Y, K]:\n"
         );
 
         for (var i = 0; i < this._toni.length; i++) {
@@ -171,7 +171,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
             this.calcolaTonoMedio();
         }
 
-        tabella = tabella.concat("\nIl tono medio, valutato su tutti i documenti, è il seguente: \n[").
+        tabella = tabella.concat("\nTono medio: [").
             concat(this._tonoMedio.cmyk.cyan).concat(", ").
             concat(this._tonoMedio.cmyk.magenta).concat(", ").
             concat(this._tonoMedio.cmyk.yellow).concat(", ").
@@ -197,7 +197,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
             return;
         }
 
-        righeTabella.push("Tono;Ciano;Magenta;Giallo;Nero");
+        righeTabella.push("Documento;Ciano;Magenta;Giallo;Nero");
 
         for (var i = 0; i < this._toni.length; i++) {
             tonoCorrente = this._toni[i].tono;
@@ -217,7 +217,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         }
 
         righeTabella.push(
-            "".concat("Medio").concat(";").
+            "".concat("Media").concat(";").
                 concat(this._tonoMedio.cmyk.cyan).concat(";").
                 concat(this._tonoMedio.cmyk.magenta).concat(";").
                 concat(this._tonoMedio.cmyk.yellow).concat(";").
