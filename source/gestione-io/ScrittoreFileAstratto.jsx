@@ -8,11 +8,11 @@ var ScrittoreFileAstratto = {
 
     /**
     * Metodo senza implementazione per il salvataggio su file dell'array di stringhe passato
-    * come parametro.
+    * come parametro. Ritorna true se il salvataggio è avvenuto con successo, false altrimenti.
     * @abstract
     * @param {Array} listaLineeFile - array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa linea.
     * @throws Lancia un errore quando invocato.
-    * @returns {undefined}
+    * @returns {boolean}
     */
     scriviSuFile: function(listaLineeFile) {
         throw new Error(

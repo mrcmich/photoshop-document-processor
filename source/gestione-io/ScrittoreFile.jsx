@@ -13,10 +13,10 @@ function ScrittoreFile() {
     /**
     * Metodo per il salvataggio su file txt dell'array di stringhe passato
     * come parametro, crea un nuovo file con nome del tipo "prefisso_gg-mm-yyyy_oo-mm.txt" (dove prefisso è la prima
-    * stringa del parametro listaLineeFile) sul Desktop e in esso scrive le informazioni.
+    * stringa del parametro listaLineeFile) sul Desktop e in esso scrive le informazioni. Ritorna true se il salvataggio è avvenuto con successo, false altrimenti.
     * @param {Array} listaLineeFile - array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa linea.
     * @throws Lancia un errore se non è possibile creare o scrivere il file.
-    * @returns {undefined}
+    * @returns {boolean}
     */
     this.scriviSuFile = function(listaLineeFile) {
         var file;
@@ -37,7 +37,7 @@ function ScrittoreFile() {
         );
 
         if (listaLineeFile.length == 0) {
-            return;
+            return true;
         }
 
         prefisso = listaLineeFile[0];
@@ -64,7 +64,7 @@ function ScrittoreFile() {
                 true
             );
 
-            return;
+            return false;
         }
 
         for (var i = 1; i < listaLineeFile.length; i++) {
@@ -77,7 +77,7 @@ function ScrittoreFile() {
 
                 file.close();
                 file.remove();
-                return;
+                return false;
             }
         }
 
@@ -87,6 +87,8 @@ function ScrittoreFile() {
             "File " + prefisso + " salvato sul Desktop come " + nomeFile + ".",
             "Salvataggio file " + prefisso + " riuscito"
         );
+
+        return true;
     };
 
 }
