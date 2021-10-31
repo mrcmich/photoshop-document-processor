@@ -152,7 +152,7 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         }
 
         tabella = tabella.concat(
-            "Tono dei documenti in formato [C, M, Y, K]:\n"
+            "Tono dei documenti in formato [C,M,Y,K]:\n"
         );
 
         for (var i = 0; i < this._toni.length; i++) {
@@ -160,9 +160,9 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
             idString = this._toni[i].id < 10 ? "0".concat(this._toni[i].id) : this._toni[i].id;
 
             tabella = tabella.concat(idString).concat(": [").
-                concat(Math.round(tonoCorrente.cmyk.cyan)).concat(", ").
-                concat(Math.round(tonoCorrente.cmyk.magenta)).concat(", ").
-                concat(Math.round(tonoCorrente.cmyk.yellow)).concat(", ").
+                concat(Math.round(tonoCorrente.cmyk.cyan)).concat(",").
+                concat(Math.round(tonoCorrente.cmyk.magenta)).concat(",").
+                concat(Math.round(tonoCorrente.cmyk.yellow)).concat(",").
                 concat(Math.round(tonoCorrente.cmyk.black)).concat("]\n")
             ;
         }
@@ -172,9 +172,9 @@ function TabellaToniCMYK(estrattoreCodiceNumerico) {
         }
 
         tabella = tabella.concat("\nTono medio: [").
-            concat(this._tonoMedio.cmyk.cyan).concat(", ").
-            concat(this._tonoMedio.cmyk.magenta).concat(", ").
-            concat(this._tonoMedio.cmyk.yellow).concat(", ").
+            concat(this._tonoMedio.cmyk.cyan).concat(",").
+            concat(this._tonoMedio.cmyk.magenta).concat(",").
+            concat(this._tonoMedio.cmyk.yellow).concat(",").
             concat(this._tonoMedio.cmyk.black).concat("]")
         ;
 
