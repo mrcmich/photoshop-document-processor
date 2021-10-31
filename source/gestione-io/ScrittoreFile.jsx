@@ -2,19 +2,19 @@
 //@include "../oggetti-minimi/Asserzione.jsx"
 
 /**
-* Constructor function per la creazione di un nuovo scrittore tabella toni,
-* componente dedicato al salvataggio su file csv della tabella dei toni. 
+* Constructor function per la creazione di un nuovo scrittore file,
+* componente dedicato al salvataggio di informazioni testuali su file txt.
 * Ha ScrittoreFileAstratto come prototipo.
 * @constructor
 */
-function ScrittoreTabellaToni() {
+function ScrittoreFile() {
     this.__proto__ = ScrittoreFileAstratto;
 
     /**
-    * Metodo per il salvataggio su file csv dell'array di stringhe passato
-    * come parametro, crea un nuovo file con nome del tipo "tabella_toni_gg-mm-yyyy_oo-mm.csv" 
-    * sul Desktop e in esso scrive le informazioni.
-    * @param {Array} listaLineeFile - array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa riga della tabella dei toni.
+    * Metodo per il salvataggio su file txt dell'array di stringhe passato
+    * come parametro, crea un nuovo file con nome del tipo "prefisso_gg-mm-yyyy_oo-mm.txt" (dove prefisso è la prima
+    * stringa del parametro listaLineeFile) sul Desktop e in esso scrive le informazioni.
+    * @param {Array} listaLineeFile - array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa linea.
     * @throws Lancia un errore se non è possibile creare o scrivere il file.
     * @returns {undefined}
     */
@@ -27,6 +27,7 @@ function ScrittoreTabellaToni() {
         var anno;
         var ore;
         var minuti;
+        var prefisso;
 
         asserzione(
             listaLineeFile != undefined, 
@@ -39,6 +40,7 @@ function ScrittoreTabellaToni() {
             return;
         }
 
+        prefisso = listaLineeFile[0];
         timestamp = new Date();
         giorno = (timestamp.getDate() < 10) ? "0".concat(timestamp.getDate()) : timestamp.getDate();
         mese = ((timestamp.getMonth() + 1) < 10) ? "0".concat(timestamp.getMonth() + 1) : timestamp.getMonth() + 1;
@@ -46,18 +48,18 @@ function ScrittoreTabellaToni() {
         ore = (timestamp.getHours() < 10) ? "0".concat(timestamp.getHours()) : timestamp.getHours();
         minuti = (timestamp.getMinutes() < 10) ? "0".concat(timestamp.getMinutes()) : timestamp.getMinutes();
 
-        nomeFile = "tabella_toni_" + 
+        nomeFile = prefisso + "_" +
             giorno + "-" + mese + "-" + anno + 
             "_" +
             ore + "-" + minuti +
-            ".csv"
+            ".txt"
         ;
 
         file = new File(Folder.desktop + "/" + nomeFile);
 
         if (!file.open("w")) {
             alert(
-                "Impossibile scrivere su file la tabella dei toni.",
+                "Impossibile scrivere " + prefisso + " su file.",
                 "Errore di creazione file",
                 true
             );
@@ -65,10 +67,10 @@ function ScrittoreTabellaToni() {
             return;
         }
 
-        for (var i = 0; i < listaLineeFile.length; i++) {
+        for (var i = 1; i < listaLineeFile.length; i++) {
             if (!file.writeln(listaLineeFile[i])) {
                 alert(
-                    "Impossibile scrivere su file la tabella dei toni.",
+                    "Impossibile scrivere " + prefisso + " su file.",
                     "Errore di scrittura file",
                     true
                 );
@@ -82,8 +84,8 @@ function ScrittoreTabellaToni() {
         file.close();
 
         alert(
-            "Tabella dei toni salvata sul Desktop come " + nomeFile + ".",
-            "Salvataggio tabella toni riuscito"
+            "File " + prefisso + " salvato sul Desktop come " + nomeFile + ".",
+            "Salvataggio file " + prefisso + " riuscito"
         );
     };
 

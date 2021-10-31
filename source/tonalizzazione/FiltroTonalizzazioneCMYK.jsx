@@ -1,4 +1,5 @@
 ﻿//@include "../oggetti-minimi/Asserzione.jsx"
+//@include "../gestione-io/ScrittoreFile.jsx"
 //@include "FiltroTonalizzazioneAstratto.jsx"
 //@include "FiltroLetturaTonoCMYK.jsx"
 
@@ -6,12 +7,13 @@
 * Constructor function per la creazione di un filtro tonalizzazione CMYK, oggetto che 
 * si occupa della tonalizzazione di un set di documenti ad un tono di riferimento specificato dall'utente,
 * collaborando con un filtro lettura tono cui demanda la rilevazione e validazione del tono dei documenti e la loro organizzazione
-* in una tabella dei toni.
+* in una tabella dei toni. Terminata l'elaborazione, produce un report (su file).
 * Ha FiltroTonalizzazioneAstratto come prototipo.
 * @param {FiltroLetturaTonoAstratto} filtroLetturaTonoCMYK - il filtro lettura tono da associare al filtro tonalizzazione.
+* @param {ScrittoreFileAstratto} scrittoreFile - oggetto deputato al salvataggio del report di esecuzione su file.
 * @constructor
 */
-function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
+function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
     this.__proto__ = FiltroTonalizzazioneAstratto;
 
     /**
@@ -32,6 +34,13 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     * @protected
     */
     this._filtroLetturaTonoCMYK = null;
+
+    /**
+    * Oggetto deputato al salvataggio del report dell'elaborazione su file.
+    * @type {ScrittoreFileAstratto}
+    * @protected
+    */
+    this._scrittoreFile = null;
 
     /**
     * Array contenente il nome dei documenti con tono che il filtro non è in grado di 
@@ -359,6 +368,75 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
     };
 
     /**
+    * Metodo per la generazione di un report dell'elaborazione, in cui sono specificati il tono di riferimento applicato ai
+    * documenti e l'elenco dei documenti non tonalizzati (inclusa la ragione per cui la tonalizzazione non è stata possibile).
+    * @protected
+    * @param {Array} documentiConTonoNonValido - array contenente il nome dei documenti con uno o più canali allo 0%.
+    * @param {Array} documentiNonTonalizzabili - array contenente il nome dei documenti che richiedono fattori di tonalizzazione fuori dal range [0,200].
+    * @param {Object} riferimentiUtente - oggetto che contiene i riferimenti inseriti dall'utente per la tonalizzazione (vedi metodo _determinaTonoRiferimento).
+    * @returns {Array}
+    */
+    this._generaReport = function(documentiConTonoNonValido, documentiNonTonalizzabili, riferimentiUtente) {
+        var report = ["report"];
+        var canali = ["cyan", "magenta", "yellow", "black"];
+        var tonoRiferimento = "Applicato tono di riferimento [";
+        var documentiNonValidi;
+
+        for (var i = 0; i < canali.length; i++) {
+            var ref = riferimentiUtente[canali[i]];
+
+            if (ref.length == 1) {
+                tonoRiferimento = tonoRiferimento.concat(ref[0]);
+            } else if (ref.length == 2) {
+                tonoRiferimento = tonoRiferimento.concat(ref[0]).concat(":").concat(ref[1]);
+            }
+
+            if (i < canali.length - 1) {
+                tonoRiferimento = tonoRiferimento.concat(",");
+            }
+        }
+
+        tonoRiferimento = tonoRiferimento.concat("].");
+        report.push(tonoRiferimento);
+
+        if (documentiConTonoNonValido.length == 0 && documentiNonTonalizzabili == 0) {
+            report.push("Tonalizzati tutti i documenti.");
+        } else {
+            if (documentiConTonoNonValido.length > 0) {
+                documentiNonValidi = "Documenti ";
+
+                for (var i = 0; i < documentiConTonoNonValido.length; i++) {
+                    documentiNonValidi = documentiNonValidi.concat(documentiConTonoNonValido[i]);
+
+                    if (i < documentiConTonoNonValido.length - 1) {
+                        documentiNonValidi = documentiNonValidi.concat(", ");
+                    }
+                }
+
+                documentiNonValidi = documentiNonValidi.concat(" non tonalizzati: uno o più canali allo 0%.");
+                report.push(documentiNonValidi);
+            }
+
+            if (documentiNonTonalizzabili.length > 0) {  
+                documentiNonValidi = "Documenti ";
+
+                for (var i = 0; i < documentiNonTonalizzabili.length; i++) {
+                    documentiNonValidi = documentiNonValidi.concat(documentiNonTonalizzabili[i]);
+
+                    if (i < documentiNonTonalizzabili.length - 1) {
+                        documentiNonValidi = documentiNonValidi.concat(", ");
+                    }
+                }
+
+                documentiNonValidi = documentiNonValidi.concat(" non tonalizzati: uno o più fattori di tonalizzazione superiori al +200%.");
+                report.push(documentiNonValidi);
+            }
+        }
+
+        return report;
+    };
+
+    /**
     * Metodo per l'esecuzione del filtro tonalizzazione.
     * Il filtro si applica all'array di documenti passato come parametro.
     * Visualizza un messaggio di errore all'utente e termina se sono presenti documenti non validi.
@@ -373,6 +451,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
         var campionatoreColore;
         var livelloRiferimento;
         var documentiDaIgnorare = {};
+        var report;
         
         this._filtroLetturaTonoCMYK.esegui(documenti);
 
@@ -412,25 +491,35 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK) {
             documenti[i].save();
         }
 
-        if (documentiConTonoNonValido.length > 0) {
+        if (documentiConTonoNonValido.length > 0 || this._documentiNonTonalizzabili.length > 0) {
             alert(
-                "I documenti " + documentiConTonoNonValido + 
-                " hanno canali allo 0%, pertanto non sono tonalizzabili da PDP:\ntonalizzare manualmente.", 
-                "Documenti con tono non valido"
+                "Presenti documenti non tonalizzati: vedi report per i dettagli.", 
+                "Documenti non tonalizzati"
             );
         }
 
-        if (this._documentiNonTonalizzabili.length > 0) {
-            alert(
-                "I documenti " + this._documentiNonTonalizzabili + 
-                " richiedono fattori di tonalizzazione superiori al 200%" +
-                ", pertanto non sono tonalizzabili da PDP:\ntonalizzare manualmente.", 
-                "Documenti non tonalizzabili"
-            );
-        }
+        report = this._generaReport(documentiConTonoNonValido, this._documentiNonTonalizzabili, riferimentiUtente);
+        this._scrittoreFile.scriviSuFile(report);
+    };
 
+    /**
+    * Metodo setter per l'attributo _scrittoreFile.
+    * @throws Lancia un errore se il parametro passato è null o undefined.
+    * @param {ScrittoreFileAstratto} scrittoreFile - oggetto deputato al salvataggio del report di esecuzione su file.  
+    * @returns {undefined}
+    */
+    this.settaScrittoreFile = function(scrittoreFile) {
+        asserzione(
+            scrittoreFile != undefined, 
+            "settaScrittoreFile(scrittoreFile)", 
+            "FiltroTonalizzazioneCMYK", 
+            "scrittoreFile null o undefined."
+        );
+
+        this._scrittoreFile = scrittoreFile;
     };
 
     this.settaFiltroLetturaTonoCMYK(filtroLetturaTonoCMYK);
+    this.settaScrittoreFile(scrittoreFile);
 
 }

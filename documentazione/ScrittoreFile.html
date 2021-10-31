@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Interface: EstrattoreInfoAstratto</title>
+    <title>JSDoc: Class: ScrittoreFile</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Interface: EstrattoreInfoAstratto</h1>
+    <h1 class="page-title">Class: ScrittoreFile</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>EstrattoreInfoAstratto</h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ScrittoreFile<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -37,10 +37,31 @@
     <div class="container-overview">
     
         
-            <div class="description">Oggetto JavaScript che rappresenta l'astrazione di un estrattore di informazioni,ovvero di un oggetto che estrae informazioni di interesse dai metadati di un documento.Deve essere settato come prototipo di un estrattore di informazioni, il quale deve implementarne i metodi.</div>
-        
 
-        
+    
+
+    
+    <h4 class="name" id="ScrittoreFile"><span class="type-signature"></span>new ScrittoreFile<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Constructor function per la creazione di un nuovo scrittore file,componente dedicato al salvataggio di informazioni testuali su file txt.Ha ScrittoreFileAstratto come prototipo.
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 <dl class="details">
@@ -72,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="estrazione-info-documento_EstrattoreInfoAstratto.jsx.html">estrazione-info-documento/EstrattoreInfoAstratto.jsx</a>, <a href="estrazione-info-documento_EstrattoreInfoAstratto.jsx.html#line7">line 7</a>
+        <a href="gestione-io_ScrittoreFile.jsx.html">gestione-io/ScrittoreFile.jsx</a>, <a href="gestione-io_ScrittoreFile.jsx.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -84,7 +105,24 @@
 </dl>
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     </div>
 
@@ -111,7 +149,7 @@
     
 
     
-    <h4 class="name" id=".estraiInfo"><span class="type-signature">(abstract, static) </span>estraiInfo<span class="signature">(documento)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="scriviSuFile"><span class="type-signature"></span>scriviSuFile<span class="signature">(listaLineeFile)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
     
 
     
@@ -119,7 +157,7 @@
 
 
 <div class="description">
-    Metodo senza implementazione per l'estrazione di informazioni, sotto forma di stringa,dai metadati del documento passato come parametro.
+    Metodo per il salvataggio su file txt dell'array di stringhe passatocome parametro, crea un nuovo file con nome del tipo "prefisso_gg-mm-yyyy_oo-mm.txt" (dove prefisso è la primastringa del parametro listaLineeFile) sul Desktop e in esso scrive le informazioni.
 </div>
 
 
@@ -155,13 +193,13 @@
 
         <tr>
             
-                <td class="name"><code>documento</code></td>
+                <td class="name"><code>listaLineeFile</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Document</span>
+<span class="param-type">Array</span>
 
 
             
@@ -171,7 +209,7 @@
 
             
 
-            <td class="description last">il documento da cui si vogliono estrarre informazioni.</td>
+            <td class="description last">array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa linea.</td>
         </tr>
 
     
@@ -212,7 +250,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="estrazione-info-documento_EstrattoreInfoAstratto.jsx.html">estrazione-info-documento/EstrattoreInfoAstratto.jsx</a>, <a href="estrazione-info-documento_EstrattoreInfoAstratto.jsx.html#line17">line 17</a>
+        <a href="gestione-io_ScrittoreFile.jsx.html">gestione-io/ScrittoreFile.jsx</a>, <a href="gestione-io_ScrittoreFile.jsx.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -241,7 +279,7 @@
 
     <div class="param-desc">
     
-        Lancia un errore quando invocato.
+        Lancia un errore se non è possibile creare o scrivere il file.
     
     </div>
 
@@ -260,7 +298,7 @@
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type">undefined</span>
 
 
     </dd>
