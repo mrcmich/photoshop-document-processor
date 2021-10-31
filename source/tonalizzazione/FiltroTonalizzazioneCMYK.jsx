@@ -396,11 +396,11 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
             }
         }
 
-        tonoRiferimento = tonoRiferimento.concat("]");
+        tonoRiferimento = tonoRiferimento.concat("].");
         report.push(tonoRiferimento);
 
         if (documentiConTonoNonValido.length == 0 && documentiNonTonalizzabili == 0) {
-            report.push("Tonalizzati tutti i documenti");
+            report.push("Tonalizzati tutti i documenti.");
         } else {
             if (documentiConTonoNonValido.length > 0) {
                 documentiNonValidi = "Documenti ";
@@ -413,7 +413,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
                     }
                 }
 
-                documentiNonValidi = documentiNonValidi.concat(" non tonalizzati: uno o più canali allo 0%");
+                documentiNonValidi = documentiNonValidi.concat(" non tonalizzati: uno o più canali allo 0%.");
                 report.push(documentiNonValidi);
             }
 
@@ -428,7 +428,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
                     }
                 }
 
-                documentiNonValidi = documentiNonValidi.concat(" non tonalizzati: uno o più fattori di tonalizzazione superiori al +200%");
+                documentiNonValidi = documentiNonValidi.concat(" non tonalizzati: uno o più fattori di tonalizzazione superiori al +200%.");
                 report.push(documentiNonValidi);
             }
         }
@@ -491,20 +491,10 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
             documenti[i].save();
         }
 
-        if (documentiConTonoNonValido.length > 0) {
+        if (documentiConTonoNonValido.length > 0 || this._documentiNonTonalizzabili.length > 0) {
             alert(
-                "I documenti " + documentiConTonoNonValido + 
-                " hanno canali allo 0%, pertanto non sono tonalizzabili da PDP:\ntonalizzare manualmente.", 
-                "Documenti con tono non valido"
-            );
-        }
-
-        if (this._documentiNonTonalizzabili.length > 0) {
-            alert(
-                "I documenti " + this._documentiNonTonalizzabili + 
-                " richiedono fattori di tonalizzazione superiori al 200%" +
-                ", pertanto non sono tonalizzabili da PDP:\ntonalizzare manualmente.", 
-                "Documenti non tonalizzabili"
+                "Presenti documenti non tonalizzati:\nVedi report per i dettagli.", 
+                "Documenti non tonalizzati"
             );
         }
 
