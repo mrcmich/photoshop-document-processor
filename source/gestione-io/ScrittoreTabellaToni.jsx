@@ -13,10 +13,10 @@ function ScrittoreTabellaToni() {
     /**
     * Metodo per il salvataggio su file csv dell'array di stringhe passato
     * come parametro, crea un nuovo file con nome del tipo "tabella_toni_gg-mm-yyyy_oo-mm.csv" 
-    * sul Desktop e in esso scrive le informazioni.
+    * sul Desktop e in esso scrive le informazioni. Ritorna true se il salvataggio è avvenuto con successo, false altrimenti.
     * @param {Array} listaLineeFile - array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa riga della tabella dei toni.
     * @throws Lancia un errore se non è possibile creare o scrivere il file.
-    * @returns {undefined}
+    * @returns {boolean}
     */
     this.scriviSuFile = function(listaLineeFile) {
         var file;
@@ -36,7 +36,7 @@ function ScrittoreTabellaToni() {
         );
 
         if (listaLineeFile.length == 0) {
-            return;
+            return true;
         }
 
         timestamp = new Date();
@@ -62,7 +62,7 @@ function ScrittoreTabellaToni() {
                 true
             );
 
-            return;
+            return false;
         }
 
         for (var i = 0; i < listaLineeFile.length; i++) {
@@ -75,7 +75,7 @@ function ScrittoreTabellaToni() {
 
                 file.close();
                 file.remove();
-                return;
+                return false;
             }
         }
 
@@ -85,6 +85,8 @@ function ScrittoreTabellaToni() {
             "Tabella dei toni salvata sul Desktop come " + nomeFile + ".",
             "Salvataggio tabella toni riuscito"
         );
+
+        return true;
     };
 
 }

@@ -369,7 +369,8 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
 
     /**
     * Metodo per la generazione di un report dell'elaborazione, in cui sono specificati il tono di riferimento applicato ai
-    * documenti e l'elenco dei documenti non tonalizzati (inclusa la ragione per cui la tonalizzazione non è stata possibile).
+    * documenti e l'elenco dei documenti non tonalizzati (inclusa la ragione per cui la tonalizzazione non è stata possibile). Ritorna un
+    * array di stringhe, dove ogni stringa corrisponde a una riga del report (quando scritto su file).
     * @protected
     * @param {Array} documentiConTonoNonValido - array contenente il nome dei documenti con uno o più canali allo 0%.
     * @param {Array} documentiNonTonalizzabili - array contenente il nome dei documenti che richiedono fattori di tonalizzazione fuori dal range [0,200].
@@ -493,13 +494,19 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
 
         if (documentiConTonoNonValido.length > 0 || this._documentiNonTonalizzabili.length > 0) {
             alert(
-                "Presenti documenti non tonalizzati: vedi report per i dettagli.", 
+                "Presenti documenti non tonalizzati:\nvedi report per i dettagli.", 
                 "Documenti non tonalizzati"
             );
         }
 
         report = this._generaReport(documentiConTonoNonValido, this._documentiNonTonalizzabili, riferimentiUtente);
-        this._scrittoreFile.scriviSuFile(report);
+    
+        if (!this._scrittoreFile.scriviSuFile(report)) {
+            alert(
+                (report.slice(1)).join("\n"),
+                "Report"
+            );
+        }
     };
 
     /**

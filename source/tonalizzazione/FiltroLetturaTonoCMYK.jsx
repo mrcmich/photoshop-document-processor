@@ -149,12 +149,13 @@ function FiltroLetturaTonoCMYK(tabellaToni, scrittoreTabellaToni) {
 
         this._compilaTabellaToni();
         this._tabellaToni.calcolaTonoMedio();
-        this._scrittoreTabellaToni.scriviSuFile(this._tabellaToni.toFile());
 
-        alert(
-            this._tabellaToni.toString(),
-            "Tabella dei toni"
-        );
+        if (!this._scrittoreTabellaToni.scriviSuFile(this._tabellaToni.toFile())) {
+            alert(
+                this._tabellaToni.toString(),
+                "Tabella dei toni"
+            );
+        } 
     };
 
     /**
