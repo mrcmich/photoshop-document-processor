@@ -370,6 +370,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
     /**
     * Metodo per la generazione di un report dell'elaborazione, in cui sono specificati il tono di riferimento applicato ai
     * documenti e l'elenco dei documenti non tonalizzati (inclusa la ragione per cui la tonalizzazione non è stata possibile).
+    * @protected
     * @param {Array} documentiConTonoNonValido - array contenente il nome dei documenti con uno o più canali allo 0%.
     * @param {Array} documentiNonTonalizzabili - array contenente il nome dei documenti che richiedono fattori di tonalizzazione fuori dal range [0,200].
     * @param {Object} riferimentiUtente - oggetto che contiene i riferimenti inseriti dall'utente per la tonalizzazione (vedi metodo _determinaTonoRiferimento).
