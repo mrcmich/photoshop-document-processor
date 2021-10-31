@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Class: ScrittoreFile</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Class: ScrittoreFile</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ScrittoreFile<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -38,7 +38,30 @@
     
         
 
-        
+    
+
+    
+    <h4 class="name" id="ScrittoreFile"><span class="type-signature"></span>new ScrittoreFile<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Constructor function per la creazione di un nuovo scrittore file,componente dedicato al salvataggio di informazioni testuali su file txt.Ha ScrittoreFileAstratto come prototipo.
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 <dl class="details">
@@ -68,6 +91,11 @@
     
 
     
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gestione-io_ScrittoreFile.jsx.html">gestione-io/ScrittoreFile.jsx</a>, <a href="gestione-io_ScrittoreFile.jsx.html#line10">line 10</a>
+    </li></ul></dd>
+    
 
     
 
@@ -77,7 +105,24 @@
 </dl>
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     </div>
 
@@ -104,7 +149,7 @@
     
 
     
-    <h4 class="name" id="asserzione"><span class="type-signature"></span>asserzione<span class="signature">(condizione, metodo, oggetto, descrizione, dati)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    <h4 class="name" id="scriviSuFile"><span class="type-signature"></span>scriviSuFile<span class="signature">(listaLineeFile)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
     
 
     
@@ -112,7 +157,7 @@
 
 
 <div class="description">
-    Funzione che lancia un errore se la condizione fornita come parametronon è verificata, documentandolo in maniera opportuna.
+    Metodo per il salvataggio su file txt dell'array di stringhe passatocome parametro, crea un nuovo file con nome del tipo "prefisso_gg-mm-yyyy_oo-mm.txt" (dove prefisso è la primastringa del parametro listaLineeFile) sul Desktop e in esso scrive le informazioni.
 </div>
 
 
@@ -148,13 +193,13 @@
 
         <tr>
             
-                <td class="name"><code>condizione</code></td>
+                <td class="name"><code>listaLineeFile</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">boolean</span>
+<span class="param-type">Array</span>
 
 
             
@@ -164,99 +209,7 @@
 
             
 
-            <td class="description last">la condizione che viene valutata.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>metodo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">il nome del metodo in cui la condizione è valutata.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>oggetto</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">il nome dell'oggetto in cui la condizione è valutata.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>descrizione</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">la descrizione dell'errore che deve essere generato se la condizione non è verificata.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>dati</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">oggetto opzionale che può essere passato all'errore, associato alla proprietà dati.</td>
+            <td class="description last">array contenente le stringhe da scrivere su file, dove ogni stringa rappresenta una diversa linea.</td>
         </tr>
 
     
@@ -297,7 +250,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="oggetti-minimi_Asserzione.jsx.html">oggetti-minimi/Asserzione.jsx</a>, <a href="oggetti-minimi_Asserzione.jsx.html#line12">line 12</a>
+        <a href="gestione-io_ScrittoreFile.jsx.html">gestione-io/ScrittoreFile.jsx</a>, <a href="gestione-io_ScrittoreFile.jsx.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -326,7 +279,7 @@
 
     <div class="param-desc">
     
-        Lancia un errore se la condizione non è verificata.
+        Lancia un errore se non è possibile creare o scrivere il file.
     
     </div>
 
