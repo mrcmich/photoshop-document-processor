@@ -1,4 +1,5 @@
 //@include "../../source/tonalizzazione/FiltroLetturaTonoCMYK.jsx"
+//@include "../../source/gestione-io/ScrittoreFile.jsx"
 //@include "../../source/tonalizzazione/FiltroTonalizzazioneCMYK.jsx"
 
 if (app.documents.length == 0) {
@@ -9,7 +10,59 @@ if (app.documents.length == 0) {
 }
 
 var filtroLetturaTono = new FiltroLetturaTonoCMYK(new TabellaToniCMYK(new EstrattoreCodiceNumericoStandard()), new ScrittoreTabellaToni());
-var filtroTonalizzazione = new FiltroTonalizzazioneCMYK(filtroLetturaTono);
+var filtroTonalizzazione = new FiltroTonalizzazioneCMYK(filtroLetturaTono, new ScrittoreFile());
+
+describe("Il metodo _generaReport(documentiConTonoNonValido, documentiNonTonalizzabili, riferimentiUtente) di FiltroTonalizzazioneCMYK", function() {
+    var report;
+
+    it("\n\tdeve gestire correttamente il caso in cui tutti i documenti siano tonalizzati", function() {
+        report = filtroTonalizzazione._generaReport([], [], {
+            "cyan": [13],
+            "magenta": [10,12],
+            "yellow": [90],
+            "black": [1,4]
+        });
+
+        $.writeln("Verifica corretto contenuto del report - caso in cui tutti i documenti sono tonalizzati");
+        $.writeln(report);
+    });
+
+    it("\n\tdeve gestire correttamente il caso in cui ci siano documenti con canali allo 0%", function() {
+        report = filtroTonalizzazione._generaReport(["03_TEST_CANALE0", "05_TEST_CANALE0"], [], {
+            "cyan": [1,2],
+            "magenta": [1],
+            "yellow": [2,6],
+            "black": [17]
+        });
+
+        $.writeln("Verifica corretto contenuto del report - caso con documenti non validi");
+        $.writeln(report);
+    });
+
+    it("\n\tdeve gestire correttamente il caso in cui ci siano documenti che richiedono fattori di tonalizzazione superiori al +200%", function() {
+        report = filtroTonalizzazione._generaReport([], ["11_TEST_FATTORE200", "12_TEST_FATTORE200","13_TEST_FATTORE200"], {
+            "cyan": [1,2],
+            "magenta": [100],
+            "yellow": [2,6],
+            "black": [3,5]
+        });
+
+        $.writeln("Verifica corretto contenuto del report - caso con documenti non tonalizzabili");
+        $.writeln(report);
+    });
+
+    it("\n\tdeve gestire correttamente il caso in cui ci siano documenti non validi e non tonalizzabili", function() {
+        report = filtroTonalizzazione._generaReport(["08_TEST_CANALE0"], ["11_TEST_FATTORE200", "12_TEST_FATTORE200"], {
+            "cyan": [12],
+            "magenta": [100],
+            "yellow": [26],
+            "black": [35]
+        });
+
+        $.writeln("Verifica corretto contenuto del report - caso con documenti non validi e non tonalizzabili");
+        $.writeln(report);
+    });
+});
 
 describe("Il metodo settaFiltroLetturaTonoCMYK(filtroLetturaTonoCMYK) di FiltroTonalizzazioneCMYK", function() {
     it("\n\tdeve lanciare un errore se filtroLetturaTonoCMYK è null", function() {
@@ -319,4 +372,3 @@ describe("Il metodo esegui(documenti) di FiltroTonalizzazioneCMYK", function() {
         filtroTonalizzazione.esegui(app.documents);
     });
 });
-
