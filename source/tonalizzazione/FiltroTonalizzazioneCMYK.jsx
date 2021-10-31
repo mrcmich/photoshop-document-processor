@@ -493,7 +493,7 @@ function FiltroTonalizzazioneCMYK(filtroLetturaTonoCMYK, scrittoreFile) {
 
         if (documentiConTonoNonValido.length > 0 || this._documentiNonTonalizzabili.length > 0) {
             alert(
-                "Presenti documenti non tonalizzati:\nVedi report per i dettagli.", 
+                "Presenti documenti non tonalizzati: vedi report per i dettagli.", 
                 "Documenti non tonalizzati"
             );
         }
