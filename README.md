@@ -15,7 +15,7 @@ Per l'installazione del software, scaricare l'archivio con le funzionalità desi
 - Tonalizzazione documenti (solo metodo colore CMYK)
 
 ### Stato del progetto
-Tutte le funzionalità sono state testate e implementate in ambiente Windows; il testing in ambiente macOS è tuttora in corso d'opera.
+Tutte le funzionalità sono state testate, sia su sistemi Windows che MacOS.
 
 ### Utilizzo del software
 Il codice può essere liberamente impiegato, a patto che non sia usato a fini commerciali. 
